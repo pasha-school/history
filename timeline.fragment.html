@@ -1,0 +1,178 @@
+<div id="pasha-history-timeline">
+  <h2>История: опорные даты 6 класса</h2>
+  <div class="legend text-small" aria-label="Условные обозначения">
+    <span><i class="swatch rome"></i>Рим и Византия</span>
+    <span><i class="swatch justinian"></i>Юстиниан</span>
+    <span><i class="swatch neighbors"></i>Соседи и Русь</span>
+    <span><i class="swatch franks"></i>Франки</span>
+    <span><i class="swatch europe"></i>Европа IX–XI вв.</span>
+  </div>
+  <label class="filter text-small">Показать тему
+    <select class="form-select" aria-label="Выбор темы таймлайна">
+      <option value="europe">Европа IX–XI вв. — новый параграф</option>
+      <option value="franks">Франки</option>
+      <option value="byzantium">Византия и соседи</option>
+      <option value="rus">Русь</option>
+      <option value="all">Все даты</option>
+    </select>
+  </label>
+  <div class="text-small text-muted scale-note">События расположены по порядку; расстояния между датами условные.</div>
+  <div class="timeline-scroll">
+    <div class="timeline" aria-label="Лента времени от 330 до 1453 года">
+      <div class="axis" aria-hidden="true"></div>
+      <div class="events"></div>
+    </div>
+  </div>
+  <div class="mobile-events"></div>
+  <div class="card detail" aria-live="polite">
+    <div class="text-muted text-small">Выбери дату на линии</div>
+    <div class="detail-title">486 — начало завоевания Галлии</div>
+    <div class="detail-text">Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.</div>
+  </div>
+</div>
+
+<style>
+  #pasha-history-timeline { width: 100%; color: var(--foreground); }
+  #pasha-history-timeline h2 { margin: 0 0 12px; }
+  #pasha-history-timeline .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; color: var(--muted-foreground); }
+  #pasha-history-timeline .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  #pasha-history-timeline .filter { display: flex; align-items: center; gap: 8px; margin: 8px 0; color: var(--muted-foreground); }
+  #pasha-history-timeline .filter .form-select { width: min(320px, 100%); }
+  #pasha-history-timeline .scale-note { margin-bottom: 4px; }
+  #pasha-history-timeline .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  #pasha-history-timeline .rome { background: var(--viz-series-1); }
+  #pasha-history-timeline .justinian { background: var(--viz-series-2); }
+  #pasha-history-timeline .neighbors { background: var(--viz-series-3); }
+  #pasha-history-timeline .franks { background: var(--viz-series-4); }
+  #pasha-history-timeline .europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
+  #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
+  #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
+  #pasha-history-timeline .event-wrap { position: absolute; top: 0; height: 100%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+  #pasha-history-timeline .stem { position: absolute; width: 1px; background: var(--border); left: 50%; }
+  #pasha-history-timeline .stem.up { top: 68px; height: 96px; }
+  #pasha-history-timeline .stem.down { top: 166px; height: 96px; }
+  #pasha-history-timeline .event-btn { position: absolute; width: 112px; white-space: normal; text-align: center; }
+  #pasha-history-timeline .event-btn.up { top: 15px; }
+  #pasha-history-timeline .event-btn.down { top: 263px; transform: translateY(-50%); }
+  #pasha-history-timeline .event-btn.mid-up { top: 72px; }
+  #pasha-history-timeline .event-btn.mid-down { top: 207px; }
+  #pasha-history-timeline .dot { position: absolute; top: 158px; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--background); }
+  #pasha-history-timeline .dot.rome { background: var(--viz-series-1); }
+  #pasha-history-timeline .dot.justinian { background: var(--viz-series-2); }
+  #pasha-history-timeline .dot.neighbors { background: var(--viz-series-3); }
+  #pasha-history-timeline .dot.franks { background: var(--viz-series-4); }
+  #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .year { display: block; font-weight: 500; }
+  #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
+  #pasha-history-timeline .detail { margin-top: 8px; }
+  #pasha-history-timeline .detail-title { margin-top: 4px; font-weight: 500; }
+  #pasha-history-timeline .detail-text { margin-top: 4px; }
+  #pasha-history-timeline .mobile-events { display: none; }
+  @media (max-width: 600px) {
+    #pasha-history-timeline .timeline-scroll { display: none; }
+    #pasha-history-timeline .mobile-events { display: grid; gap: 4px; margin: 8px 0; }
+    #pasha-history-timeline .mobile-events .btn { text-align: left; }
+    #pasha-history-timeline .filter { align-items: stretch; flex-direction: column; }
+  }
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('pasha-history-timeline');
+  const events = [
+    { year: 330, short: 'Новый Рим', title: 'основание Нового Рима', detail: 'Император Константин сделал город новой столицей. Вскоре его стали называть Константинополем.', cat: 'rome', topic: 'byzantium' },
+    { year: 395, short: 'раздел империи', title: 'разделение Римской империи', detail: 'Империя окончательно разделилась на Западную и Восточную части. Восточная часть позднее получила название Византия.', cat: 'rome', topic: 'byzantium' },
+    { year: 476, short: 'падение Запада', title: 'падение Западной Римской империи', detail: 'Запад ослабили борьба за власть, хозяйственные трудности, нехватка надёжных войск и нападения германских племён.', cat: 'rome', topic: 'byzantium' },
+    { year: 486, short: 'франки в Галлии', title: 'начало завоевания Галлии', detail: 'Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.', cat: 'franks', topic: 'franks' },
+    { year: 527, short: 'Юстиниан', title: 'начало правления Юстиниана I', detail: 'При Юстиниане Византия достигла вершины своего могущества.', cat: 'justinian', topic: 'byzantium' },
+    { year: 531, short: 'Хосров I', title: 'начало правления Хосрова I', detail: 'Хосров I стал шахом Ирана — сильного восточного соседа и противника Византии.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 532, short: 'восстание «Ника»', title: 'восстание «Ника»', detail: 'Высокие налоги и произвол чиновников вызвали мятеж в Константинополе. Юстиниан собрал войска и подавил его.', cat: 'justinian', topic: 'byzantium' },
+    { year: 537, short: 'Святая София', title: 'завершение строительства Святой Софии', detail: 'В Константинополе построили огромный христианский храм — один из символов Византии.', cat: 'justinian', topic: 'byzantium' },
+    { year: 550, label: 'VI век', short: 'набеги славян', title: 'нападения славян на Византию', detail: 'Славяне переходили Дунай, нападали на Балканы и постепенно расселялись на византийских землях. 550 год здесь — условная точка внутри VI века.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 565, short: 'смерть Юстиниана', title: 'смерть Юстиниана I', detail: 'После смерти Юстиниана удерживать завоёванные территории стало трудно.', cat: 'justinian', topic: 'byzantium' },
+    { year: 681, short: 'Болгарское царство', title: 'образование Первого Болгарского царства', detail: 'На северной границе Византии появилось сильное Болгарское царство.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 732, short: 'битва при Пуатье', title: 'победа франков при Пуатье', detail: 'Карл Мартелл разбил арабское войско. Прозвище Мартелл означает «Молот».', cat: 'franks', topic: 'franks' },
+    { year: 800, short: 'Карл — император', title: 'провозглашение Карла Великого императором', detail: 'Папа римский короновал Карла. На Западе появилась империя, считавшая себя наследницей Рима.', cat: 'franks', topic: 'franks' },
+    { year: 843, short: 'Верденский раздел', title: 'раздел империи Карла Великого', detail: 'Три внука Карла разделили империю. Из западной и восточной частей позднее выросли Франция и Германия.', cat: 'franks', topic: 'franks' },
+    { year: 862, short: 'призвание Рюрика', title: 'летописная дата образования государства Русь', detail: 'Согласно летописи, в 862 году на княжение был призван Рюрик.', cat: 'neighbors', topic: 'rus' },
+    { year: 863, short: 'Кирилл и Мефодий', title: 'начало деятельности Кирилла и Мефодия', detail: 'Братья прибыли в Великую Моравию, создали славянскую азбуку и начали переводить христианские книги.', cat: 'europe', topic: 'europe' },
+    { year: 865, short: 'крещение Болгарии', title: 'принятие христианства Болгарией', detail: 'Болгария приняла христианство из Византии при князе Борисе.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 871, label: '871–899', short: 'Альфред Великий', title: 'правление Альфреда Великого', detail: 'Альфред создал флот, укрепил крепости, перестроил войско и возглавил борьбу Англии с датчанами.', cat: 'europe', topic: 'europe' },
+    { year: 882, label: '882–912', short: 'княжение Олега', title: 'княжение Олега на Руси', detail: 'Олег объединил Новгород и Киев и правил Русью до 912 года.', cat: 'europe', topic: 'europe' },
+    { year: 962, short: 'империя Оттона', title: 'образование Священной Римской империи', detail: 'Папа римский провозгласил германского короля Оттона I императором.', cat: 'europe', topic: 'europe' },
+    { year: 966, short: 'крещение Польши', title: 'принятие христианства Польшей', detail: 'Польша приняла христианство по римскому образцу и вошла в мир латинской культуры.', cat: 'europe', topic: 'europe' },
+    { year: 987, label: '987–996', short: 'Гуго Капет', title: 'правление Гуго Капета', detail: 'Гуго Капет стал королём Франции и основал новую королевскую династию — Капетингов.', cat: 'europe', topic: 'europe' },
+    { year: 988, short: 'Крещение Руси', title: 'Крещение Руси', detail: 'Единая вера помогала объединить Русь, а союз с богатой христианской Византией укреплял положение князя Владимира.', cat: 'neighbors', topic: 'rus' },
+    { year: 992, short: 'победа над печенегами', title: 'победа Владимира на реке Трубеже', detail: 'Князь Владимир Святославич победил печенегов на реке Трубеже.', cat: 'europe', topic: 'europe' },
+    { year: 1000, label: 'около 1000', short: 'викинги в Америке', title: 'достижение Винланда', detail: 'Викинги достигли побережья Северной Америки примерно за 500 лет до Колумба.', cat: 'europe', topic: 'europe' },
+    { year: 1018, short: 'падение Болгарского царства', title: 'падение Первого Болгарского царства', detail: 'Византия завоевала Болгарию и вновь подчинила большую часть Балкан.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 1066, short: 'завоевание Англии', title: 'нормандское завоевание Англии', detail: 'Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.', cat: 'europe', topic: 'europe' },
+    { year: 1072, short: 'Правда Ярославичей', title: 'создание Правды Ярославичей', detail: 'Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.', cat: 'europe', topic: 'europe' },
+    { year: 1074, short: 'Мономах и Гита', title: 'свадьба Владимира Мономаха и Гиты', detail: 'Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.', cat: 'europe', topic: 'europe' },
+    { year: 1453, short: 'падение Византии', title: 'падение Константинополя', detail: 'Османы взяли Константинополь. Византийская империя прекратила существование.', cat: 'rome', topic: 'byzantium' }
+  ];
+  const lanes = ['up', 'mid-down', 'mid-up', 'down'];
+  const container = root.querySelector('.events');
+  const mobile = root.querySelector('.mobile-events');
+  const timeline = root.querySelector('.timeline');
+  const filter = root.querySelector('select');
+  const title = root.querySelector('.detail-title');
+  const text = root.querySelector('.detail-text');
+
+  function selectEvent(event, button) {
+    root.querySelectorAll('button[aria-pressed]').forEach(item => item.setAttribute('aria-pressed', 'false'));
+    button.setAttribute('aria-pressed', 'true');
+    title.textContent = `${event.label || event.year} — ${event.title}`;
+    text.textContent = event.detail;
+  }
+
+  function render(topic) {
+    container.replaceChildren();
+    mobile.replaceChildren();
+    const shown = topic === 'all' ? events : events.filter(event => event.topic === topic);
+    timeline.style.width = `${Math.max(820, shown.length * 112)}px`;
+
+    shown.forEach((event, index) => {
+      const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
+      const lane = lanes[index % lanes.length];
+      const wrap = document.createElement('div');
+      wrap.className = 'event-wrap';
+      wrap.style.left = `${position}%`;
+
+      const stem = document.createElement('span');
+      stem.className = `stem ${lane.includes('up') ? 'up' : 'down'}`;
+      stem.setAttribute('aria-hidden', 'true');
+
+      const dot = document.createElement('span');
+      dot.className = `dot ${event.cat}`;
+      dot.setAttribute('aria-hidden', 'true');
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `btn btn-ghost event-btn ${lane}`;
+      button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+      button.innerHTML = `<span class="year tabular-nums">${event.label || event.year}</span><span class="name text-small">${event.short}</span>`;
+      button.addEventListener('click', () => selectEvent(event, button));
+
+      wrap.append(stem, dot, button);
+      container.appendChild(wrap);
+
+      const mobileButton = document.createElement('button');
+      mobileButton.type = 'button';
+      mobileButton.className = 'btn btn-ghost';
+      mobileButton.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+      mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
+      mobileButton.addEventListener('click', () => selectEvent(event, mobileButton));
+      mobile.appendChild(mobileButton);
+    });
+
+    const first = shown[0];
+    title.textContent = `${first.label || first.year} — ${first.title}`;
+    text.textContent = first.detail;
+  }
+
+  filter.addEventListener('change', () => render(filter.value));
+  render(filter.value);
+})();
+</script>
