@@ -6,10 +6,12 @@
     <span><i class="swatch neighbors"></i>Соседи и Русь</span>
     <span><i class="swatch franks"></i>Франки</span>
     <span><i class="swatch europe"></i>Европа IX–XI вв.</span>
+    <span><i class="swatch islam"></i>Ислам и арабы</span>
   </div>
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
-      <option value="europe">Европа IX–XI вв. — новый параграф</option>
+      <option value="islam">Ислам и арабы — новый параграф</option>
+      <option value="europe">Европа IX–XI вв.</option>
       <option value="franks">Франки</option>
       <option value="byzantium">Византия и соседи</option>
       <option value="rus">Русь</option>
@@ -45,6 +47,7 @@
   #pasha-history-timeline .neighbors { background: var(--viz-series-3); }
   #pasha-history-timeline .franks { background: var(--viz-series-4); }
   #pasha-history-timeline .europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .islam { background: var(--viz-series-6); }
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
@@ -63,6 +66,7 @@
   #pasha-history-timeline .dot.neighbors { background: var(--viz-series-3); }
   #pasha-history-timeline .dot.franks { background: var(--viz-series-4); }
   #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .dot.islam { background: var(--viz-series-6); }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .detail { margin-top: 8px; }
@@ -91,6 +95,15 @@
     { year: 537, short: 'Святая София', title: 'завершение строительства Святой Софии', detail: 'В Константинополе построили огромный христианский храм — один из символов Византии.', cat: 'justinian', topic: 'byzantium' },
     { year: 550, label: 'VI век', short: 'набеги славян', title: 'нападения славян на Византию', detail: 'Славяне переходили Дунай, нападали на Балканы и постепенно расселялись на византийских землях. 550 год здесь — условная точка внутри VI века.', cat: 'neighbors', topic: 'byzantium' },
     { year: 565, short: 'смерть Юстиниана', title: 'смерть Юстиниана I', detail: 'После смерти Юстиниана удерживать завоёванные территории стало трудно.', cat: 'justinian', topic: 'byzantium' },
+    { year: 570, label: 'около 570', short: 'рождение Мухаммеда', title: 'рождение Мухаммеда', detail: 'Будущий основатель ислама родился в Мекке примерно в 570 году.', cat: 'islam', topic: 'islam' },
+    { year: 610, short: 'начало проповеди', title: 'начало проповеди Мухаммеда', detail: 'Согласно мусульманской традиции, Мухаммед начал получать откровения и проповедовать веру в единого Бога — Аллаха.', cat: 'islam', topic: 'islam' },
+    { year: 622, short: 'хиджра', title: 'переселение из Мекки в Медину', detail: 'Мухаммед и его сторонники переселились в Медину. От хиджры начинается мусульманское летоисчисление.', cat: 'islam', topic: 'islam' },
+    { year: 630, short: 'возвращение в Мекку', title: 'возвращение Мухаммеда в Мекку', detail: 'Мухаммед вернулся в Мекку, а Кааба стала главной святыней ислама.', cat: 'islam', topic: 'islam' },
+    { year: 632, short: 'власть халифов', title: 'смерть Мухаммеда и начало власти халифов', detail: 'После смерти Мухаммеда арабским государством стали управлять халифы — «заместители» пророка.', cat: 'islam', topic: 'islam' },
+    { year: 637, short: 'взятие Иерусалима', title: 'взятие Иерусалима арабами', detail: 'После пятимесячной осады жители города сдались халифу. Византия потеряла важную восточную область.', cat: 'islam', topic: 'islam' },
+    { year: 643, short: 'взятие Дербента', title: 'взятие Дербента арабами', detail: 'Арабские войска дошли до Кавказа и захватили Дербент.', cat: 'islam', topic: 'islam' },
+    { year: 648, label: 'середина VII века', short: 'покорение Персии', title: 'покорение Персии арабами', detail: 'К середине VII века арабы разгромили Персидскую державу и включили её земли в своё государство.', cat: 'islam', topic: 'islam' },
+    { year: 650, short: 'Хазарский каганат', title: 'образование Хазарского каганата', detail: 'На Северном Кавказе и в Прикаспии возникло государство хазар.', cat: 'neighbors', topic: 'rus' },
     { year: 681, short: 'Болгарское царство', title: 'образование Первого Болгарского царства', detail: 'На северной границе Византии появилось сильное Болгарское царство.', cat: 'neighbors', topic: 'byzantium' },
     { year: 732, short: 'битва при Пуатье', title: 'победа франков при Пуатье', detail: 'Карл Мартелл разбил арабское войско. Прозвище Мартелл означает «Молот».', cat: 'franks', topic: 'franks' },
     { year: 800, short: 'Карл — император', title: 'провозглашение Карла Великого императором', detail: 'Папа римский короновал Карла. На Западе появилась империя, считавшая себя наследницей Рима.', cat: 'franks', topic: 'franks' },

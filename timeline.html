@@ -1043,10 +1043,12 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;span&gt;&lt;i class=&quot;swatch neighbors&quot;&gt;&lt;/i&gt;Соседи и Русь&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch franks&quot;&gt;&lt;/i&gt;Франки&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch europe&quot;&gt;&lt;/i&gt;Европа IX–XI вв.&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch islam&quot;&gt;&lt;/i&gt;Ислам и арабы&lt;/span&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
-      &lt;option value=&quot;europe&quot;&gt;Европа IX–XI вв. — новый параграф&lt;/option&gt;
+      &lt;option value=&quot;islam&quot;&gt;Ислам и арабы — новый параграф&lt;/option&gt;
+      &lt;option value=&quot;europe&quot;&gt;Европа IX–XI вв.&lt;/option&gt;
       &lt;option value=&quot;franks&quot;&gt;Франки&lt;/option&gt;
       &lt;option value=&quot;byzantium&quot;&gt;Византия и соседи&lt;/option&gt;
       &lt;option value=&quot;rus&quot;&gt;Русь&lt;/option&gt;
@@ -1082,6 +1084,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .neighbors { background: var(--viz-series-3); }
   #pasha-history-timeline .franks { background: var(--viz-series-4); }
   #pasha-history-timeline .europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .islam { background: var(--viz-series-6); }
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
@@ -1100,6 +1103,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .dot.neighbors { background: var(--viz-series-3); }
   #pasha-history-timeline .dot.franks { background: var(--viz-series-4); }
   #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
+  #pasha-history-timeline .dot.islam { background: var(--viz-series-6); }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .detail { margin-top: 8px; }
@@ -1128,6 +1132,15 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 537, short: &#x27;Святая София&#x27;, title: &#x27;завершение строительства Святой Софии&#x27;, detail: &#x27;В Константинополе построили огромный христианский храм — один из символов Византии.&#x27;, cat: &#x27;justinian&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 550, label: &#x27;VI век&#x27;, short: &#x27;набеги славян&#x27;, title: &#x27;нападения славян на Византию&#x27;, detail: &#x27;Славяне переходили Дунай, нападали на Балканы и постепенно расселялись на византийских землях. 550 год здесь — условная точка внутри VI века.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 565, short: &#x27;смерть Юстиниана&#x27;, title: &#x27;смерть Юстиниана I&#x27;, detail: &#x27;После смерти Юстиниана удерживать завоёванные территории стало трудно.&#x27;, cat: &#x27;justinian&#x27;, topic: &#x27;byzantium&#x27; },
+    { year: 570, label: &#x27;около 570&#x27;, short: &#x27;рождение Мухаммеда&#x27;, title: &#x27;рождение Мухаммеда&#x27;, detail: &#x27;Будущий основатель ислама родился в Мекке примерно в 570 году.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 610, short: &#x27;начало проповеди&#x27;, title: &#x27;начало проповеди Мухаммеда&#x27;, detail: &#x27;Согласно мусульманской традиции, Мухаммед начал получать откровения и проповедовать веру в единого Бога — Аллаха.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 622, short: &#x27;хиджра&#x27;, title: &#x27;переселение из Мекки в Медину&#x27;, detail: &#x27;Мухаммед и его сторонники переселились в Медину. От хиджры начинается мусульманское летоисчисление.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 630, short: &#x27;возвращение в Мекку&#x27;, title: &#x27;возвращение Мухаммеда в Мекку&#x27;, detail: &#x27;Мухаммед вернулся в Мекку, а Кааба стала главной святыней ислама.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 632, short: &#x27;власть халифов&#x27;, title: &#x27;смерть Мухаммеда и начало власти халифов&#x27;, detail: &#x27;После смерти Мухаммеда арабским государством стали управлять халифы — «заместители» пророка.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 637, short: &#x27;взятие Иерусалима&#x27;, title: &#x27;взятие Иерусалима арабами&#x27;, detail: &#x27;После пятимесячной осады жители города сдались халифу. Византия потеряла важную восточную область.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 643, short: &#x27;взятие Дербента&#x27;, title: &#x27;взятие Дербента арабами&#x27;, detail: &#x27;Арабские войска дошли до Кавказа и захватили Дербент.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 648, label: &#x27;середина VII века&#x27;, short: &#x27;покорение Персии&#x27;, title: &#x27;покорение Персии арабами&#x27;, detail: &#x27;К середине VII века арабы разгромили Персидскую державу и включили её земли в своё государство.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 650, short: &#x27;Хазарский каганат&#x27;, title: &#x27;образование Хазарского каганата&#x27;, detail: &#x27;На Северном Кавказе и в Прикаспии возникло государство хазар.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27; },
     { year: 681, short: &#x27;Болгарское царство&#x27;, title: &#x27;образование Первого Болгарского царства&#x27;, detail: &#x27;На северной границе Византии появилось сильное Болгарское царство.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 732, short: &#x27;битва при Пуатье&#x27;, title: &#x27;победа франков при Пуатье&#x27;, detail: &#x27;Карл Мартелл разбил арабское войско. Прозвище Мартелл означает «Молот».&#x27;, cat: &#x27;franks&#x27;, topic: &#x27;franks&#x27; },
     { year: 800, short: &#x27;Карл — император&#x27;, title: &#x27;провозглашение Карла Великого императором&#x27;, detail: &#x27;Папа римский короновал Карла. На Западе появилась империя, считавшая себя наследницей Рима.&#x27;, cat: &#x27;franks&#x27;, topic: &#x27;franks&#x27; },
