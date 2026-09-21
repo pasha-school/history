@@ -7,10 +7,12 @@
     <span><i class="swatch franks"></i>Франки</span>
     <span><i class="swatch europe"></i>Европа IX–XI вв.</span>
     <span><i class="swatch islam"></i>Ислам и арабы</span>
+    <span><i class="swatch society"></i>Средневековое общество</span>
   </div>
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
-      <option value="islam">Ислам и арабы — новый параграф</option>
+      <option value="society">Средневековое общество — новые параграфы</option>
+      <option value="islam">Ислам и арабы</option>
       <option value="europe">Европа IX–XI вв.</option>
       <option value="franks">Франки</option>
       <option value="byzantium">Византия и соседи</option>
@@ -48,6 +50,7 @@
   #pasha-history-timeline .franks { background: var(--viz-series-4); }
   #pasha-history-timeline .europe { background: var(--viz-series-5); }
   #pasha-history-timeline .islam { background: var(--viz-series-6); }
+  #pasha-history-timeline .society { background: var(--yellow); }
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
@@ -67,6 +70,7 @@
   #pasha-history-timeline .dot.franks { background: var(--viz-series-4); }
   #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
   #pasha-history-timeline .dot.islam { background: var(--viz-series-6); }
+  #pasha-history-timeline .dot.society { background: var(--yellow); }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .detail { margin-top: 8px; }
@@ -124,9 +128,12 @@
     { year: 992, short: 'победа над печенегами', title: 'победа Владимира на реке Трубеже', detail: 'Князь Владимир Святославич победил печенегов на реке Трубеже.', cat: 'europe', topic: 'europe' },
     { year: 1000, label: 'около 1000', short: 'викинги в Америке', title: 'достижение Винланда', detail: 'Викинги достигли побережья Северной Америки примерно за 500 лет до Колумба.', cat: 'europe', topic: 'europe' },
     { year: 1018, short: 'падение Болгарского царства', title: 'падение Первого Болгарского царства', detail: 'Византия завоевала Болгарию и вновь подчинила большую часть Балкан.', cat: 'neighbors', topic: 'byzantium' },
+    { year: 1054, short: 'раскол Церкви', title: 'раскол христианской Церкви', detail: 'Папа римский и патриарх Константинопольский предали друг друга анафеме. Восточных христиан стали называть православными, а западных — католиками.', cat: 'society', topic: 'society' },
     { year: 1066, short: 'завоевание Англии', title: 'нормандское завоевание Англии', detail: 'Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.', cat: 'europe', topic: 'europe' },
     { year: 1072, short: 'Правда Ярославичей', title: 'создание Правды Ярославичей', detail: 'Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.', cat: 'europe', topic: 'europe' },
     { year: 1074, short: 'Мономах и Гита', title: 'свадьба Владимира Мономаха и Гиты', detail: 'Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.', cat: 'europe', topic: 'europe' },
+    { year: 1209, label: '1209–1229', short: 'Альбигойские войны', title: 'Альбигойские войны', detail: 'Папа римский призвал рыцарей в поход против альбигойцев — еретиков на юге Франции. Война закончилась в 1229 году.', cat: 'society', topic: 'society' },
+    { year: 1215, short: 'святая инквизиция', title: 'учреждение святой инквизиции', detail: 'Церковь создала особое следствие и суд для поиска и наказания еретиков.', cat: 'society', topic: 'society' },
     { year: 1258, short: 'падение Багдада', title: 'конец правления Аббасидов', detail: 'Монголы захватили Багдад. Правление династии Аббасидов в Арабском халифате закончилось.', cat: 'islam', topic: 'islam' },
     { year: 1453, short: 'падение Византии', title: 'падение Константинополя', detail: 'Османы взяли Константинополь. Византийская империя прекратила существование.', cat: 'rome', topic: 'byzantium' }
   ];
