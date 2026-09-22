@@ -54,11 +54,11 @@
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
-  #pasha-history-timeline .event-wrap { position: absolute; top: 0; height: 100%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+  #pasha-history-timeline .event-wrap { position: absolute; top: 0; width: 112px; height: 100%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
   #pasha-history-timeline .stem { position: absolute; width: 1px; background: var(--border); left: 50%; }
   #pasha-history-timeline .stem.up { top: 68px; height: 96px; }
   #pasha-history-timeline .stem.down { top: 166px; height: 96px; }
-  #pasha-history-timeline .event-btn { position: absolute; width: 112px; white-space: normal; text-align: center; }
+  #pasha-history-timeline .event-btn { position: absolute; left: 0; inline-size: 112px; max-inline-size: none; display: flex; flex-direction: column; align-items: center; white-space: normal; text-align: center; }
   #pasha-history-timeline .event-btn.up { top: 15px; }
   #pasha-history-timeline .event-btn.down { top: 263px; transform: translateY(-50%); }
   #pasha-history-timeline .event-btn.mid-up { top: 72px; }
@@ -73,6 +73,7 @@
   #pasha-history-timeline .dot.society { background: var(--yellow); }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
+  #pasha-history-timeline .event-btn[aria-pressed="true"] .name { color: inherit; }
   #pasha-history-timeline .detail { margin-top: 8px; }
   #pasha-history-timeline .detail-title { margin-top: 4px; font-weight: 500; }
   #pasha-history-timeline .detail-text { margin-top: 4px; }
