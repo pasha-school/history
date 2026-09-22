@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Персонажи — История Паши</title>
+  <style>
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;color:#202534;background:#f4efe5;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .wrap{width:min(1080px,calc(100% - 32px));margin:auto}header{padding:42px 0;color:#fff;background:linear-gradient(118deg,#243b66,#4779ba)}
+    h1{margin:0;font-size:clamp(2rem,5vw,3rem)}.back{color:#fff}main{padding:24px 0 50px}.intro{max-width:740px}
+    #search{width:100%;max-width:560px;padding:12px 14px;border:1px solid #aabbd5;border-radius:10px;font:inherit;background:#fff}
+    nav{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}nav a{color:#315b9b;font-weight:650}
+    section{margin:30px 0}section h2{margin:0 0 12px;font-size:1.4rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+    .person{display:block;padding:18px;border:1px solid #e8e1d4;border-radius:14px;background:#fffdf8;color:inherit;text-decoration:none;box-shadow:0 4px 16px #3a30220e}
+    .person:hover,.person:focus-visible{outline:2px solid #315b9b}.person strong{display:block;color:#254b84;font-size:1.08rem}.person small{display:block;margin:4px 0;color:#626b7c}.person span{display:block}
+    #empty{display:none;color:#626b7c}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><h1>Кто есть кто</h1><p>Персонажи из пройденных тем · 6 класс</p><a class="back" href="index.html">← На главную</a></div></header>
+  <main class="wrap">
+    <p class="intro">Выбери тему и пробегись по карточкам: <b>имя → где → чем запомнился</b>. Нажми на имя, чтобы открыть полную заметку.</p>
+    <label for="search">Найти имя или место</label><br><input id="search" type="search" placeholder="Например: Византия, 988 или Карл">
+    <nav aria-label="Темы"><a href="#рим">Рим и Византия</a><a href="#европа">Европа</a><a href="#русь">Русь и славяне</a><a href="#арабы">Арабский мир</a></nav>
+    <p id="empty">Ничего не нашлось. Попробуй другое имя или место.</p>
+    <section id="рим"><h2>Рим и Византия</h2><div class="grid">
+      <a class="person" href="персонаж.html?name=Константин Великий"><strong>Константин Великий</strong><small>Рим · IV век</small><span>Основал новую столицу — Константинополь.</span></a>
+      <a class="person" href="персонаж.html?name=Одоакр"><strong>Одоакр</strong><small>Италия · 476 год</small><span>Сверг последнего западноримского императора.</span></a>
+      <a class="person" href="персонаж.html?name=Юстиниан I"><strong>Юстиниан I</strong><small>Византия · VI век</small><span>Законы, Святая София и расцвет империи.</span></a>
+      <a class="person" href="персонаж.html?name=Феодора"><strong>Феодора</strong><small>Византия · VI век</small><span>Помогла Юстиниану удержать власть во время «Ника».</span></a>
+      <a class="person" href="персонаж.html?name=Хосров I"><strong>Хосров I</strong><small>Иран · VI век</small><span>Шах и противник Византии на востоке.</span></a>
+      <a class="person" href="персонаж.html?name=Лев Математик"><strong>Лев Математик</strong><small>Византия · IX век</small><span>Учёный: школа и огненный телеграф.</span></a>
+    </div></section>
+    <section id="европа"><h2>Европа</h2><div class="grid">
+      <a class="person" href="персонаж.html?name=Хлодвиг"><strong>Хлодвиг</strong><small>Франки · V–VI века</small><span>Королевство франков и принятие христианства.</span></a>
+      <a class="person" href="персонаж.html?name=Карл Мартелл"><strong>Карл Мартелл</strong><small>Франки · VIII век</small><span>Победа при Пуатье и конное войско.</span></a>
+      <a class="person" href="персонаж.html?name=Пипин Короткий"><strong>Пипин Короткий</strong><small>Франки · VIII век</small><span>Стал королём при поддержке Церкви.</span></a>
+      <a class="person" href="персонаж.html?name=Карл Великий"><strong>Карл Великий</strong><small>Франки · VIII–IX века</small><span>Создал империю; поддерживал школы.</span></a>
+      <a class="person" href="персонаж.html?name=Альфред Великий"><strong>Альфред Великий</strong><small>Англия · IX век</small><span>Защитил англосаксов от викингов.</span></a>
+      <a class="person" href="персонаж.html?name=Оттон I"><strong>Оттон I</strong><small>Германия · X век</small><span>Император Священной Римской империи с 962 года.</span></a>
+      <a class="person" href="персонаж.html?name=Гуго Капет"><strong>Гуго Капет</strong><small>Франция · X век</small><span>Основатель династии Капетингов.</span></a>
+      <a class="person" href="персонаж.html?name=Вильгельм Завоеватель"><strong>Вильгельм Завоеватель</strong><small>Англия · 1066 год</small><span>Завоевал Англию, прибыв из Нормандии.</span></a>
+      <a class="person" href="персонаж.html?name=Франциск Ассизский"><strong>Франциск Ассизский</strong><small>Италия · XIII век</small><span>Основал орден францисканцев; помогал бедным.</span></a>
+    </div></section>
+    <section id="русь"><h2>Русь и славяне</h2><div class="grid">
+      <a class="person" href="персонаж.html?name=Кирилл и Мефодий"><strong>Кирилл и Мефодий</strong><small>Византия и славянские земли · IX век</small><span>Создали славянскую азбуку и переводили книги.</span></a>
+      <a class="person" href="персонаж.html?name=Владимир Святой"><strong>Владимир Святой</strong><small>Русь · 988 год</small><span>Начал Крещение Руси.</span></a>
+    </div></section>
+    <section id="арабы"><h2>Арабский мир</h2><div class="grid">
+      <a class="person" href="персонаж.html?name=Мухаммед"><strong>Мухаммед</strong><small>Аравия · VII век</small><span>Пророк ислама; объединил арабские племена.</span></a>
+      <a class="person" href="персонаж.html?name=Али"><strong>Али</strong><small>Халифат · VII век</small><span>Четвёртый халиф; спор о наследовании власти.</span></a>
+      <a class="person" href="персонаж.html?name=Харун ар-Рашид"><strong>Харун ар-Рашид</strong><small>Багдад · VIII–IX века</small><span>Халиф во время расцвета культуры.</span></a>
+      <a class="person" href="персонаж.html?name=Аль-Хорезми"><strong>Аль-Хорезми</strong><small>Багдад · IX век</small><span>Математик: алгебра и слово «алгоритм».</span></a>
+      <a class="person" href="персонаж.html?name=Фирдоуси"><strong>Фирдоуси</strong><small>Иран · X–XI века</small><span>Поэт, автор «Шахнаме».</span></a>
+      <a class="person" href="персонаж.html?name=Ибн Сина"><strong>Ибн Сина</strong><small>Средняя Азия и Иран · X–XI века</small><span>Врач и философ, известный как Авиценна.</span></a>
+      <a class="person" href="персонаж.html?name=Омар Хайям"><strong>Омар Хайям</strong><small>Иран · XI–XII века</small><span>Поэт, математик и астроном.</span></a>
+    </div></section>
+  </main>
+  <script>
+    const search=document.getElementById('search');
+    search.addEventListener('input',()=>{
+      const query=search.value.trim().toLocaleLowerCase('ru');let visible=0;
+      document.querySelectorAll('section').forEach(section=>{
+        let count=0;section.querySelectorAll('.person').forEach(card=>{
+          const show=card.textContent.toLocaleLowerCase('ru').includes(query);
+          card.hidden=!show;if(show)count++;
+        });section.hidden=count===0;visible+=count;
+      });document.getElementById('empty').style.display=visible?'none':'block';
+    });
+  </script>
+</body>
+</html>

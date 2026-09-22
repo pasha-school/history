@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Персонаж — История Паши</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body{margin:0;color:#202534;background:#f4efe5;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .wrap{width:min(860px,calc(100% - 32px));margin:auto}header{padding:34px 0;color:#fff;background:linear-gradient(118deg,#243b66,#4779ba)}
+    h1{margin:0;font-size:clamp(2rem,5vw,3rem)}header a{color:#fff}main{padding:28px 0 54px}
+    .paper{padding:28px;border:1px solid #e8e1d4;border-radius:16px;background:#fffdf8;box-shadow:0 8px 26px #3a302216}
+    .paper a{color:#315b9b}.paper img{max-width:100%}.paper blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid #d79b3e;background:#fff7e3}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><p>Всеобщая история · 6 класс</p><h1 id="title">Персонаж</h1><p><a href="персонажи.html">← К списку персонажей</a> · <a href="index.html">На главную</a></p></div></header>
+  <main class="wrap"><article class="paper" id="content">Загрузка заметки…</article></main>
+  <script>
+    const known='Али|Аль-Хорезми|Альфред Великий|Вильгельм Завоеватель|Владимир Святой|Гуго Капет|Ибн Сина|Карл Великий|Карл Мартелл|Кирилл и Мефодий|Константин Великий|Лев Математик|Мухаммед|Одоакр|Омар Хайям|Оттон I|Пипин Короткий|Феодора|Фирдоуси|Франциск Ассизский|Харун ар-Рашид|Хлодвиг|Хосров I|Юстиниан I'.split('|');
+    const name=new URLSearchParams(location.search).get('name');
+    const content=document.getElementById('content');
+    if(!known.includes(name))content.textContent='Такого персонажа пока нет в списке.';
+    else (async()=>{
+      try{
+        const response=await fetch('Персонажи/'+encodeURIComponent(name)+'.md');
+        if(!response.ok)throw new Error('Заметка не найдена: '+response.status);
+        let markdown=(await response.text()).replace(/^---\s*\n[\s\S]*?\n---\s*\n/,'');
+        markdown=markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(_,target,label)=>{
+          const title=target.split('/').pop();const text=label||title;
+          if(target.startsWith('Конспекты/')){
+            const number=Number(title.match(/^§ (\d+)/)?.[1]);
+            return number>=2&&number<=8?'['+text+'](конспект.html?n='+number+')':text;
+          }
+          if(known.includes(title))return '['+text+'](персонаж.html?name='+encodeURIComponent(title)+')';
+          if(target==='История — таймлайн')return '['+text+'](timeline.html)';
+          return text;
+        });
+        if(!window.marked)throw new Error('Не загрузилась библиотека оформления');
+        content.innerHTML=marked.parse(markdown);
+        const heading=content.querySelector('h1');
+        if(heading){document.getElementById('title').textContent=heading.textContent;document.title=heading.textContent+' — История Паши';heading.remove()}
+      }catch(error){content.textContent='Не удалось загрузить заметку: '+error.message}
+    })();
+  </script>
+</body>
+</html>
