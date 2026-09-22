@@ -1,1 +1,48 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Конспект — История Паши</title><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><style>body{margin:0;color:#202534;background:#f4efe5;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{width:min(900px,calc(100% - 32px));margin:auto}header{padding:34px 0;color:#fff;background:linear-gradient(118deg,#243b66,#4779ba)}main{padding:28px 0 54px}.paper{padding:28px;border:1px solid #e8e1d4;border-radius:16px;background:#fffdf8;box-shadow:0 8px 26px #3a302216}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.12}h2{margin-top:28px}a{color:#315b9b}.back{color:#fff}.paper img{display:block;max-width:100%;max-height:520px;margin:16px auto;border-radius:12px}.paper blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid #d79b3e;background:#fff7e3}</style></head><body><header><div class="wrap"><p>Всеобщая история · 6 класс</p><h1 id="title">Конспект</h1><a class="back" href="index.html">← На главную</a></div></header><main class="wrap"><article class="paper" id="content">Загрузка конспекта…</article></main><script>(async()=>{const file=new URLSearchParams(location.search).get('file');if(!file)return;const raw='https://raw.githubusercontent.com/pasha-school/history/main/'+file;try{const text=await (await fetch(raw)).text();document.getElementById('content').innerHTML=marked.parse(text.replace(/^---[\\s\\S]*?---\\s*/,''));const h=document.querySelector('#content h1');if(h){document.getElementById('title').textContent=h.textContent;h.remove()}document.querySelectorAll('#content img').forEach(img=>{img.src='https://raw.githubusercontent.com/pasha-school/history/main/'+img.getAttribute('src').replace(/^\.\.\//,'').replaceAll(' ','%20')})}catch(e){document.getElementById('content').textContent='Не удалось загрузить заметку.'}})()</script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Конспект — История Паши</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body{margin:0;color:#202534;background:#f4efe5;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .wrap{width:min(900px,calc(100% - 32px));margin:auto}
+    header{padding:34px 0;color:#fff;background:linear-gradient(118deg,#243b66,#4779ba)}
+    main{padding:28px 0 54px}.paper{padding:28px;border:1px solid #e8e1d4;border-radius:16px;background:#fffdf8;box-shadow:0 8px 26px #3a302216}
+    h1{font-size:clamp(2rem,5vw,3rem);line-height:1.12}h2{margin-top:28px}a{color:#315b9b}.back{color:#fff}
+    .paper img{display:block;max-width:100%;max-height:520px;margin:16px auto;border-radius:12px}
+    .paper blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid #d79b3e;background:#fff7e3}
+    .paper table{border-collapse:collapse;max-width:100%;display:block;overflow-x:auto}.paper td,.paper th{padding:8px;border:1px solid #d9dfeb}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><p>Всеобщая история · 6 класс</p><h1 id="title">Конспект</h1><a class="back" href="index.html">← На главную</a></div></header>
+  <main class="wrap"><article class="paper" id="content">Загрузка конспекта…</article></main>
+  <script>
+    const notes={2:'§ 2 — Византийская империя и её соседи.md',3:'§ 3 — От королевства Хлодвига к империи Карла Великого.md',4:'§ 4 — Европа в IX–XI вв.md',5:'§ 5 — Возникновение ислама и государства у арабов.md',6:'§ 6 — Арабский халифат, его расцвет и распад.md',7:'§ 7 — Сеньоры и вассалы.md',8:'§ 8 — Католическая Церковь и духовенство.md'};
+    const n=Number(new URLSearchParams(location.search).get('n'));
+    const content=document.getElementById('content');
+    if(!notes[n])content.textContent='Такого параграфа пока нет.';
+    else (async()=>{
+      try{
+        const response=await fetch('Конспекты/'+encodeURIComponent(notes[n]));
+        if(!response.ok)throw new Error('Конспект не найден: '+response.status);
+        let markdown=(await response.text()).replace(/^---\s*\n[\s\S]*?\n---\s*\n/,'');
+        markdown=markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(_,target,label)=>{
+          const path=target.endsWith('.md')?target:target+'.md';
+          return '['+(label||target.split('/').pop())+']('+encodeURI(path)+')';
+        });
+        if(!window.marked)throw new Error('Не загрузилась библиотека оформления');
+        content.innerHTML=marked.parse(markdown);
+        const heading=content.querySelector('h1');
+        if(heading){document.getElementById('title').textContent=heading.textContent;document.title=heading.textContent+' — История Паши';heading.remove()}
+        content.querySelectorAll('img').forEach(img=>{
+          const src=img.getAttribute('src');
+          if(src&&!/^https?:/.test(src))img.src=new URL(src,new URL('Конспекты/',location.href)).href;
+        });
+      }catch(error){content.textContent='Не удалось загрузить конспект: '+error.message}
+    })();
+  </script>
+</body>
+</html>
