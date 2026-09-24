@@ -34,6 +34,10 @@
     <div class="text-muted text-small">Выбери дату на линии</div>
     <div class="detail-title">486 — начало завоевания Галлии</div>
     <div class="detail-text">Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.</div>
+    <figure class="detail-map" hidden>
+      <img class="detail-map-image" alt="">
+      <figcaption><span class="detail-map-caption"></span><br><span class="detail-map-source text-small text-muted"></span></figcaption>
+    </figure>
   </div>
 </div>
 
@@ -81,6 +85,9 @@
   #pasha-history-timeline .detail { margin-top: 8px; }
   #pasha-history-timeline .detail-title { margin-top: 4px; font-weight: 500; }
   #pasha-history-timeline .detail-text { margin-top: 4px; }
+  #pasha-history-timeline .detail-map { margin: 14px 0 0; }
+  #pasha-history-timeline .detail-map-image { display: block; width: 100%; max-height: 580px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+  #pasha-history-timeline .detail-map figcaption { margin-top: 7px; line-height: 1.45; }
   #pasha-history-timeline .mobile-events { display: none; }
   @media (max-width: 600px) {
     #pasha-history-timeline .timeline-scroll { display: none; }
@@ -137,14 +144,14 @@
     { year: 1066, short: 'завоевание Англии', title: 'нормандское завоевание Англии', detail: 'Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.', cat: 'europe', topic: 'europe' },
     { year: 1072, short: 'Правда Ярославичей', title: 'создание Правды Ярославичей', detail: 'Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.', cat: 'europe', topic: 'europe' },
     { year: 1074, short: 'Мономах и Гита', title: 'свадьба Владимира Мономаха и Гиты', detail: 'Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.', cat: 'europe', topic: 'europe' },
-    { year: 1095, short: 'призыв Урбана II', title: 'призыв к Первому крестовому походу', detail: 'Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.', cat: 'crusades', topic: 'crusades' },
-    { year: 1096, label: '1096–1099', short: 'Первый поход', title: 'Первый крестовый поход', detail: 'Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.', cat: 'crusades', topic: 'crusades' },
-    { year: 1099, short: 'взятие Иерусалима', title: 'крестоносцы захватили Иерусалим', detail: 'После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.', cat: 'crusades', topic: 'crusades' },
+    { year: 1095, short: 'призыв Урбана II', title: 'призыв к Первому крестовому походу', detail: 'Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.', map: 'Карты/Первый крестовый поход — маршруты.jpg', mapAlt: 'Маршруты войск Первого крестового похода из Западной Европы через Константинополь к Иерусалиму', mapCaption: 'Цветные линии показывают пути шести армий. Они сходятся у Константинополя, проходят через Малую Азию и ведут к Антиохии и Иерусалиму.', mapSource: 'Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.', cat: 'crusades', topic: 'crusades' },
+    { year: 1096, label: '1096–1099', short: 'Первый поход', title: 'Первый крестовый поход', detail: 'Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.', map: 'Карты/Первый крестовый поход — маршруты.jpg', mapAlt: 'Маршруты войск Первого крестового похода из Западной Европы через Константинополь к Иерусалиму', mapCaption: 'Поход не был движением одной армии: отряды вышли из разных областей Европы и соединились лишь на пути к Святой земле.', mapSource: 'Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.', cat: 'crusades', topic: 'crusades' },
+    { year: 1099, short: 'взятие Иерусалима', title: 'крестоносцы захватили Иерусалим', detail: 'После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.', map: 'Карты/Первый крестовый поход — маршруты.jpg', mapAlt: 'Маршруты войск Первого крестового похода к Иерусалиму', mapCaption: 'Конечная точка маршрутов — Иерусалим. По дороге крестоносцы прошли через Никею, Антиохию и другие важные города.', mapSource: 'Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.', cat: 'crusades', topic: 'crusades' },
     { year: 1147, label: '1147–1149', short: 'Второй поход', title: 'Второй крестовый поход', detail: 'Поход начался после потери Эдессы и окончился неудачей.', cat: 'crusades', topic: 'crusades' },
-    { year: 1187, short: 'Салах ад-Дин', title: 'Салах ад-Дин вернул Иерусалим', detail: 'Мусульманские войска победили крестоносцев, и Иерусалим снова оказался под властью мусульман.', cat: 'crusades', topic: 'crusades' },
-    { year: 1189, label: '1189–1192', short: 'Третий поход', title: 'Третий крестовый поход', detail: 'Ричард Львиное Сердце, Фридрих Барбаросса и Филипп II Август не смогли вернуть Иерусалим.', cat: 'crusades', topic: 'crusades' },
-    { year: 1202, label: '1202–1204', short: 'Четвёртый поход', title: 'Четвёртый крестовый поход', detail: 'Вместо похода против мусульман крестоносцы вмешались в борьбу за власть в Византии.', cat: 'crusades', topic: 'crusades' },
-    { year: 1204, short: 'разгром Константинополя', title: 'крестоносцы захватили Константинополь', detail: 'Участники Четвёртого похода разграбили христианскую столицу Византии и создали Латинскую империю.', cat: 'crusades', topic: 'crusades' },
+    { year: 1187, short: 'Салах ад-Дин', title: 'победа при Хаттине и возвращение Иерусалима', detail: '4 июля армия Салах ад-Дина разгромила войско Иерусалимского королевства у Хаттина. После этой победы мусульмане заняли многие города, а 2 октября Иерусалим сдался Салах ад-Дину.', map: 'Карты/Битва при Хаттине — 1187.png', mapAlt: 'Движение армий Салах ад-Дина и Иерусалимского королевства перед битвой при Хаттине', mapCaption: 'Красным показано войско Иерусалимского королевства, зелёным — армия Салах ад-Дина, голубыми точками — важные источники воды. Крестоносцы ушли от источников у Сефории и были окружены у Хаттина.', mapSource: 'Источник: Treklam, Wikimedia Commons; карта создана по исследованиям C. Tyerman и D. Nicolle, CC BY-SA 4.0.', cat: 'crusades', topic: 'crusades' },
+    { year: 1189, label: '1189–1192', short: 'Третий поход', title: 'Третий крестовый поход', detail: 'Ричард Львиное Сердце и Филипп II двигались главным образом морем, Фридрих Барбаросса — сушей через Византию и Малую Азию. Поход вернул крестоносцам часть побережья, но не Иерусалим.', map: 'Карты/Третий крестовый поход — маршруты.png', mapAlt: 'Морские и сухопутные маршруты Третьего крестового похода', mapCaption: 'Зелёные линии — путь Ричарда I, синие — Филиппа II, красная — Фридриха I Барбароссы. Карта также показывает владения крестоносцев до и после похода.', mapSource: 'Источник: Kandi, Wikimedia Commons, CC BY-SA 4.0.', cat: 'crusades', topic: 'crusades' },
+    { year: 1202, label: '1202–1204', short: 'Четвёртый поход', title: 'Четвёртый крестовый поход', detail: 'Крестоносцы собрались в Венеции, но вместо Египта сначала направились к Заре, а затем к Константинополю. Синяя линия на карте показывает этот поворот маршрута.', map: 'Карты/Четвёртый крестовый поход — маршрут.png', mapAlt: 'Маршрут Четвёртого крестового похода от Венеции через Зару к Константинополю', mapCaption: 'Синяя линия показывает путь от Венеции через Зару к Константинополю. Цветом отмечены земли Латинской империи и греческих государств после 1204 года.', mapSource: 'Источник: IvanBondarev, Wikimedia Commons, CC BY-SA 4.0.', cat: 'crusades', topic: 'crusades' },
+    { year: 1204, short: 'разгром Константинополя', title: 'крестоносцы захватили Константинополь', detail: '13 апреля 1204 года участники Четвёртого похода захватили и разграбили христианскую столицу Византии. На её землях возникли Латинская империя и греческие государства-преемники.', map: 'Карты/Четвёртый крестовый поход — маршрут.png', mapAlt: 'Маршрут к Константинополю и раздел византийских земель после 1204 года', mapCaption: 'Маршрут заканчивается у Константинополя. Жёлтым показаны латинские владения, красным — греческие государства, возникшие после разгрома Византии.', mapSource: 'Источник: IvanBondarev, Wikimedia Commons, CC BY-SA 4.0.', cat: 'crusades', topic: 'crusades' },
     { year: 1209, label: '1209–1229', short: 'Альбигойские войны', title: 'Альбигойские войны', detail: 'Папа римский призвал рыцарей в поход против альбигойцев — еретиков на юге Франции. Война закончилась в 1229 году.', cat: 'society', topic: 'society' },
     { year: 1215, short: 'святая инквизиция', title: 'учреждение святой инквизиции', detail: 'Церковь создала особое следствие и суд для поиска и наказания еретиков.', cat: 'society', topic: 'society' },
     { year: 1258, short: 'падение Багдада', title: 'конец правления Аббасидов', detail: 'Монголы захватили Багдад. Правление династии Аббасидов в Арабском халифате закончилось.', cat: 'islam', topic: 'islam' },
@@ -158,12 +165,29 @@
   const filter = root.querySelector('select');
   const title = root.querySelector('.detail-title');
   const text = root.querySelector('.detail-text');
+  const map = root.querySelector('.detail-map');
+  const mapImage = root.querySelector('.detail-map-image');
+  const mapCaption = root.querySelector('.detail-map-caption');
+  const mapSource = root.querySelector('.detail-map-source');
 
   function selectEvent(event, button) {
     root.querySelectorAll('button[aria-pressed]').forEach(item => item.setAttribute('aria-pressed', 'false'));
     button.setAttribute('aria-pressed', 'true');
     title.textContent = `${event.label || event.year} — ${event.title}`;
     text.textContent = event.detail;
+    if (event.map) {
+      map.hidden = false;
+      mapImage.src = event.map;
+      mapImage.alt = event.mapAlt;
+      mapCaption.textContent = event.mapCaption;
+      mapSource.textContent = event.mapSource;
+    } else {
+      map.hidden = true;
+      mapImage.removeAttribute('src');
+      mapImage.alt = '';
+      mapCaption.textContent = '';
+      mapSource.textContent = '';
+    }
   }
 
   function render(topic) {
@@ -193,6 +217,8 @@
       button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
       button.innerHTML = `<span class="year tabular-nums">${event.label || event.year}</span><span class="name text-small">${event.short}</span>`;
       button.addEventListener('click', () => selectEvent(event, button));
+      button.addEventListener('mouseenter', () => selectEvent(event, button));
+      button.addEventListener('focus', () => selectEvent(event, button));
 
       wrap.append(stem, dot, button);
       container.appendChild(wrap);
@@ -207,8 +233,8 @@
     });
 
     const first = shown[0];
-    title.textContent = `${first.label || first.year} — ${first.title}`;
-    text.textContent = first.detail;
+    const firstButton = container.querySelector('button');
+    selectEvent(first, firstButton);
   }
 
   filter.addEventListener('change', () => render(filter.value));

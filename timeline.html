@@ -11,13 +11,13 @@
 </head>
 <body>
 <nav aria-label="Навигация"><a class="home-link" href="index.html">← На главную</a></nav>
-<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="История — таймлайн 6 класса" data-srcdoc="&lt;!doctype html&gt;
+<iframe id="codex-visualization" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" title="История — таймлайн 6 класса" data-srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 &lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
-&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src &#x27;self&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
 &lt;title&gt;История — таймлайн 6 класса&lt;/title&gt;
 &lt;style&gt;:root {
   color-scheme: light dark;
@@ -1364,6 +1364,10 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;div class=&quot;text-muted text-small&quot;&gt;Выбери дату на линии&lt;/div&gt;
     &lt;div class=&quot;detail-title&quot;&gt;486 — начало завоевания Галлии&lt;/div&gt;
     &lt;div class=&quot;detail-text&quot;&gt;Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.&lt;/div&gt;
+    &lt;figure class=&quot;detail-map&quot; hidden&gt;
+      &lt;img class=&quot;detail-map-image&quot; alt=&quot;&quot;&gt;
+      &lt;figcaption&gt;&lt;span class=&quot;detail-map-caption&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;detail-map-source text-small text-muted&quot;&gt;&lt;/span&gt;&lt;/figcaption&gt;
+    &lt;/figure&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1411,6 +1415,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .detail { margin-top: 8px; }
   #pasha-history-timeline .detail-title { margin-top: 4px; font-weight: 500; }
   #pasha-history-timeline .detail-text { margin-top: 4px; }
+  #pasha-history-timeline .detail-map { margin: 14px 0 0; }
+  #pasha-history-timeline .detail-map-image { display: block; width: 100%; max-height: 580px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+  #pasha-history-timeline .detail-map figcaption { margin-top: 7px; line-height: 1.45; }
   #pasha-history-timeline .mobile-events { display: none; }
   @media (max-width: 600px) {
     #pasha-history-timeline .timeline-scroll { display: none; }
@@ -1467,14 +1474,14 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 1066, short: &#x27;завоевание Англии&#x27;, title: &#x27;нормандское завоевание Англии&#x27;, detail: &#x27;Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 1072, short: &#x27;Правда Ярославичей&#x27;, title: &#x27;создание Правды Ярославичей&#x27;, detail: &#x27;Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 1074, short: &#x27;Мономах и Гита&#x27;, title: &#x27;свадьба Владимира Мономаха и Гиты&#x27;, detail: &#x27;Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
-    { year: 1095, short: &#x27;призыв Урбана II&#x27;, title: &#x27;призыв к Первому крестовому походу&#x27;, detail: &#x27;Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1096, label: &#x27;1096–1099&#x27;, short: &#x27;Первый поход&#x27;, title: &#x27;Первый крестовый поход&#x27;, detail: &#x27;Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1099, short: &#x27;взятие Иерусалима&#x27;, title: &#x27;крестоносцы захватили Иерусалим&#x27;, detail: &#x27;После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1095, short: &#x27;призыв Урбана II&#x27;, title: &#x27;призыв к Первому крестовому походу&#x27;, detail: &#x27;Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.&#x27;, map: &#x27;Карты/Первый крестовый поход — маршруты.jpg&#x27;, mapAlt: &#x27;Маршруты войск Первого крестового похода из Западной Европы через Константинополь к Иерусалиму&#x27;, mapCaption: &#x27;Цветные линии показывают пути шести армий. Они сходятся у Константинополя, проходят через Малую Азию и ведут к Антиохии и Иерусалиму.&#x27;, mapSource: &#x27;Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1096, label: &#x27;1096–1099&#x27;, short: &#x27;Первый поход&#x27;, title: &#x27;Первый крестовый поход&#x27;, detail: &#x27;Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.&#x27;, map: &#x27;Карты/Первый крестовый поход — маршруты.jpg&#x27;, mapAlt: &#x27;Маршруты войск Первого крестового похода из Западной Европы через Константинополь к Иерусалиму&#x27;, mapCaption: &#x27;Поход не был движением одной армии: отряды вышли из разных областей Европы и соединились лишь на пути к Святой земле.&#x27;, mapSource: &#x27;Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1099, short: &#x27;взятие Иерусалима&#x27;, title: &#x27;крестоносцы захватили Иерусалим&#x27;, detail: &#x27;После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.&#x27;, map: &#x27;Карты/Первый крестовый поход — маршруты.jpg&#x27;, mapAlt: &#x27;Маршруты войск Первого крестового похода к Иерусалиму&#x27;, mapCaption: &#x27;Конечная точка маршрутов — Иерусалим. По дороге крестоносцы прошли через Никею, Антиохию и другие важные города.&#x27;, mapSource: &#x27;Источник: Arnaud de Vachon и Nihil scimus, Wikimedia Commons, CC0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
     { year: 1147, label: &#x27;1147–1149&#x27;, short: &#x27;Второй поход&#x27;, title: &#x27;Второй крестовый поход&#x27;, detail: &#x27;Поход начался после потери Эдессы и окончился неудачей.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1187, short: &#x27;Салах ад-Дин&#x27;, title: &#x27;Салах ад-Дин вернул Иерусалим&#x27;, detail: &#x27;Мусульманские войска победили крестоносцев, и Иерусалим снова оказался под властью мусульман.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1189, label: &#x27;1189–1192&#x27;, short: &#x27;Третий поход&#x27;, title: &#x27;Третий крестовый поход&#x27;, detail: &#x27;Ричард Львиное Сердце, Фридрих Барбаросса и Филипп II Август не смогли вернуть Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1202, label: &#x27;1202–1204&#x27;, short: &#x27;Четвёртый поход&#x27;, title: &#x27;Четвёртый крестовый поход&#x27;, detail: &#x27;Вместо похода против мусульман крестоносцы вмешались в борьбу за власть в Византии.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
-    { year: 1204, short: &#x27;разгром Константинополя&#x27;, title: &#x27;крестоносцы захватили Константинополь&#x27;, detail: &#x27;Участники Четвёртого похода разграбили христианскую столицу Византии и создали Латинскую империю.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1187, short: &#x27;Салах ад-Дин&#x27;, title: &#x27;победа при Хаттине и возвращение Иерусалима&#x27;, detail: &#x27;4 июля армия Салах ад-Дина разгромила войско Иерусалимского королевства у Хаттина. После этой победы мусульмане заняли многие города, а 2 октября Иерусалим сдался Салах ад-Дину.&#x27;, map: &#x27;Карты/Битва при Хаттине — 1187.png&#x27;, mapAlt: &#x27;Движение армий Салах ад-Дина и Иерусалимского королевства перед битвой при Хаттине&#x27;, mapCaption: &#x27;Красным показано войско Иерусалимского королевства, зелёным — армия Салах ад-Дина, голубыми точками — важные источники воды. Крестоносцы ушли от источников у Сефории и были окружены у Хаттина.&#x27;, mapSource: &#x27;Источник: Treklam, Wikimedia Commons; карта создана по исследованиям C. Tyerman и D. Nicolle, CC BY-SA 4.0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1189, label: &#x27;1189–1192&#x27;, short: &#x27;Третий поход&#x27;, title: &#x27;Третий крестовый поход&#x27;, detail: &#x27;Ричард Львиное Сердце и Филипп II двигались главным образом морем, Фридрих Барбаросса — сушей через Византию и Малую Азию. Поход вернул крестоносцам часть побережья, но не Иерусалим.&#x27;, map: &#x27;Карты/Третий крестовый поход — маршруты.png&#x27;, mapAlt: &#x27;Морские и сухопутные маршруты Третьего крестового похода&#x27;, mapCaption: &#x27;Зелёные линии — путь Ричарда I, синие — Филиппа II, красная — Фридриха I Барбароссы. Карта также показывает владения крестоносцев до и после похода.&#x27;, mapSource: &#x27;Источник: Kandi, Wikimedia Commons, CC BY-SA 4.0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1202, label: &#x27;1202–1204&#x27;, short: &#x27;Четвёртый поход&#x27;, title: &#x27;Четвёртый крестовый поход&#x27;, detail: &#x27;Крестоносцы собрались в Венеции, но вместо Египта сначала направились к Заре, а затем к Константинополю. Синяя линия на карте показывает этот поворот маршрута.&#x27;, map: &#x27;Карты/Четвёртый крестовый поход — маршрут.png&#x27;, mapAlt: &#x27;Маршрут Четвёртого крестового похода от Венеции через Зару к Константинополю&#x27;, mapCaption: &#x27;Синяя линия показывает путь от Венеции через Зару к Константинополю. Цветом отмечены земли Латинской империи и греческих государств после 1204 года.&#x27;, mapSource: &#x27;Источник: IvanBondarev, Wikimedia Commons, CC BY-SA 4.0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1204, short: &#x27;разгром Константинополя&#x27;, title: &#x27;крестоносцы захватили Константинополь&#x27;, detail: &#x27;13 апреля 1204 года участники Четвёртого похода захватили и разграбили христианскую столицу Византии. На её землях возникли Латинская империя и греческие государства-преемники.&#x27;, map: &#x27;Карты/Четвёртый крестовый поход — маршрут.png&#x27;, mapAlt: &#x27;Маршрут к Константинополю и раздел византийских земель после 1204 года&#x27;, mapCaption: &#x27;Маршрут заканчивается у Константинополя. Жёлтым показаны латинские владения, красным — греческие государства, возникшие после разгрома Византии.&#x27;, mapSource: &#x27;Источник: IvanBondarev, Wikimedia Commons, CC BY-SA 4.0.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
     { year: 1209, label: &#x27;1209–1229&#x27;, short: &#x27;Альбигойские войны&#x27;, title: &#x27;Альбигойские войны&#x27;, detail: &#x27;Папа римский призвал рыцарей в поход против альбигойцев — еретиков на юге Франции. Война закончилась в 1229 году.&#x27;, cat: &#x27;society&#x27;, topic: &#x27;society&#x27; },
     { year: 1215, short: &#x27;святая инквизиция&#x27;, title: &#x27;учреждение святой инквизиции&#x27;, detail: &#x27;Церковь создала особое следствие и суд для поиска и наказания еретиков.&#x27;, cat: &#x27;society&#x27;, topic: &#x27;society&#x27; },
     { year: 1258, short: &#x27;падение Багдада&#x27;, title: &#x27;конец правления Аббасидов&#x27;, detail: &#x27;Монголы захватили Багдад. Правление династии Аббасидов в Арабском халифате закончилось.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
@@ -1488,12 +1495,29 @@ html&gt;body{padding:0}&lt;/style&gt;
   const filter = root.querySelector(&#x27;select&#x27;);
   const title = root.querySelector(&#x27;.detail-title&#x27;);
   const text = root.querySelector(&#x27;.detail-text&#x27;);
+  const map = root.querySelector(&#x27;.detail-map&#x27;);
+  const mapImage = root.querySelector(&#x27;.detail-map-image&#x27;);
+  const mapCaption = root.querySelector(&#x27;.detail-map-caption&#x27;);
+  const mapSource = root.querySelector(&#x27;.detail-map-source&#x27;);
 
   function selectEvent(event, button) {
     root.querySelectorAll(&#x27;button[aria-pressed]&#x27;).forEach(item =&gt; item.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;));
     button.setAttribute(&#x27;aria-pressed&#x27;, &#x27;true&#x27;);
     title.textContent = `${event.label || event.year} — ${event.title}`;
     text.textContent = event.detail;
+    if (event.map) {
+      map.hidden = false;
+      mapImage.src = event.map;
+      mapImage.alt = event.mapAlt;
+      mapCaption.textContent = event.mapCaption;
+      mapSource.textContent = event.mapSource;
+    } else {
+      map.hidden = true;
+      mapImage.removeAttribute(&#x27;src&#x27;);
+      mapImage.alt = &#x27;&#x27;;
+      mapCaption.textContent = &#x27;&#x27;;
+      mapSource.textContent = &#x27;&#x27;;
+    }
   }
 
   function render(topic) {
@@ -1523,6 +1547,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       button.setAttribute(&#x27;aria-pressed&#x27;, index === 0 ? &#x27;true&#x27; : &#x27;false&#x27;);
       button.innerHTML = `&lt;span class=&quot;year tabular-nums&quot;&gt;${event.label || event.year}&lt;/span&gt;&lt;span class=&quot;name text-small&quot;&gt;${event.short}&lt;/span&gt;`;
       button.addEventListener(&#x27;click&#x27;, () =&gt; selectEvent(event, button));
+      button.addEventListener(&#x27;mouseenter&#x27;, () =&gt; selectEvent(event, button));
+      button.addEventListener(&#x27;focus&#x27;, () =&gt; selectEvent(event, button));
 
       wrap.append(stem, dot, button);
       container.appendChild(wrap);
@@ -1537,8 +1563,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     });
 
     const first = shown[0];
-    title.textContent = `${first.label || first.year} — ${first.title}`;
-    text.textContent = first.detail;
+    const firstButton = container.querySelector(&#x27;button&#x27;);
+    selectEvent(first, firstButton);
   }
 
   filter.addEventListener(&#x27;change&#x27;, () =&gt; render(filter.value));
