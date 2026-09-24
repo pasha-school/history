@@ -8,10 +8,12 @@
     <span><i class="swatch europe"></i>Европа IX–XI вв.</span>
     <span><i class="swatch islam"></i>Ислам и арабы</span>
     <span><i class="swatch society"></i>Средневековое общество</span>
+    <span><i class="swatch crusades"></i>Крестовые походы</span>
   </div>
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
-      <option value="society">Средневековое общество — новые параграфы</option>
+      <option value="crusades">Крестовые походы — § 10</option>
+      <option value="society">Средневековое общество — § 7–9</option>
       <option value="islam">Ислам и арабы</option>
       <option value="europe">Европа IX–XI вв.</option>
       <option value="franks">Франки</option>
@@ -51,6 +53,7 @@
   #pasha-history-timeline .europe { background: var(--viz-series-5); }
   #pasha-history-timeline .islam { background: var(--viz-series-6); }
   #pasha-history-timeline .society { background: var(--yellow); }
+  #pasha-history-timeline .crusades { background: #c9573f; }
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
@@ -71,6 +74,7 @@
   #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
   #pasha-history-timeline .dot.islam { background: var(--viz-series-6); }
   #pasha-history-timeline .dot.society { background: var(--yellow); }
+  #pasha-history-timeline .dot.crusades { background: #c9573f; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed="true"] .name { color: inherit; }
@@ -133,9 +137,18 @@
     { year: 1066, short: 'завоевание Англии', title: 'нормандское завоевание Англии', detail: 'Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.', cat: 'europe', topic: 'europe' },
     { year: 1072, short: 'Правда Ярославичей', title: 'создание Правды Ярославичей', detail: 'Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.', cat: 'europe', topic: 'europe' },
     { year: 1074, short: 'Мономах и Гита', title: 'свадьба Владимира Мономаха и Гиты', detail: 'Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.', cat: 'europe', topic: 'europe' },
+    { year: 1095, short: 'призыв Урбана II', title: 'призыв к Первому крестовому походу', detail: 'Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.', cat: 'crusades', topic: 'crusades' },
+    { year: 1096, label: '1096–1099', short: 'Первый поход', title: 'Первый крестовый поход', detail: 'Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.', cat: 'crusades', topic: 'crusades' },
+    { year: 1099, short: 'взятие Иерусалима', title: 'крестоносцы захватили Иерусалим', detail: 'После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.', cat: 'crusades', topic: 'crusades' },
+    { year: 1147, label: '1147–1149', short: 'Второй поход', title: 'Второй крестовый поход', detail: 'Поход начался после потери Эдессы и окончился неудачей.', cat: 'crusades', topic: 'crusades' },
+    { year: 1187, short: 'Салах ад-Дин', title: 'Салах ад-Дин вернул Иерусалим', detail: 'Мусульманские войска победили крестоносцев, и Иерусалим снова оказался под властью мусульман.', cat: 'crusades', topic: 'crusades' },
+    { year: 1189, label: '1189–1192', short: 'Третий поход', title: 'Третий крестовый поход', detail: 'Ричард Львиное Сердце, Фридрих Барбаросса и Филипп II Август не смогли вернуть Иерусалим.', cat: 'crusades', topic: 'crusades' },
+    { year: 1202, label: '1202–1204', short: 'Четвёртый поход', title: 'Четвёртый крестовый поход', detail: 'Вместо похода против мусульман крестоносцы вмешались в борьбу за власть в Византии.', cat: 'crusades', topic: 'crusades' },
+    { year: 1204, short: 'разгром Константинополя', title: 'крестоносцы захватили Константинополь', detail: 'Участники Четвёртого похода разграбили христианскую столицу Византии и создали Латинскую империю.', cat: 'crusades', topic: 'crusades' },
     { year: 1209, label: '1209–1229', short: 'Альбигойские войны', title: 'Альбигойские войны', detail: 'Папа римский призвал рыцарей в поход против альбигойцев — еретиков на юге Франции. Война закончилась в 1229 году.', cat: 'society', topic: 'society' },
     { year: 1215, short: 'святая инквизиция', title: 'учреждение святой инквизиции', detail: 'Церковь создала особое следствие и суд для поиска и наказания еретиков.', cat: 'society', topic: 'society' },
     { year: 1258, short: 'падение Багдада', title: 'конец правления Аббасидов', detail: 'Монголы захватили Багдад. Правление династии Аббасидов в Арабском халифате закончилось.', cat: 'islam', topic: 'islam' },
+    { year: 1291, short: 'падение Акры', title: 'конец государств крестоносцев', detail: 'Мусульмане взяли Акру — последнюю крупную крепость крестоносцев в Святой земле.', cat: 'crusades', topic: 'crusades' },
     { year: 1453, short: 'падение Византии', title: 'падение Константинополя', detail: 'Османы взяли Константинополь. Византийская империя прекратила существование.', cat: 'rome', topic: 'byzantium' }
   ];
   const lanes = ['up', 'mid-down', 'mid-up', 'down'];

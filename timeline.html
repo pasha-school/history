@@ -187,9 +187,13 @@ html &gt; body {
   line-height: var(--line-height-normal);
 }
 
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
 a {
   color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
-  cursor: pointer;
+  cursor: var(--cursor-interaction, pointer);
   font-weight: var(--font-weight-medium, 500);
   text-decoration: none;
   text-underline-offset: 2px;
@@ -540,7 +544,7 @@ small,
 }
 
 a.btn {
-  cursor: pointer;
+  cursor: var(--cursor-interaction, pointer);
   text-decoration: none;
 }
 
@@ -1334,10 +1338,12 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;span&gt;&lt;i class=&quot;swatch europe&quot;&gt;&lt;/i&gt;Европа IX–XI вв.&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch islam&quot;&gt;&lt;/i&gt;Ислам и арабы&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch society&quot;&gt;&lt;/i&gt;Средневековое общество&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch crusades&quot;&gt;&lt;/i&gt;Крестовые походы&lt;/span&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
-      &lt;option value=&quot;society&quot;&gt;Средневековое общество — новые параграфы&lt;/option&gt;
+      &lt;option value=&quot;crusades&quot;&gt;Крестовые походы — § 10&lt;/option&gt;
+      &lt;option value=&quot;society&quot;&gt;Средневековое общество — § 7–9&lt;/option&gt;
       &lt;option value=&quot;islam&quot;&gt;Ислам и арабы&lt;/option&gt;
       &lt;option value=&quot;europe&quot;&gt;Европа IX–XI вв.&lt;/option&gt;
       &lt;option value=&quot;franks&quot;&gt;Франки&lt;/option&gt;
@@ -1377,6 +1383,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .europe { background: var(--viz-series-5); }
   #pasha-history-timeline .islam { background: var(--viz-series-6); }
   #pasha-history-timeline .society { background: var(--yellow); }
+  #pasha-history-timeline .crusades { background: #c9573f; }
   #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
@@ -1397,6 +1404,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .dot.europe { background: var(--viz-series-5); }
   #pasha-history-timeline .dot.islam { background: var(--viz-series-6); }
   #pasha-history-timeline .dot.society { background: var(--yellow); }
+  #pasha-history-timeline .dot.crusades { background: #c9573f; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed=&quot;true&quot;] .name { color: inherit; }
@@ -1459,9 +1467,18 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 1066, short: &#x27;завоевание Англии&#x27;, title: &#x27;нормандское завоевание Англии&#x27;, detail: &#x27;Герцог Вильгельм Нормандский победил англосаксов и стал королём Англии — Вильгельмом Завоевателем.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 1072, short: &#x27;Правда Ярославичей&#x27;, title: &#x27;создание Правды Ярославичей&#x27;, detail: &#x27;Сыновья Ярослава Мудрого дополнили древнерусский сборник законов.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 1074, short: &#x27;Мономах и Гита&#x27;, title: &#x27;свадьба Владимира Мономаха и Гиты&#x27;, detail: &#x27;Русский князь Владимир Мономах женился на Гите, дочери последнего англосаксонского короля Гарольда.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
+    { year: 1095, short: &#x27;призыв Урбана II&#x27;, title: &#x27;призыв к Первому крестовому походу&#x27;, detail: &#x27;Папа Урбан II выступил в Клермоне и призвал западных христиан отправиться освобождать Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1096, label: &#x27;1096–1099&#x27;, short: &#x27;Первый поход&#x27;, title: &#x27;Первый крестовый поход&#x27;, detail: &#x27;Сначала выступили толпы бедноты, затем рыцарские войска. В 1099 году они взяли Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1099, short: &#x27;взятие Иерусалима&#x27;, title: &#x27;крестоносцы захватили Иерусалим&#x27;, detail: &#x27;После жестокого штурма крестоносцы создали на Востоке свои государства во главе с Иерусалимским королевством.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1147, label: &#x27;1147–1149&#x27;, short: &#x27;Второй поход&#x27;, title: &#x27;Второй крестовый поход&#x27;, detail: &#x27;Поход начался после потери Эдессы и окончился неудачей.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1187, short: &#x27;Салах ад-Дин&#x27;, title: &#x27;Салах ад-Дин вернул Иерусалим&#x27;, detail: &#x27;Мусульманские войска победили крестоносцев, и Иерусалим снова оказался под властью мусульман.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1189, label: &#x27;1189–1192&#x27;, short: &#x27;Третий поход&#x27;, title: &#x27;Третий крестовый поход&#x27;, detail: &#x27;Ричард Львиное Сердце, Фридрих Барбаросса и Филипп II Август не смогли вернуть Иерусалим.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1202, label: &#x27;1202–1204&#x27;, short: &#x27;Четвёртый поход&#x27;, title: &#x27;Четвёртый крестовый поход&#x27;, detail: &#x27;Вместо похода против мусульман крестоносцы вмешались в борьбу за власть в Византии.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
+    { year: 1204, short: &#x27;разгром Константинополя&#x27;, title: &#x27;крестоносцы захватили Константинополь&#x27;, detail: &#x27;Участники Четвёртого похода разграбили христианскую столицу Византии и создали Латинскую империю.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
     { year: 1209, label: &#x27;1209–1229&#x27;, short: &#x27;Альбигойские войны&#x27;, title: &#x27;Альбигойские войны&#x27;, detail: &#x27;Папа римский призвал рыцарей в поход против альбигойцев — еретиков на юге Франции. Война закончилась в 1229 году.&#x27;, cat: &#x27;society&#x27;, topic: &#x27;society&#x27; },
     { year: 1215, short: &#x27;святая инквизиция&#x27;, title: &#x27;учреждение святой инквизиции&#x27;, detail: &#x27;Церковь создала особое следствие и суд для поиска и наказания еретиков.&#x27;, cat: &#x27;society&#x27;, topic: &#x27;society&#x27; },
     { year: 1258, short: &#x27;падение Багдада&#x27;, title: &#x27;конец правления Аббасидов&#x27;, detail: &#x27;Монголы захватили Багдад. Правление династии Аббасидов в Арабском халифате закончилось.&#x27;, cat: &#x27;islam&#x27;, topic: &#x27;islam&#x27; },
+    { year: 1291, short: &#x27;падение Акры&#x27;, title: &#x27;конец государств крестоносцев&#x27;, detail: &#x27;Мусульмане взяли Акру — последнюю крупную крепость крестоносцев в Святой земле.&#x27;, cat: &#x27;crusades&#x27;, topic: &#x27;crusades&#x27; },
     { year: 1453, short: &#x27;падение Византии&#x27;, title: &#x27;падение Константинополя&#x27;, detail: &#x27;Османы взяли Константинополь. Византийская империя прекратила существование.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; }
   ];
   const lanes = [&#x27;up&#x27;, &#x27;mid-down&#x27;, &#x27;mid-up&#x27;, &#x27;down&#x27;];
@@ -1555,10 +1572,15 @@ html&gt;body{padding:0}&lt;/style&gt;
   let lastPointerWasTouch = false;
   let pinnedByTouch = false;
 
-  const getTrigger = (target) =&gt;
-    target?.nodeType === Node.ELEMENT_NODE
-      ? target.closest(&quot;[data-tooltip]&quot;)
-      : null;
+  const getTrigger = (event) =&gt; {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest(&quot;[data-tooltip]&quot;);
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
   const containsTarget = (trigger, target) =&gt;
     target?.nodeType != null &amp;&amp; trigger.contains(target);
   const getContent = (trigger) =&gt;
@@ -1703,7 +1725,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (event.pointerType === &quot;touch&quot;) {
       return;
     }
-    const trigger = getTrigger(event.target);
+    const trigger = getTrigger(event);
     if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
       return;
     }
@@ -1719,7 +1741,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (!isTouch || event.detail === 0) {
       return;
     }
-    const trigger = getTrigger(event.target);
+    const trigger = getTrigger(event);
     if (
       trigger == null ||
       !trigger.isConnected ||
@@ -1743,7 +1765,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (pinnedByTouch) {
       return;
     }
-    const trigger = getTrigger(event.target);
+    const trigger = getTrigger(event);
     if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
       return;
     }
@@ -1752,7 +1774,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     }
   };
   const handleFocusIn = (event) =&gt; {
-    const trigger = getTrigger(event.target);
+    const trigger = getTrigger(event);
     if (trigger?.matches(&quot;:focus-visible&quot;)) {
       requestOpen(trigger, true);
     }
@@ -1764,35 +1786,69 @@ html&gt;body{padding:0}&lt;/style&gt;
   };
   const handleContextMenu = (event) =&gt; {
     lastPointerWasTouch = false;
-    const trigger = getTrigger(event.target);
+    const trigger = getTrigger(event);
     if (activeTrigger === trigger || pendingTrigger === trigger) {
       closeTooltip();
     }
   };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) =&gt; {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) =&gt; {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll(&quot;*&quot;)) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) =&gt; {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) =&gt; {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host &amp;&amp; !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger &amp;&amp; !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () =&gt; {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
   const destroy = () =&gt; {
     closeTooltip(false);
     lastPointerWasTouch = false;
-    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
-    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
-    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
-    document.removeEventListener(&quot;click&quot;, handleTouchClick);
-    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
-    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
-    document.removeEventListener(&quot;focusout&quot;, handleLeave);
-    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
-    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
     tooltip = null;
   };
 
-  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
-  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
-  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
-  document.addEventListener(&quot;click&quot;, handleTouchClick);
-  document.addEventListener(&quot;pointerout&quot;, handleLeave);
-  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
-  document.addEventListener(&quot;focusout&quot;, handleLeave);
-  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
-  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  // Events between children of one shadow root never reach the document.
+  listen(document);
   window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
 })();
 &lt;/script&gt;
