@@ -1636,6 +1636,14 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .detail-map-image { display: block; width: 100%; max-height: 580px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
   #pasha-history-timeline .detail-map figcaption { margin-top: 7px; line-height: 1.45; }
   #pasha-history-timeline .mobile-events { display: none; }
+  #pasha-history-timeline .topic-band { position: absolute; left: 0; right: 0; height: 128px; background: color-mix(in srgb, var(--lane-color) 9%, var(--background)); border-bottom: 1px solid var(--border); }
+  #pasha-history-timeline .topic-band-title { position: sticky; left: 0; display: inline-block; padding: 8px 14px; background: var(--background); border-left: 4px solid var(--lane-color); font-weight: 600; z-index: 2; }
+  #pasha-history-timeline .timeline.by-topic .axis { display: none; }
+  #pasha-history-timeline .timeline.by-topic .event-wrap { height: 128px; }
+  #pasha-history-timeline .timeline.by-topic .stem { display: none; }
+  #pasha-history-timeline .timeline.by-topic .dot { top: 47px; }
+  #pasha-history-timeline .timeline.by-topic .event-btn { top: 65px; transform: none; }
+  #pasha-history-timeline .mobile-topic-title { margin: 12px 0 4px; font-weight: 600; }
   @media (max-width: 600px) {
     #pasha-history-timeline .timeline-scroll { display: none; }
     #pasha-history-timeline .mobile-events { display: grid; gap: 4px; margin: 8px 0; }
@@ -1721,6 +1729,18 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 1453, short: &#x27;падение Византии&#x27;, title: &#x27;падение Константинополя&#x27;, detail: &#x27;Османы взяли Константинополь. Византийская империя прекратила существование.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; }
   ];
   const lanes = [&#x27;up&#x27;, &#x27;mid-down&#x27;, &#x27;mid-up&#x27;, &#x27;down&#x27;];
+  const topics = [
+    [&#x27;byzantium&#x27;, &#x27;Рим и Византия&#x27;, &#x27;var(--viz-series-1)&#x27;],
+    [&#x27;rus&#x27;, &#x27;Русь&#x27;, &#x27;var(--viz-series-3)&#x27;],
+    [&#x27;franks&#x27;, &#x27;Франки&#x27;, &#x27;var(--viz-series-4)&#x27;],
+    [&#x27;europe&#x27;, &#x27;Европа IX–XI вв.&#x27;, &#x27;var(--viz-series-5)&#x27;],
+    [&#x27;islam&#x27;, &#x27;Ислам и арабы&#x27;, &#x27;var(--viz-series-6)&#x27;],
+    [&#x27;society&#x27;, &#x27;Средневековое общество и Церковь&#x27;, &#x27;var(--yellow)&#x27;],
+    [&#x27;crusades&#x27;, &#x27;Крестовые походы&#x27;, &#x27;#c9573f&#x27;],
+    [&#x27;monarchies&#x27;, &#x27;Королевства Западной Европы&#x27;, &#x27;#7a5bb5&#x27;],
+    [&#x27;empire&#x27;, &#x27;Империя и соседи&#x27;, &#x27;#a36c38&#x27;],
+    [&#x27;culture&#x27;, &#x27;Культура Европы&#x27;, &#x27;#368a79&#x27;]
+  ];
   const container = root.querySelector(&#x27;.events&#x27;);
   const mobile = root.querySelector(&#x27;.mobile-events&#x27;);
   const timeline = root.querySelector(&#x27;.timeline&#x27;);
@@ -1757,6 +1777,22 @@ html&gt;body{padding:0}&lt;/style&gt;
     mobile.replaceChildren();
     const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (topic === &#x27;newtopics&#x27; &amp;&amp; [&#x27;empire&#x27;, &#x27;culture&#x27;].includes(event.topic))));
     timeline.style.width = `${Math.max(820, shown.length * 112)}px`;
+    const grouped = topic === &#x27;all&#x27;;
+    timeline.classList.toggle(&#x27;by-topic&#x27;, grouped);
+    timeline.style.height = grouped ? `${topics.length * 128}px` : &#x27;&#x27;;
+    if (grouped) {
+      topics.forEach(([key, name, color], index) =&gt; {
+        const band = document.createElement(&#x27;div&#x27;);
+        band.className = &#x27;topic-band&#x27;;
+        band.style.top = `${index * 128}px`;
+        band.style.setProperty(&#x27;--lane-color&#x27;, color);
+        const heading = document.createElement(&#x27;span&#x27;);
+        heading.className = &#x27;topic-band-title&#x27;;
+        heading.textContent = name;
+        band.appendChild(heading);
+        container.appendChild(band);
+      });
+    }
 
     shown.forEach((event, index) =&gt; {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
@@ -1764,6 +1800,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       const wrap = document.createElement(&#x27;div&#x27;);
       wrap.className = &#x27;event-wrap&#x27;;
       wrap.style.left = `${position}%`;
+      if (grouped) wrap.style.top = `${topics.findIndex(([key]) =&gt; key === event.topic) * 128}px`;
 
       const stem = document.createElement(&#x27;span&#x27;);
       stem.className = `stem ${lane.includes(&#x27;up&#x27;) ? &#x27;up&#x27; : &#x27;down&#x27;}`;
@@ -1790,6 +1827,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       mobileButton.className = &#x27;btn btn-ghost&#x27;;
       mobileButton.setAttribute(&#x27;aria-pressed&#x27;, index === 0 ? &#x27;true&#x27; : &#x27;false&#x27;);
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
+      if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) =&gt; key === event.topic)[1]}`;
       mobileButton.addEventListener(&#x27;click&#x27;, () =&gt; selectEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });

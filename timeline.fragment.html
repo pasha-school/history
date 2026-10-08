@@ -100,6 +100,14 @@
   #pasha-history-timeline .detail-map-image { display: block; width: 100%; max-height: 580px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
   #pasha-history-timeline .detail-map figcaption { margin-top: 7px; line-height: 1.45; }
   #pasha-history-timeline .mobile-events { display: none; }
+  #pasha-history-timeline .topic-band { position: absolute; left: 0; right: 0; height: 128px; background: color-mix(in srgb, var(--lane-color) 9%, var(--background)); border-bottom: 1px solid var(--border); }
+  #pasha-history-timeline .topic-band-title { position: sticky; left: 0; display: inline-block; padding: 8px 14px; background: var(--background); border-left: 4px solid var(--lane-color); font-weight: 600; z-index: 2; }
+  #pasha-history-timeline .timeline.by-topic .axis { display: none; }
+  #pasha-history-timeline .timeline.by-topic .event-wrap { height: 128px; }
+  #pasha-history-timeline .timeline.by-topic .stem { display: none; }
+  #pasha-history-timeline .timeline.by-topic .dot { top: 47px; }
+  #pasha-history-timeline .timeline.by-topic .event-btn { top: 65px; transform: none; }
+  #pasha-history-timeline .mobile-topic-title { margin: 12px 0 4px; font-weight: 600; }
   @media (max-width: 600px) {
     #pasha-history-timeline .timeline-scroll { display: none; }
     #pasha-history-timeline .mobile-events { display: grid; gap: 4px; margin: 8px 0; }
@@ -185,6 +193,18 @@
     { year: 1453, short: 'падение Византии', title: 'падение Константинополя', detail: 'Османы взяли Константинополь. Византийская империя прекратила существование.', cat: 'rome', topic: 'byzantium' }
   ];
   const lanes = ['up', 'mid-down', 'mid-up', 'down'];
+  const topics = [
+    ['byzantium', 'Рим и Византия', 'var(--viz-series-1)'],
+    ['rus', 'Русь', 'var(--viz-series-3)'],
+    ['franks', 'Франки', 'var(--viz-series-4)'],
+    ['europe', 'Европа IX–XI вв.', 'var(--viz-series-5)'],
+    ['islam', 'Ислам и арабы', 'var(--viz-series-6)'],
+    ['society', 'Средневековое общество и Церковь', 'var(--yellow)'],
+    ['crusades', 'Крестовые походы', '#c9573f'],
+    ['monarchies', 'Королевства Западной Европы', '#7a5bb5'],
+    ['empire', 'Империя и соседи', '#a36c38'],
+    ['culture', 'Культура Европы', '#368a79']
+  ];
   const container = root.querySelector('.events');
   const mobile = root.querySelector('.mobile-events');
   const timeline = root.querySelector('.timeline');
@@ -221,6 +241,22 @@
     mobile.replaceChildren();
     const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (topic === 'newtopics' && ['empire', 'culture'].includes(event.topic))));
     timeline.style.width = `${Math.max(820, shown.length * 112)}px`;
+    const grouped = topic === 'all';
+    timeline.classList.toggle('by-topic', grouped);
+    timeline.style.height = grouped ? `${topics.length * 128}px` : '';
+    if (grouped) {
+      topics.forEach(([key, name, color], index) => {
+        const band = document.createElement('div');
+        band.className = 'topic-band';
+        band.style.top = `${index * 128}px`;
+        band.style.setProperty('--lane-color', color);
+        const heading = document.createElement('span');
+        heading.className = 'topic-band-title';
+        heading.textContent = name;
+        band.appendChild(heading);
+        container.appendChild(band);
+      });
+    }
 
     shown.forEach((event, index) => {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
@@ -228,6 +264,7 @@
       const wrap = document.createElement('div');
       wrap.className = 'event-wrap';
       wrap.style.left = `${position}%`;
+      if (grouped) wrap.style.top = `${topics.findIndex(([key]) => key === event.topic) * 128}px`;
 
       const stem = document.createElement('span');
       stem.className = `stem ${lane.includes('up') ? 'up' : 'down'}`;
@@ -254,6 +291,7 @@
       mobileButton.className = 'btn btn-ghost';
       mobileButton.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
+      if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) => key === event.topic)[1]}`;
       mobileButton.addEventListener('click', () => selectEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });
