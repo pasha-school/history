@@ -29,13 +29,15 @@
       <option value="all">Все даты</option>
     </select>
   </label>
-  <div class="text-small text-muted scale-note">События расположены по порядку; расстояния между датами условные.</div>
+  <div class="text-small text-muted scale-note">Шкала времени: отметки через 100 лет. Нажми на событие, чтобы открыть описание.</div>
   <div class="timeline-scroll">
+    <div class="century-scale" aria-label="Шкала годов"></div>
     <div class="timeline" aria-label="Лента времени от 330 до 1453 года">
       <div class="axis" aria-hidden="true"></div>
       <div class="events"></div>
     </div>
   </div>
+  <dialog class="event-popup" aria-label="Описание события"><button class="btn popup-close" type="button" aria-label="Закрыть описание">Закрыть ×</button><div class="popup-content"></div></dialog>
   <div class="mobile-events"></div>
   <div class="card detail" aria-live="polite">
     <div class="text-muted text-small">Выбери дату на линии</div>
@@ -66,7 +68,13 @@
   #pasha-history-timeline .society { background: var(--yellow); }
   #pasha-history-timeline .crusades { background: #c9573f; }
   #pasha-history-timeline .monarchies { background: #7a5bb5; }
-  #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
+  #pasha-history-timeline .timeline-scroll { overflow: auto; max-height: 70vh; }
+  #pasha-history-timeline .century-scale { position: sticky; top: 0; height: 42px; background: var(--background); border-bottom: 2px solid var(--border); z-index: 5; }
+  #pasha-history-timeline .century-tick { position: absolute; bottom: 0; padding-bottom: 9px; transform: translateX(-50%); font-weight: 600; }
+  #pasha-history-timeline .century-tick::after { content: ''; position: absolute; bottom: 0; left: 50%; height: 7px; border-left: 1px solid currentColor; }
+  #pasha-history-timeline .event-popup { color: var(--foreground); background: var(--background); border: 1px solid var(--border); border-radius: 12px; padding: 20px; width: min(640px, calc(100vw - 48px)); max-height: 85vh; overflow: auto; }
+  #pasha-history-timeline .event-popup::backdrop { background: #0006; }
+  #pasha-history-timeline .popup-close { display: block; margin-left: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
   #pasha-history-timeline .event-wrap { position: absolute; top: 0; width: 112px; height: 100%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
@@ -215,6 +223,20 @@
   const mapImage = root.querySelector('.detail-map-image');
   const mapCaption = root.querySelector('.detail-map-caption');
   const mapSource = root.querySelector('.detail-map-source');
+  const popup = root.querySelector('.event-popup');
+  const scale = root.querySelector('.century-scale');
+  function openEvent(event, button) {
+    selectEvent(event, button);
+    const content = root.querySelector('.detail').cloneNode(true);
+    content.querySelector('.text-muted.text-small').remove();
+    root.querySelector('.popup-content').replaceChildren(content);
+    popup.showModal();
+  }
+  root.querySelector('.popup-close').addEventListener('click', () => popup.close());
+  popup.addEventListener('click', event => {
+    const rect = popup.getBoundingClientRect();
+    if (event.target === popup && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) popup.close();
+  });
 
   function selectEvent(event, button) {
     root.querySelectorAll('button[aria-pressed]').forEach(item => item.setAttribute('aria-pressed', 'false'));
@@ -240,15 +262,48 @@
     container.replaceChildren();
     mobile.replaceChildren();
     const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (topic === 'newtopics' && ['empire', 'culture'].includes(event.topic))));
-    timeline.style.width = `${Math.max(820, shown.length * 112)}px`;
+    const minYear = Math.floor(Math.min(...shown.map(event => event.year)) / 100) * 100;
+    const maxYear = Math.ceil(Math.max(...shown.map(event => event.year)) / 100) * 100;
+    const range = Math.max(100, maxYear - minYear);
+    const width = Math.max(820, range * 7);
+    const x = year => 90 + (year - minYear) / range * (width - 180);
+    timeline.style.width = `${width}px`;
+    scale.style.width = `${width}px`;
+    scale.replaceChildren();
+    for (let year = minYear; year <= minYear + range; year += 100) {
+      const tick = document.createElement('span');
+      tick.className = 'century-tick';
+      tick.style.left = `${x(year)}px`;
+      tick.textContent = year;
+      scale.appendChild(tick);
+    }
     const grouped = topic === 'all';
+    const ends = {};
+    const slots = shown.map(event => {
+      const key = grouped ? event.topic : 'all';
+      const rows = ends[key] ||= [];
+      let row = rows.findIndex(end => x(event.year) - end >= 120);
+      if (row < 0) row = rows.length;
+      rows[row] = x(event.year);
+      return row;
+    });
+    let offset = 0;
+    const offsets = {};
+    const heights = {};
+    topics.forEach(([key]) => {
+      offsets[key] = offset;
+      heights[key] = 40 + Math.max(1, (ends[key] || []).length) * 100;
+      offset += heights[key];
+    });
     timeline.classList.toggle('by-topic', grouped);
-    timeline.style.height = grouped ? `${topics.length * 128}px` : '';
+    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
+    timeline.classList.add('by-topic');
     if (grouped) {
       topics.forEach(([key, name, color], index) => {
         const band = document.createElement('div');
         band.className = 'topic-band';
-        band.style.top = `${index * 128}px`;
+        band.style.top = `${offsets[key]}px`;
+        band.style.height = `${heights[key]}px`;
         band.style.setProperty('--lane-color', color);
         const heading = document.createElement('span');
         heading.className = 'topic-band-title';
@@ -263,8 +318,8 @@
       const lane = lanes[index % lanes.length];
       const wrap = document.createElement('div');
       wrap.className = 'event-wrap';
-      wrap.style.left = `${position}%`;
-      if (grouped) wrap.style.top = `${topics.findIndex(([key]) => key === event.topic) * 128}px`;
+      wrap.style.left = `${x(event.year)}px`;
+      wrap.style.top = `${(grouped ? offsets[event.topic] : 0) + slots[index] * 100}px`;
 
       const stem = document.createElement('span');
       stem.className = `stem ${lane.includes('up') ? 'up' : 'down'}`;
@@ -279,7 +334,7 @@
       button.className = `btn btn-ghost event-btn ${lane}`;
       button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
       button.innerHTML = `<span class="year tabular-nums">${event.label || event.year}</span><span class="name text-small">${event.short}</span>`;
-      button.addEventListener('click', () => selectEvent(event, button));
+      button.addEventListener('click', () => openEvent(event, button));
       button.addEventListener('mouseenter', () => selectEvent(event, button));
       button.addEventListener('focus', () => selectEvent(event, button));
 
@@ -292,7 +347,7 @@
       mobileButton.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
       if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) => key === event.topic)[1]}`;
-      mobileButton.addEventListener('click', () => selectEvent(event, mobileButton));
+      mobileButton.addEventListener('click', () => openEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });
 

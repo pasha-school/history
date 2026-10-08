@@ -1565,13 +1565,15 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;option value=&quot;all&quot;&gt;Все даты&lt;/option&gt;
     &lt;/select&gt;
   &lt;/label&gt;
-  &lt;div class=&quot;text-small text-muted scale-note&quot;&gt;События расположены по порядку; расстояния между датами условные.&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted scale-note&quot;&gt;Шкала времени: отметки через 100 лет. Нажми на событие, чтобы открыть описание.&lt;/div&gt;
   &lt;div class=&quot;timeline-scroll&quot;&gt;
+    &lt;div class=&quot;century-scale&quot; aria-label=&quot;Шкала годов&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;timeline&quot; aria-label=&quot;Лента времени от 330 до 1453 года&quot;&gt;
       &lt;div class=&quot;axis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
       &lt;div class=&quot;events&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
+  &lt;dialog class=&quot;event-popup&quot; aria-label=&quot;Описание события&quot;&gt;&lt;button class=&quot;btn popup-close&quot; type=&quot;button&quot; aria-label=&quot;Закрыть описание&quot;&gt;Закрыть ×&lt;/button&gt;&lt;div class=&quot;popup-content&quot;&gt;&lt;/div&gt;&lt;/dialog&gt;
   &lt;div class=&quot;mobile-events&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;card detail&quot; aria-live=&quot;polite&quot;&gt;
     &lt;div class=&quot;text-muted text-small&quot;&gt;Выбери дату на линии&lt;/div&gt;
@@ -1602,7 +1604,13 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .society { background: var(--yellow); }
   #pasha-history-timeline .crusades { background: #c9573f; }
   #pasha-history-timeline .monarchies { background: #7a5bb5; }
-  #pasha-history-timeline .timeline-scroll { overflow-x: auto; }
+  #pasha-history-timeline .timeline-scroll { overflow: auto; max-height: 70vh; }
+  #pasha-history-timeline .century-scale { position: sticky; top: 0; height: 42px; background: var(--background); border-bottom: 2px solid var(--border); z-index: 5; }
+  #pasha-history-timeline .century-tick { position: absolute; bottom: 0; padding-bottom: 9px; transform: translateX(-50%); font-weight: 600; }
+  #pasha-history-timeline .century-tick::after { content: &#x27;&#x27;; position: absolute; bottom: 0; left: 50%; height: 7px; border-left: 1px solid currentColor; }
+  #pasha-history-timeline .event-popup { color: var(--foreground); background: var(--background); border: 1px solid var(--border); border-radius: 12px; padding: 20px; width: min(640px, calc(100vw - 48px)); max-height: 85vh; overflow: auto; }
+  #pasha-history-timeline .event-popup::backdrop { background: #0006; }
+  #pasha-history-timeline .popup-close { display: block; margin-left: auto; }
   #pasha-history-timeline .timeline { position: relative; min-width: 100%; height: 330px; margin: 2px 0 8px; }
   #pasha-history-timeline .axis { position: absolute; left: 0; right: 0; top: 164px; height: 2px; background: var(--border); }
   #pasha-history-timeline .event-wrap { position: absolute; top: 0; width: 112px; height: 100%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
@@ -1751,6 +1759,20 @@ html&gt;body{padding:0}&lt;/style&gt;
   const mapImage = root.querySelector(&#x27;.detail-map-image&#x27;);
   const mapCaption = root.querySelector(&#x27;.detail-map-caption&#x27;);
   const mapSource = root.querySelector(&#x27;.detail-map-source&#x27;);
+  const popup = root.querySelector(&#x27;.event-popup&#x27;);
+  const scale = root.querySelector(&#x27;.century-scale&#x27;);
+  function openEvent(event, button) {
+    selectEvent(event, button);
+    const content = root.querySelector(&#x27;.detail&#x27;).cloneNode(true);
+    content.querySelector(&#x27;.text-muted.text-small&#x27;).remove();
+    root.querySelector(&#x27;.popup-content&#x27;).replaceChildren(content);
+    popup.showModal();
+  }
+  root.querySelector(&#x27;.popup-close&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; popup.close());
+  popup.addEventListener(&#x27;click&#x27;, event =&gt; {
+    const rect = popup.getBoundingClientRect();
+    if (event.target === popup &amp;&amp; (event.clientX &lt; rect.left || event.clientX &gt; rect.right || event.clientY &lt; rect.top || event.clientY &gt; rect.bottom)) popup.close();
+  });
 
   function selectEvent(event, button) {
     root.querySelectorAll(&#x27;button[aria-pressed]&#x27;).forEach(item =&gt; item.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;));
@@ -1776,15 +1798,48 @@ html&gt;body{padding:0}&lt;/style&gt;
     container.replaceChildren();
     mobile.replaceChildren();
     const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (topic === &#x27;newtopics&#x27; &amp;&amp; [&#x27;empire&#x27;, &#x27;culture&#x27;].includes(event.topic))));
-    timeline.style.width = `${Math.max(820, shown.length * 112)}px`;
+    const minYear = Math.floor(Math.min(...shown.map(event =&gt; event.year)) / 100) * 100;
+    const maxYear = Math.ceil(Math.max(...shown.map(event =&gt; event.year)) / 100) * 100;
+    const range = Math.max(100, maxYear - minYear);
+    const width = Math.max(820, range * 7);
+    const x = year =&gt; 90 + (year - minYear) / range * (width - 180);
+    timeline.style.width = `${width}px`;
+    scale.style.width = `${width}px`;
+    scale.replaceChildren();
+    for (let year = minYear; year &lt;= minYear + range; year += 100) {
+      const tick = document.createElement(&#x27;span&#x27;);
+      tick.className = &#x27;century-tick&#x27;;
+      tick.style.left = `${x(year)}px`;
+      tick.textContent = year;
+      scale.appendChild(tick);
+    }
     const grouped = topic === &#x27;all&#x27;;
+    const ends = {};
+    const slots = shown.map(event =&gt; {
+      const key = grouped ? event.topic : &#x27;all&#x27;;
+      const rows = ends[key] ||= [];
+      let row = rows.findIndex(end =&gt; x(event.year) - end &gt;= 120);
+      if (row &lt; 0) row = rows.length;
+      rows[row] = x(event.year);
+      return row;
+    });
+    let offset = 0;
+    const offsets = {};
+    const heights = {};
+    topics.forEach(([key]) =&gt; {
+      offsets[key] = offset;
+      heights[key] = 40 + Math.max(1, (ends[key] || []).length) * 100;
+      offset += heights[key];
+    });
     timeline.classList.toggle(&#x27;by-topic&#x27;, grouped);
-    timeline.style.height = grouped ? `${topics.length * 128}px` : &#x27;&#x27;;
+    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
+    timeline.classList.add(&#x27;by-topic&#x27;);
     if (grouped) {
       topics.forEach(([key, name, color], index) =&gt; {
         const band = document.createElement(&#x27;div&#x27;);
         band.className = &#x27;topic-band&#x27;;
-        band.style.top = `${index * 128}px`;
+        band.style.top = `${offsets[key]}px`;
+        band.style.height = `${heights[key]}px`;
         band.style.setProperty(&#x27;--lane-color&#x27;, color);
         const heading = document.createElement(&#x27;span&#x27;);
         heading.className = &#x27;topic-band-title&#x27;;
@@ -1799,8 +1854,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       const lane = lanes[index % lanes.length];
       const wrap = document.createElement(&#x27;div&#x27;);
       wrap.className = &#x27;event-wrap&#x27;;
-      wrap.style.left = `${position}%`;
-      if (grouped) wrap.style.top = `${topics.findIndex(([key]) =&gt; key === event.topic) * 128}px`;
+      wrap.style.left = `${x(event.year)}px`;
+      wrap.style.top = `${(grouped ? offsets[event.topic] : 0) + slots[index] * 100}px`;
 
       const stem = document.createElement(&#x27;span&#x27;);
       stem.className = `stem ${lane.includes(&#x27;up&#x27;) ? &#x27;up&#x27; : &#x27;down&#x27;}`;
@@ -1815,7 +1870,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       button.className = `btn btn-ghost event-btn ${lane}`;
       button.setAttribute(&#x27;aria-pressed&#x27;, index === 0 ? &#x27;true&#x27; : &#x27;false&#x27;);
       button.innerHTML = `&lt;span class=&quot;year tabular-nums&quot;&gt;${event.label || event.year}&lt;/span&gt;&lt;span class=&quot;name text-small&quot;&gt;${event.short}&lt;/span&gt;`;
-      button.addEventListener(&#x27;click&#x27;, () =&gt; selectEvent(event, button));
+      button.addEventListener(&#x27;click&#x27;, () =&gt; openEvent(event, button));
       button.addEventListener(&#x27;mouseenter&#x27;, () =&gt; selectEvent(event, button));
       button.addEventListener(&#x27;focus&#x27;, () =&gt; selectEvent(event, button));
 
@@ -1828,7 +1883,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       mobileButton.setAttribute(&#x27;aria-pressed&#x27;, index === 0 ? &#x27;true&#x27; : &#x27;false&#x27;);
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
       if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) =&gt; key === event.topic)[1]}`;
-      mobileButton.addEventListener(&#x27;click&#x27;, () =&gt; selectEvent(event, mobileButton));
+      mobileButton.addEventListener(&#x27;click&#x27;, () =&gt; openEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });
 
