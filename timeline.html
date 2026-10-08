@@ -1761,12 +1761,14 @@ html&gt;body{padding:0}&lt;/style&gt;
   const mapSource = root.querySelector(&#x27;.detail-map-source&#x27;);
   const popup = root.querySelector(&#x27;.event-popup&#x27;);
   const scale = root.querySelector(&#x27;.century-scale&#x27;);
+  const detail = root.querySelector(&#x27;.detail&#x27;);
+  const popupContent = root.querySelector(&#x27;.popup-content&#x27;);
   function openEvent(event, button) {
     selectEvent(event, button);
-    const content = root.querySelector(&#x27;.detail&#x27;).cloneNode(true);
+    const content = detail.cloneNode(true);
     content.querySelector(&#x27;.text-muted.text-small&#x27;).remove();
-    root.querySelector(&#x27;.popup-content&#x27;).replaceChildren(content);
-    popup.showModal();
+    popupContent.replaceChildren(content);
+    if (!popup.open) popup.showModal();
   }
   root.querySelector(&#x27;.popup-close&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; popup.close());
   popup.addEventListener(&#x27;click&#x27;, event =&gt; {

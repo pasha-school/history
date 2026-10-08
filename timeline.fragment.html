@@ -225,12 +225,14 @@
   const mapSource = root.querySelector('.detail-map-source');
   const popup = root.querySelector('.event-popup');
   const scale = root.querySelector('.century-scale');
+  const detail = root.querySelector('.detail');
+  const popupContent = root.querySelector('.popup-content');
   function openEvent(event, button) {
     selectEvent(event, button);
-    const content = root.querySelector('.detail').cloneNode(true);
+    const content = detail.cloneNode(true);
     content.querySelector('.text-muted.text-small').remove();
-    root.querySelector('.popup-content').replaceChildren(content);
-    popup.showModal();
+    popupContent.replaceChildren(content);
+    if (!popup.open) popup.showModal();
   }
   root.querySelector('.popup-close').addEventListener('click', () => popup.close());
   popup.addEventListener('click', event => {
