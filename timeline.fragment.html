@@ -1,6 +1,8 @@
 <div id="pasha-history-timeline">
   <h2>История: опорные даты 6 класса</h2>
   <div class="legend text-small" aria-label="Условные обозначения">
+    <span><i class="swatch steppe"></i>Великая степь и монголы</span>
+    <span><i class="swatch eastasia"></i>Китай и Япония</span>
     <span><i class="swatch rome"></i>Рим и Византия</span>
     <span><i class="swatch justinian"></i>Юстиниан</span>
     <span><i class="swatch neighbors"></i>Соседи и Русь</span>
@@ -15,7 +17,9 @@
   </div>
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
-      <option value="newtopics">Империя и культура — § 13–14</option>
+      <option value="newtopics">Великая степь, Китай и Япония — § 15–17</option>
+      <option value="steppe">Великая степь и монголы — § 15</option>
+      <option value="eastasia">Китай и Япония — § 16–17</option>
       <option value="empire">Империя и соседи — § 13</option>
       <option value="culture">Культура Европы — § 14</option>
       <option value="monarchies">Англия, Франция и Пиренеи — § 11–12</option>
@@ -98,6 +102,8 @@
   #pasha-history-timeline .dot.monarchies { background: #7a5bb5; }
   #pasha-history-timeline .empire { background: #a36c38; }
   #pasha-history-timeline .culture { background: #368a79; }
+  #pasha-history-timeline .steppe { background: #9b6844; }
+  #pasha-history-timeline .eastasia { background: #b7355b; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed="true"] .name { color: inherit; }
@@ -135,6 +141,22 @@
 (() => {
   const root = document.getElementById('pasha-history-timeline');
   const events = [
+    { year: 618, short: 'династия Тан', title: 'начало правления династии Тан в Китае', detail: 'Тан — одна из главных династий средневекового Китая. Государством управлял император, опиравшийся на чиновников.', cat: 'eastasia', topic: 'eastasia' },
+    { year: 1192, short: 'власть сёгунов', title: 'установление власти сёгунов в Японии', detail: '1192 — опорная дата учебника. Военное правительство сосредоточило управление в руках сёгуна; императорский титул сохранился.', cat: 'eastasia', topic: 'eastasia' },
+    { year: 1206, short: 'Чингисхан', title: 'Темучин провозглашён Чингисханом', detail: 'Курултай признал Темучина верховным правителем монгольских племён. Началось создание огромной державы.', cat: 'steppe', topic: 'steppe' },
+    { year: 1223, short: 'битва на Калке', title: 'поражение русских князей и половцев на Калке', detail: 'Монгольское войско разгромило союзные силы русских князей и половцев. Это произошло до нашествия Батыя на Русь.', cat: 'rus', topic: 'rus', relatedTopics: ['steppe'] },
+    { year: 1227, short: 'смерть Чингисхана', title: 'смерть Чингисхана', detail: 'После смерти основателя державы завоевания продолжили его наследники.', cat: 'steppe', topic: 'steppe' },
+    { year: 1236, label: '1236–1243', short: 'господство монголов', title: 'установление монгольского господства над русскими землями', detail: 'Такой период указан в таблице § 15. Он шире дат самого нашествия Батыя на Русь — 1237–1240. Русские княжества стали платить дань и зависеть от ханской власти.', cat: 'rus', topic: 'rus', relatedTopics: ['steppe'] },
+    { year: 1237, label: '1237–1240', short: 'нашествие Батыя', title: 'нашествие Батыя на Русь', detail: 'Войско Батыя разорило многие русские города. Русь попала в зависимость от Орды; это часть более широкого западного похода монголов.', cat: 'rus', topic: 'rus', relatedTopics: ['steppe'] },
+    { year: 1274, short: 'поход на Японию', title: 'первое монгольское вторжение в Японию', detail: 'Войска державы Хубилая высадились у Кюсю, но завоевать Японию не смогли. На карте сплошная красная линия обозначает поход 1274 года.', cat: 'eastasia', topic: 'eastasia', relatedTopics: ['steppe'] },
+    { year: 1279, short: 'монголы в Китае', title: 'завершение завоевания Китая монголами', detail: 'При Хубилае была побеждена Южная Сун. Династия Юань, объявленная ранее, стала править всем Китаем.', cat: 'eastasia', topic: 'eastasia', relatedTopics: ['steppe'] },
+    { year: 1281, short: 'второй поход на Японию', title: 'второе монгольское вторжение в Японию', detail: 'Новую попытку завоевания сорвали сопротивление японцев и шторм, уничтоживший множество кораблей. На карте пунктирная красная линия обозначает поход 1281 года.', cat: 'eastasia', topic: 'eastasia', relatedTopics: ['steppe'] },
+    { year: 1338, short: 'сёгун Асикага', title: 'Асикага Такаудзи становится сёгуном', detail: 'В Японии возник сёгунат Асикага — военное правительство. Император сохранял свой титул.', cat: 'eastasia', topic: 'eastasia' },
+    { year: 1368, short: 'династия Мин', title: 'Чжу Юаньчжан основывает династию Мин', detail: 'Борьба против монгольских правителей привела к основанию новой китайской династии. Основателем стал Чжу Юаньчжан.', cat: 'eastasia', topic: 'eastasia' },
+    { year: 1380, short: 'Куликовская битва', title: 'победа русских полков в Куликовской битве', detail: 'Русские полки победили войско Мамая. Победа была важной, но не означала немедленного конца зависимости от Орды.', cat: 'rus', topic: 'rus', relatedTopics: ['steppe'] },
+    { year: 1395, short: 'поход Тимура', title: 'поход Тимура на Русь', detail: 'После войны с Тохтамышем войско Тимура дошло до русских земель, но затем повернуло назад.', cat: 'rus', topic: 'rus', relatedTopics: ['steppe'] },
+    { year: 1405, short: 'смерть Тимура', title: 'смерть Тимура', detail: 'Тимур умер в начале похода на Китай. После его смерти единство созданной им державы ослабло.', cat: 'steppe', topic: 'steppe' },
+    { year: 1405, short: 'экспедиции Чжэн Хэ', title: 'начало морских экспедиций Чжэн Хэ', detail: 'Адмирал династии Мин возглавил морские посольства. Экспедиции развивали торговые и дипломатические связи со странами Индийского океана.', cat: 'eastasia', topic: 'eastasia' },
     { year: 330, short: 'Новый Рим', title: 'основание Нового Рима', detail: 'Император Константин сделал город новой столицей. Вскоре его стали называть Константинополем.', cat: 'rome', topic: 'byzantium' },
     { year: 395, short: 'раздел империи', title: 'разделение Римской империи', detail: 'Империя окончательно разделилась на Западную и Восточную части. Восточная часть позднее получила название Византия.', cat: 'rome', topic: 'byzantium' },
     { year: 476, short: 'падение Запада', title: 'падение Западной Римской империи', detail: 'Запад ослабили борьба за власть, хозяйственные трудности, нехватка надёжных войск и нападения германских племён.', cat: 'rome', topic: 'byzantium' },
@@ -208,7 +230,29 @@
     { year: 1453, short: 'падение Византии', title: 'падение Константинополя', detail: 'Османы взяли Константинополь. Византийская империя прекратила существование.', cat: 'rome', topic: 'byzantium' }
   ];
   const lanes = ['up', 'mid-down', 'mid-up', 'down'];
+  events.sort((a, b) => a.year - b.year);
+  const mongolMap = {
+    map: 'Карты/Монгольская империя — 1206–1294.gif',
+    mapAlt: 'Расширение монгольских владений в XIII веке',
+    mapCaption: 'Анимация показывает изменения владений, а не тактику отдельного боя. Красный — монгольская держава; к концу показаны отдельные ханства. Современные границы на подложке служат ориентиром.',
+    mapSource: 'Astrokey44, модификация Sting. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Mongol_Empire_map_2.gif · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.'
+  };
+  const japanMap = {
+    map: 'Карты/Походы монголов на Японию — 1274 и 1281.jpg',
+    mapAlt: 'Морские маршруты вторжений в Японию в 1274 и 1281 годах',
+    mapCaption: 'Сплошные красные стрелки — 1274, пунктирные — 1281. Корея сверху слева, Цусима между Кореей и Кюсю; врезка справа — район залива Хаката. Подписи японские; карта из атласа 1935 года.',
+    mapSource: 'Yoshida Togo и соавторы; скан Abasaa. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Battles_of_Bun%27ei_and_Koan_map.jpg · общественное достояние · без изменений.'
+  };
+  events.forEach(event => {
+    if (event.cat === 'rus') event.cat = 'neighbors';
+    if ([1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
+    if ([1274, 1281].includes(event.year)) Object.assign(event, japanMap);
+    if (event.year === 1258) event.relatedTopics = ['steppe'];
+    if (event.year === 650) event.relatedTopics = ['steppe'];
+  });
   const topics = [
+    ['steppe', 'Великая степь и монголы', '#9b6844'],
+    ['eastasia', 'Китай и Япония', '#b7355b'],
     ['byzantium', 'Рим, Византия и её соседи', 'var(--viz-series-1)'],
     ['rus', 'Русь и соседи', 'var(--viz-series-3)'],
     ['franks', 'Франки', 'var(--viz-series-4)'],
@@ -301,7 +345,7 @@
     closePopup();
     container.replaceChildren();
     mobile.replaceChildren();
-    const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === 'newtopics' && [event.topic, ...(event.relatedTopics || [])].some(key => ['empire', 'culture'].includes(key)))));
+    const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === 'newtopics' && [event.topic, ...(event.relatedTopics || [])].some(key => ['steppe', 'eastasia'].includes(key)))));
     const minYear = Math.floor(Math.min(...shown.map(event => event.year)) / 100) * 100;
     const maxYear = Math.ceil(Math.max(...shown.map(event => event.year)) / 100) * 100;
     const range = Math.max(100, maxYear - minYear);

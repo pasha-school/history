@@ -1537,6 +1537,8 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;div id=&quot;pasha-history-timeline&quot;&gt;
   &lt;h2&gt;История: опорные даты 6 класса&lt;/h2&gt;
   &lt;div class=&quot;legend text-small&quot; aria-label=&quot;Условные обозначения&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch steppe&quot;&gt;&lt;/i&gt;Великая степь и монголы&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch eastasia&quot;&gt;&lt;/i&gt;Китай и Япония&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch rome&quot;&gt;&lt;/i&gt;Рим и Византия&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch justinian&quot;&gt;&lt;/i&gt;Юстиниан&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch neighbors&quot;&gt;&lt;/i&gt;Соседи и Русь&lt;/span&gt;
@@ -1551,7 +1553,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
-      &lt;option value=&quot;newtopics&quot;&gt;Империя и культура — § 13–14&lt;/option&gt;
+      &lt;option value=&quot;newtopics&quot;&gt;Великая степь, Китай и Япония — § 15–17&lt;/option&gt;
+      &lt;option value=&quot;steppe&quot;&gt;Великая степь и монголы — § 15&lt;/option&gt;
+      &lt;option value=&quot;eastasia&quot;&gt;Китай и Япония — § 16–17&lt;/option&gt;
       &lt;option value=&quot;empire&quot;&gt;Империя и соседи — § 13&lt;/option&gt;
       &lt;option value=&quot;culture&quot;&gt;Культура Европы — § 14&lt;/option&gt;
       &lt;option value=&quot;monarchies&quot;&gt;Англия, Франция и Пиренеи — § 11–12&lt;/option&gt;
@@ -1634,6 +1638,8 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .dot.monarchies { background: #7a5bb5; }
   #pasha-history-timeline .empire { background: #a36c38; }
   #pasha-history-timeline .culture { background: #368a79; }
+  #pasha-history-timeline .steppe { background: #9b6844; }
+  #pasha-history-timeline .eastasia { background: #b7355b; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed=&quot;true&quot;] .name { color: inherit; }
@@ -1671,6 +1677,22 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;pasha-history-timeline&#x27;);
   const events = [
+    { year: 618, short: &#x27;династия Тан&#x27;, title: &#x27;начало правления династии Тан в Китае&#x27;, detail: &#x27;Тан — одна из главных династий средневекового Китая. Государством управлял император, опиравшийся на чиновников.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
+    { year: 1192, short: &#x27;власть сёгунов&#x27;, title: &#x27;установление власти сёгунов в Японии&#x27;, detail: &#x27;1192 — опорная дата учебника. Военное правительство сосредоточило управление в руках сёгуна; императорский титул сохранился.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
+    { year: 1206, short: &#x27;Чингисхан&#x27;, title: &#x27;Темучин провозглашён Чингисханом&#x27;, detail: &#x27;Курултай признал Темучина верховным правителем монгольских племён. Началось создание огромной державы.&#x27;, cat: &#x27;steppe&#x27;, topic: &#x27;steppe&#x27; },
+    { year: 1223, short: &#x27;битва на Калке&#x27;, title: &#x27;поражение русских князей и половцев на Калке&#x27;, detail: &#x27;Монгольское войско разгромило союзные силы русских князей и половцев. Это произошло до нашествия Батыя на Русь.&#x27;, cat: &#x27;rus&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1227, short: &#x27;смерть Чингисхана&#x27;, title: &#x27;смерть Чингисхана&#x27;, detail: &#x27;После смерти основателя державы завоевания продолжили его наследники.&#x27;, cat: &#x27;steppe&#x27;, topic: &#x27;steppe&#x27; },
+    { year: 1236, label: &#x27;1236–1243&#x27;, short: &#x27;господство монголов&#x27;, title: &#x27;установление монгольского господства над русскими землями&#x27;, detail: &#x27;Такой период указан в таблице § 15. Он шире дат самого нашествия Батыя на Русь — 1237–1240. Русские княжества стали платить дань и зависеть от ханской власти.&#x27;, cat: &#x27;rus&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1237, label: &#x27;1237–1240&#x27;, short: &#x27;нашествие Батыя&#x27;, title: &#x27;нашествие Батыя на Русь&#x27;, detail: &#x27;Войско Батыя разорило многие русские города. Русь попала в зависимость от Орды; это часть более широкого западного похода монголов.&#x27;, cat: &#x27;rus&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1274, short: &#x27;поход на Японию&#x27;, title: &#x27;первое монгольское вторжение в Японию&#x27;, detail: &#x27;Войска державы Хубилая высадились у Кюсю, но завоевать Японию не смогли. На карте сплошная красная линия обозначает поход 1274 года.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1279, short: &#x27;монголы в Китае&#x27;, title: &#x27;завершение завоевания Китая монголами&#x27;, detail: &#x27;При Хубилае была побеждена Южная Сун. Династия Юань, объявленная ранее, стала править всем Китаем.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1281, short: &#x27;второй поход на Японию&#x27;, title: &#x27;второе монгольское вторжение в Японию&#x27;, detail: &#x27;Новую попытку завоевания сорвали сопротивление японцев и шторм, уничтоживший множество кораблей. На карте пунктирная красная линия обозначает поход 1281 года.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1338, short: &#x27;сёгун Асикага&#x27;, title: &#x27;Асикага Такаудзи становится сёгуном&#x27;, detail: &#x27;В Японии возник сёгунат Асикага — военное правительство. Император сохранял свой титул.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
+    { year: 1368, short: &#x27;династия Мин&#x27;, title: &#x27;Чжу Юаньчжан основывает династию Мин&#x27;, detail: &#x27;Борьба против монгольских правителей привела к основанию новой китайской династии. Основателем стал Чжу Юаньчжан.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
+    { year: 1380, short: &#x27;Куликовская битва&#x27;, title: &#x27;победа русских полков в Куликовской битве&#x27;, detail: &#x27;Русские полки победили войско Мамая. Победа была важной, но не означала немедленного конца зависимости от Орды.&#x27;, cat: &#x27;rus&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1395, short: &#x27;поход Тимура&#x27;, title: &#x27;поход Тимура на Русь&#x27;, detail: &#x27;После войны с Тохтамышем войско Тимура дошло до русских земель, но затем повернуло назад.&#x27;, cat: &#x27;rus&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1405, short: &#x27;смерть Тимура&#x27;, title: &#x27;смерть Тимура&#x27;, detail: &#x27;Тимур умер в начале похода на Китай. После его смерти единство созданной им державы ослабло.&#x27;, cat: &#x27;steppe&#x27;, topic: &#x27;steppe&#x27; },
+    { year: 1405, short: &#x27;экспедиции Чжэн Хэ&#x27;, title: &#x27;начало морских экспедиций Чжэн Хэ&#x27;, detail: &#x27;Адмирал династии Мин возглавил морские посольства. Экспедиции развивали торговые и дипломатические связи со странами Индийского океана.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
     { year: 330, short: &#x27;Новый Рим&#x27;, title: &#x27;основание Нового Рима&#x27;, detail: &#x27;Император Константин сделал город новой столицей. Вскоре его стали называть Константинополем.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 395, short: &#x27;раздел империи&#x27;, title: &#x27;разделение Римской империи&#x27;, detail: &#x27;Империя окончательно разделилась на Западную и Восточную части. Восточная часть позднее получила название Византия.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 476, short: &#x27;падение Запада&#x27;, title: &#x27;падение Западной Римской империи&#x27;, detail: &#x27;Запад ослабили борьба за власть, хозяйственные трудности, нехватка надёжных войск и нападения германских племён.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; },
@@ -1744,7 +1766,29 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 1453, short: &#x27;падение Византии&#x27;, title: &#x27;падение Константинополя&#x27;, detail: &#x27;Османы взяли Константинополь. Византийская империя прекратила существование.&#x27;, cat: &#x27;rome&#x27;, topic: &#x27;byzantium&#x27; }
   ];
   const lanes = [&#x27;up&#x27;, &#x27;mid-down&#x27;, &#x27;mid-up&#x27;, &#x27;down&#x27;];
+  events.sort((a, b) =&gt; a.year - b.year);
+  const mongolMap = {
+    map: &#x27;Карты/Монгольская империя — 1206–1294.gif&#x27;,
+    mapAlt: &#x27;Расширение монгольских владений в XIII веке&#x27;,
+    mapCaption: &#x27;Анимация показывает изменения владений, а не тактику отдельного боя. Красный — монгольская держава; к концу показаны отдельные ханства. Современные границы на подложке служат ориентиром.&#x27;,
+    mapSource: &#x27;Astrokey44, модификация Sting. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Mongol_Empire_map_2.gif · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.&#x27;
+  };
+  const japanMap = {
+    map: &#x27;Карты/Походы монголов на Японию — 1274 и 1281.jpg&#x27;,
+    mapAlt: &#x27;Морские маршруты вторжений в Японию в 1274 и 1281 годах&#x27;,
+    mapCaption: &#x27;Сплошные красные стрелки — 1274, пунктирные — 1281. Корея сверху слева, Цусима между Кореей и Кюсю; врезка справа — район залива Хаката. Подписи японские; карта из атласа 1935 года.&#x27;,
+    mapSource: &#x27;Yoshida Togo и соавторы; скан Abasaa. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Battles_of_Bun%27ei_and_Koan_map.jpg · общественное достояние · без изменений.&#x27;
+  };
+  events.forEach(event =&gt; {
+    if (event.cat === &#x27;rus&#x27;) event.cat = &#x27;neighbors&#x27;;
+    if ([1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
+    if ([1274, 1281].includes(event.year)) Object.assign(event, japanMap);
+    if (event.year === 1258) event.relatedTopics = [&#x27;steppe&#x27;];
+    if (event.year === 650) event.relatedTopics = [&#x27;steppe&#x27;];
+  });
   const topics = [
+    [&#x27;steppe&#x27;, &#x27;Великая степь и монголы&#x27;, &#x27;#9b6844&#x27;],
+    [&#x27;eastasia&#x27;, &#x27;Китай и Япония&#x27;, &#x27;#b7355b&#x27;],
     [&#x27;byzantium&#x27;, &#x27;Рим, Византия и её соседи&#x27;, &#x27;var(--viz-series-1)&#x27;],
     [&#x27;rus&#x27;, &#x27;Русь и соседи&#x27;, &#x27;var(--viz-series-3)&#x27;],
     [&#x27;franks&#x27;, &#x27;Франки&#x27;, &#x27;var(--viz-series-4)&#x27;],
@@ -1837,7 +1881,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     closePopup();
     container.replaceChildren();
     mobile.replaceChildren();
-    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;empire&#x27;, &#x27;culture&#x27;].includes(key)))));
+    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;steppe&#x27;, &#x27;eastasia&#x27;].includes(key)))));
     const minYear = Math.floor(Math.min(...shown.map(event =&gt; event.year)) / 100) * 100;
     const maxYear = Math.ceil(Math.max(...shown.map(event =&gt; event.year)) / 100) * 100;
     const range = Math.max(100, maxYear - minYear);
