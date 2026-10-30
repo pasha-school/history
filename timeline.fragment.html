@@ -1,6 +1,8 @@
 <div id="pasha-history-timeline">
   <h2>История: опорные даты 6 класса</h2>
   <div class="legend text-small" aria-label="Условные обозначения">
+    <span><i class="swatch india"></i>Индия</span>
+    <span><i class="swatch africa"></i>Африка</span>
     <span><i class="swatch steppe"></i>Великая степь и монголы</span>
     <span><i class="swatch eastasia"></i>Китай и Япония</span>
     <span><i class="swatch rome"></i>Рим и Византия</span>
@@ -17,7 +19,9 @@
   </div>
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
-      <option value="newtopics">Великая степь, Китай и Япония — § 15–17</option>
+      <option value="newtopics">Индия и Африка — § 18–19</option>
+      <option value="india">Индия — § 18</option>
+      <option value="africa">Африка — § 19</option>
       <option value="steppe">Великая степь и монголы — § 15</option>
       <option value="eastasia">Китай и Япония — § 16–17</option>
       <option value="empire">Империя и соседи — § 13</option>
@@ -104,6 +108,8 @@
   #pasha-history-timeline .culture { background: #368a79; }
   #pasha-history-timeline .steppe { background: #9b6844; }
   #pasha-history-timeline .eastasia { background: #b7355b; }
+  #pasha-history-timeline .india { background: #c56a21; }
+  #pasha-history-timeline .africa { background: #467c36; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed="true"] .name { color: inherit; }
@@ -141,6 +147,14 @@
 (() => {
   const root = document.getElementById('pasha-history-timeline');
   const events = [
+    { year: 350, label: 'середина IV в.', short: 'Эзана: христианство', title: 'принятие христианства царём Аксума', detail: 'При царе Эзане христианство укрепилось в Аксуме на северо-востоке Африки. Середина IV века — опорная датировка учебника; точный год не установлен. Сначала новая вера распространялась среди правящей верхушки.', cat: 'africa', topic: 'africa' },
+    { year: 606, label: '606–647', short: 'правление Харши', title: 'Харша объединяет часть Северной Индии', detail: 'Правитель временно объединил значительную часть Северной Индии. После его смерти в 647 году объединение распалось. Не следует представлять это как постоянное единство всей Индии.', cat: 'india', topic: 'india' },
+    { year: 712, short: 'завоевание Синда', title: 'арабское завоевание Синда', detail: 'Арабы завоевали Синд на северо-западе Индийского субконтинента, на территории современного Пакистана. Это не завоевание всей Индии. Синд стал провинцией халифата.', cat: 'india', topic: 'india', relatedTopics: ['islam'] },
+    { year: 1001, short: 'походы Махмуда', title: 'походы Махмуда Газневи в Индию', detail: '1001 год — начало походов по таблице § 18. Правитель Газни совершал набеги ради добычи и расширения власти. Это раньше образования Делийского султаната.', cat: 'india', topic: 'india' },
+    { year: 1206, short: 'Делийский султанат', title: 'образование Делийского султаната', detail: 'В Северной Индии возникло государство с центром в Дели. Оно объединяло несколько последовательно правивших династий и существовало до 1526 года. Карта показывает более позднее расширение, а не границы при основании.', cat: 'india', topic: 'india' },
+    { year: 1240, label: 'около 1240', short: 'империя Мали', title: 'образование империи Мали', detail: 'Около 1240 года — опорная дата § 19. Государство Западной Африки усиливалось благодаря торговле и контролю путей. Карта обзорная: она показывает империю в расширенных границах, не точное состояние в год основания.', cat: 'africa', topic: 'africa' },
+    { year: 1324, short: 'паломничество Мусы', title: 'паломничество Мусы I в Мекку', detail: 'Правитель Мали отправился в Мекку через Каир. Его богатство и щедрые дары привлекли внимание современников. Торговые связи Мали охватывали Западную Африку и пути через Сахару; маршрут паломничества на этой карте не нанесён.', cat: 'africa', topic: 'africa' },
+    { year: 1398, short: 'Тимур в Дели', title: 'вторжение Тимура в Индию и разорение Дели', detail: 'Войска Тимура разорили Дели, что сильно ослабило султанат. Государство не исчезло в 1398 году: султанские династии продолжали править до 1526 года. На карте показана география султаната, не движения войск и не границы 1398 года.', cat: 'india', topic: 'india', relatedTopics: ['steppe'] },
     { year: 618, short: 'династия Тан', title: 'начало правления династии Тан в Китае', detail: 'Тан — одна из главных династий средневекового Китая. Государством управлял император, опиравшийся на чиновников.', cat: 'eastasia', topic: 'eastasia' },
     { year: 1192, short: 'власть сёгунов', title: 'установление власти сёгунов в Японии', detail: '1192 — опорная дата учебника. Военное правительство сосредоточило управление в руках сёгуна; императорский титул сохранился.', cat: 'eastasia', topic: 'eastasia' },
     { year: 1206, short: 'Чингисхан', title: 'Темучин провозглашён Чингисханом', detail: 'Курултай признал Темучина верховным правителем монгольских племён. Началось создание огромной державы.', cat: 'steppe', topic: 'steppe' },
@@ -244,13 +258,25 @@
     mapSource: 'Yoshida Togo и соавторы; скан Abasaa. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Battles_of_Bun%27ei_and_Koan_map.jpg · общественное достояние · без изменений.'
   };
   events.forEach(event => {
+    if (event.topic === 'india' && [1206, 1398].includes(event.year)) Object.assign(event, {
+      map: 'Карты/Делийский султанат.png', mapAlt: 'Обзорная карта Делийского султаната',
+      mapCaption: 'Коричневый — территория султаната в реконструкции расширения; Delhi — Дели, Lahore — Лахор. Дата состояния на оригинале не указана. Это не границы 1206 или 1398 года и не схема боя.',
+      mapSource: 'Koba-chan / Pataliputra, по атласу Шварцберга. https://commons.wikimedia.org/wiki/File:Map_of_the_Delhi_Sultanate.png · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.'
+    });
+    if (event.topic === 'africa' && [1240, 1324].includes(event.year)) Object.assign(event, {
+      map: 'Карты/Империя Мали.png', mapAlt: 'Обзорная карта империи Мали в Западной Африке',
+      mapCaption: 'Зелёный — примерные владения империи. Timbuktu — Тимбукту, Gao — Гао, Jenne — Дженне; синий — реки. Тонкие линии — современные границы. Карта не показывает маршруты караванов или паломничества и не фиксирует границы года основания.',
+      mapSource: 'Astrokey44. https://commons.wikimedia.org/wiki/File:MALI_empire_map.PNG · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.'
+    });
     if (event.cat === 'rus') event.cat = 'neighbors';
-    if ([1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
+    if (event.topic !== 'india' && [1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
     if ([1274, 1281].includes(event.year)) Object.assign(event, japanMap);
     if (event.year === 1258) event.relatedTopics = ['steppe'];
     if (event.year === 650) event.relatedTopics = ['steppe'];
   });
   const topics = [
+    ['india', 'Индия', '#c56a21'],
+    ['africa', 'Африка', '#467c36'],
     ['steppe', 'Великая степь и монголы', '#9b6844'],
     ['eastasia', 'Китай и Япония', '#b7355b'],
     ['byzantium', 'Рим, Византия и её соседи', 'var(--viz-series-1)'],
@@ -345,7 +371,7 @@
     closePopup();
     container.replaceChildren();
     mobile.replaceChildren();
-    const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === 'newtopics' && [event.topic, ...(event.relatedTopics || [])].some(key => ['steppe', 'eastasia'].includes(key)))));
+    const shown = topic === 'all' ? events : events.filter(event => (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === 'newtopics' && [event.topic, ...(event.relatedTopics || [])].some(key => ['india', 'africa'].includes(key)))));
     const minYear = Math.floor(Math.min(...shown.map(event => event.year)) / 100) * 100;
     const maxYear = Math.ceil(Math.max(...shown.map(event => event.year)) / 100) * 100;
     const range = Math.max(100, maxYear - minYear);

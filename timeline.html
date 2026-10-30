@@ -1537,6 +1537,8 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;div id=&quot;pasha-history-timeline&quot;&gt;
   &lt;h2&gt;История: опорные даты 6 класса&lt;/h2&gt;
   &lt;div class=&quot;legend text-small&quot; aria-label=&quot;Условные обозначения&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch india&quot;&gt;&lt;/i&gt;Индия&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch africa&quot;&gt;&lt;/i&gt;Африка&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch steppe&quot;&gt;&lt;/i&gt;Великая степь и монголы&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch eastasia&quot;&gt;&lt;/i&gt;Китай и Япония&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch rome&quot;&gt;&lt;/i&gt;Рим и Византия&lt;/span&gt;
@@ -1553,7 +1555,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
-      &lt;option value=&quot;newtopics&quot;&gt;Великая степь, Китай и Япония — § 15–17&lt;/option&gt;
+      &lt;option value=&quot;newtopics&quot;&gt;Индия и Африка — § 18–19&lt;/option&gt;
+      &lt;option value=&quot;india&quot;&gt;Индия — § 18&lt;/option&gt;
+      &lt;option value=&quot;africa&quot;&gt;Африка — § 19&lt;/option&gt;
       &lt;option value=&quot;steppe&quot;&gt;Великая степь и монголы — § 15&lt;/option&gt;
       &lt;option value=&quot;eastasia&quot;&gt;Китай и Япония — § 16–17&lt;/option&gt;
       &lt;option value=&quot;empire&quot;&gt;Империя и соседи — § 13&lt;/option&gt;
@@ -1640,6 +1644,8 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .culture { background: #368a79; }
   #pasha-history-timeline .steppe { background: #9b6844; }
   #pasha-history-timeline .eastasia { background: #b7355b; }
+  #pasha-history-timeline .india { background: #c56a21; }
+  #pasha-history-timeline .africa { background: #467c36; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed=&quot;true&quot;] .name { color: inherit; }
@@ -1677,6 +1683,14 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;pasha-history-timeline&#x27;);
   const events = [
+    { year: 350, label: &#x27;середина IV в.&#x27;, short: &#x27;Эзана: христианство&#x27;, title: &#x27;принятие христианства царём Аксума&#x27;, detail: &#x27;При царе Эзане христианство укрепилось в Аксуме на северо-востоке Африки. Середина IV века — опорная датировка учебника; точный год не установлен. Сначала новая вера распространялась среди правящей верхушки.&#x27;, cat: &#x27;africa&#x27;, topic: &#x27;africa&#x27; },
+    { year: 606, label: &#x27;606–647&#x27;, short: &#x27;правление Харши&#x27;, title: &#x27;Харша объединяет часть Северной Индии&#x27;, detail: &#x27;Правитель временно объединил значительную часть Северной Индии. После его смерти в 647 году объединение распалось. Не следует представлять это как постоянное единство всей Индии.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27; },
+    { year: 712, short: &#x27;завоевание Синда&#x27;, title: &#x27;арабское завоевание Синда&#x27;, detail: &#x27;Арабы завоевали Синд на северо-западе Индийского субконтинента, на территории современного Пакистана. Это не завоевание всей Индии. Синд стал провинцией халифата.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27;, relatedTopics: [&#x27;islam&#x27;] },
+    { year: 1001, short: &#x27;походы Махмуда&#x27;, title: &#x27;походы Махмуда Газневи в Индию&#x27;, detail: &#x27;1001 год — начало походов по таблице § 18. Правитель Газни совершал набеги ради добычи и расширения власти. Это раньше образования Делийского султаната.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27; },
+    { year: 1206, short: &#x27;Делийский султанат&#x27;, title: &#x27;образование Делийского султаната&#x27;, detail: &#x27;В Северной Индии возникло государство с центром в Дели. Оно объединяло несколько последовательно правивших династий и существовало до 1526 года. Карта показывает более позднее расширение, а не границы при основании.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27; },
+    { year: 1240, label: &#x27;около 1240&#x27;, short: &#x27;империя Мали&#x27;, title: &#x27;образование империи Мали&#x27;, detail: &#x27;Около 1240 года — опорная дата § 19. Государство Западной Африки усиливалось благодаря торговле и контролю путей. Карта обзорная: она показывает империю в расширенных границах, не точное состояние в год основания.&#x27;, cat: &#x27;africa&#x27;, topic: &#x27;africa&#x27; },
+    { year: 1324, short: &#x27;паломничество Мусы&#x27;, title: &#x27;паломничество Мусы I в Мекку&#x27;, detail: &#x27;Правитель Мали отправился в Мекку через Каир. Его богатство и щедрые дары привлекли внимание современников. Торговые связи Мали охватывали Западную Африку и пути через Сахару; маршрут паломничества на этой карте не нанесён.&#x27;, cat: &#x27;africa&#x27;, topic: &#x27;africa&#x27; },
+    { year: 1398, short: &#x27;Тимур в Дели&#x27;, title: &#x27;вторжение Тимура в Индию и разорение Дели&#x27;, detail: &#x27;Войска Тимура разорили Дели, что сильно ослабило султанат. Государство не исчезло в 1398 году: султанские династии продолжали править до 1526 года. На карте показана география султаната, не движения войск и не границы 1398 года.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
     { year: 618, short: &#x27;династия Тан&#x27;, title: &#x27;начало правления династии Тан в Китае&#x27;, detail: &#x27;Тан — одна из главных династий средневекового Китая. Государством управлял император, опиравшийся на чиновников.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
     { year: 1192, short: &#x27;власть сёгунов&#x27;, title: &#x27;установление власти сёгунов в Японии&#x27;, detail: &#x27;1192 — опорная дата учебника. Военное правительство сосредоточило управление в руках сёгуна; императорский титул сохранился.&#x27;, cat: &#x27;eastasia&#x27;, topic: &#x27;eastasia&#x27; },
     { year: 1206, short: &#x27;Чингисхан&#x27;, title: &#x27;Темучин провозглашён Чингисханом&#x27;, detail: &#x27;Курултай признал Темучина верховным правителем монгольских племён. Началось создание огромной державы.&#x27;, cat: &#x27;steppe&#x27;, topic: &#x27;steppe&#x27; },
@@ -1780,13 +1794,25 @@ html&gt;body{padding:0}&lt;/style&gt;
     mapSource: &#x27;Yoshida Togo и соавторы; скан Abasaa. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Battles_of_Bun%27ei_and_Koan_map.jpg · общественное достояние · без изменений.&#x27;
   };
   events.forEach(event =&gt; {
+    if (event.topic === &#x27;india&#x27; &amp;&amp; [1206, 1398].includes(event.year)) Object.assign(event, {
+      map: &#x27;Карты/Делийский султанат.png&#x27;, mapAlt: &#x27;Обзорная карта Делийского султаната&#x27;,
+      mapCaption: &#x27;Коричневый — территория султаната в реконструкции расширения; Delhi — Дели, Lahore — Лахор. Дата состояния на оригинале не указана. Это не границы 1206 или 1398 года и не схема боя.&#x27;,
+      mapSource: &#x27;Koba-chan / Pataliputra, по атласу Шварцберга. https://commons.wikimedia.org/wiki/File:Map_of_the_Delhi_Sultanate.png · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.&#x27;
+    });
+    if (event.topic === &#x27;africa&#x27; &amp;&amp; [1240, 1324].includes(event.year)) Object.assign(event, {
+      map: &#x27;Карты/Империя Мали.png&#x27;, mapAlt: &#x27;Обзорная карта империи Мали в Западной Африке&#x27;,
+      mapCaption: &#x27;Зелёный — примерные владения империи. Timbuktu — Тимбукту, Gao — Гао, Jenne — Дженне; синий — реки. Тонкие линии — современные границы. Карта не показывает маршруты караванов или паломничества и не фиксирует границы года основания.&#x27;,
+      mapSource: &#x27;Astrokey44. https://commons.wikimedia.org/wiki/File:MALI_empire_map.PNG · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.&#x27;
+    });
     if (event.cat === &#x27;rus&#x27;) event.cat = &#x27;neighbors&#x27;;
-    if ([1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
+    if (event.topic !== &#x27;india&#x27; &amp;&amp; [1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
     if ([1274, 1281].includes(event.year)) Object.assign(event, japanMap);
     if (event.year === 1258) event.relatedTopics = [&#x27;steppe&#x27;];
     if (event.year === 650) event.relatedTopics = [&#x27;steppe&#x27;];
   });
   const topics = [
+    [&#x27;india&#x27;, &#x27;Индия&#x27;, &#x27;#c56a21&#x27;],
+    [&#x27;africa&#x27;, &#x27;Африка&#x27;, &#x27;#467c36&#x27;],
     [&#x27;steppe&#x27;, &#x27;Великая степь и монголы&#x27;, &#x27;#9b6844&#x27;],
     [&#x27;eastasia&#x27;, &#x27;Китай и Япония&#x27;, &#x27;#b7355b&#x27;],
     [&#x27;byzantium&#x27;, &#x27;Рим, Византия и её соседи&#x27;, &#x27;var(--viz-series-1)&#x27;],
@@ -1881,7 +1907,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     closePopup();
     container.replaceChildren();
     mobile.replaceChildren();
-    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;steppe&#x27;, &#x27;eastasia&#x27;].includes(key)))));
+    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;india&#x27;, &#x27;africa&#x27;].includes(key)))));
     const minYear = Math.floor(Math.min(...shown.map(event =&gt; event.year)) / 100) * 100;
     const maxYear = Math.ceil(Math.max(...shown.map(event =&gt; event.year)) / 100) * 100;
     const range = Math.max(100, maxYear - minYear);
