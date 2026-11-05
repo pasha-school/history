@@ -1537,6 +1537,10 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;div id=&quot;pasha-history-timeline&quot;&gt;
   &lt;h2&gt;История: опорные даты 6 класса&lt;/h2&gt;
   &lt;div class=&quot;legend text-small&quot; aria-label=&quot;Условные обозначения&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch america&quot;&gt;&lt;/i&gt;Америка&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch late&quot;&gt;&lt;/i&gt;Европа XIV–XV веков&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch ottomans&quot;&gt;&lt;/i&gt;Османы и Византия&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch renaissance&quot;&gt;&lt;/i&gt;Возрождение и печать&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch india&quot;&gt;&lt;/i&gt;Индия&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch africa&quot;&gt;&lt;/i&gt;Африка&lt;/span&gt;
     &lt;span&gt;&lt;i class=&quot;swatch steppe&quot;&gt;&lt;/i&gt;Великая степь и монголы&lt;/span&gt;
@@ -1555,7 +1559,11 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
-      &lt;option value=&quot;newtopics&quot;&gt;Индия и Африка — § 18–19&lt;/option&gt;
+      &lt;option value=&quot;newtopics&quot;&gt;Америка и осень Средневековья — § 20–24&lt;/option&gt;
+      &lt;option value=&quot;america&quot;&gt;Америка — § 20&lt;/option&gt;
+      &lt;option value=&quot;late&quot;&gt;Европа XIV–XV веков — § 21–22, 24&lt;/option&gt;
+      &lt;option value=&quot;ottomans&quot;&gt;Османы и Византия — § 23&lt;/option&gt;
+      &lt;option value=&quot;renaissance&quot;&gt;Возрождение и печать — § 24&lt;/option&gt;
       &lt;option value=&quot;india&quot;&gt;Индия — § 18&lt;/option&gt;
       &lt;option value=&quot;africa&quot;&gt;Африка — § 19&lt;/option&gt;
       &lt;option value=&quot;steppe&quot;&gt;Великая степь и монголы — § 15&lt;/option&gt;
@@ -1576,7 +1584,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;div class=&quot;text-small text-muted scale-note&quot;&gt;Шкала времени: отметки через 100 лет. Нажми на событие, чтобы открыть описание.&lt;/div&gt;
   &lt;div class=&quot;timeline-scroll&quot;&gt;
     &lt;div class=&quot;century-scale&quot; aria-label=&quot;Шкала годов&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;timeline&quot; aria-label=&quot;Лента времени от 330 до 1453 года&quot;&gt;
+    &lt;div class=&quot;timeline&quot; aria-label=&quot;Лента времени: опорные даты Средневековья&quot;&gt;
       &lt;div class=&quot;axis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
       &lt;div class=&quot;events&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -1646,6 +1654,10 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .eastasia { background: #b7355b; }
   #pasha-history-timeline .india { background: #c56a21; }
   #pasha-history-timeline .africa { background: #467c36; }
+  #pasha-history-timeline .america { background: #087f8c; }
+  #pasha-history-timeline .late { background: #a24573; }
+  #pasha-history-timeline .ottomans { background: #99652c; }
+  #pasha-history-timeline .renaissance { background: #5854b6; }
   #pasha-history-timeline .year { display: block; font-weight: 500; }
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed=&quot;true&quot;] .name { color: inherit; }
@@ -1683,6 +1695,36 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;pasha-history-timeline&#x27;);
   const events = [
+    { year: 1350, label: &#x27;XIV–XV века&#x27;, short: &#x27;Раннее Возрождение&#x27;, title: &#x27;Раннее Возрождение в Италии&#x27;, detail: &#x27;Период, а не событие одного года. Богатые города и античное наследие помогали развитию новой культуры. Гуманисты обращались к достоинству человека и образованию; художники изучали природу и перспективу.&#x27;, cat: &#x27;renaissance&#x27;, topic: &#x27;renaissance&#x27; },
+    { year: 1200, label: &#x27;около 1200&#x27;, short: &#x27;Куско&#x27;, title: &#x27;основание Куско — опорная дата учебника&#x27;, detail: &#x27;Город в Андах стал центром державы инков. Дата ранней истории условная: она не означает, что большая империя появилась за один год.&#x27;, cat: &#x27;america&#x27;, topic: &#x27;america&#x27; },
+    { year: 1261, short: &#x27;возвращение столицы&#x27;, title: &#x27;восстановление Византии в Константинополе&#x27;, detail: &#x27;Войска Никейской империи вернули столицу. Однако восстановленная Византия не получила обратно всех земель и прежних доходов.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27;, relatedTopics: [&#x27;byzantium&#x27;] },
+    { year: 1325, short: &#x27;Теночтитлан&#x27;, title: &#x27;основание Теночтитлана&#x27;, detail: &#x27;Традиционная дата основания города на озере Тескоко. Впоследствии он стал столицей ацтекской державы. Ацтеки, майя и инки — не один народ.&#x27;, cat: &#x27;america&#x27;, topic: &#x27;america&#x27; },
+    { year: 1337, label: &#x27;1337–1453&#x27;, short: &#x27;Столетняя война&#x27;, title: &#x27;Столетняя война Англии и Франции&#x27;, detail: &#x27;Английские короли претендовали на французскую корону и владения. Война длилась 116 лет с перерывами. В итоге Франция победила.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1346, label: &#x27;1346–1353&#x27;, short: &#x27;Чёрная смерть&#x27;, title: &#x27;эпидемия чумы в Европе&#x27;, detail: &#x27;Массовая гибель людей привела к нехватке работников. Споры о заработке и повинностях усилили общественные конфликты. Это период по таблице учебника, не одновременное начало эпидемии во всех городах.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1346, short: &#x27;Креси&#x27;, title: &#x27;победа англичан при Креси&#x27;, detail: &#x27;Одно из сражений Столетней войны. Действия английских лучников и пехоты помогли разгромить французское войско.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1356, short: &#x27;Пуатье: Столетняя война&#x27;, title: &#x27;поражение французов при Пуатье&#x27;, detail: &#x27;Французский король попал в плен к англичанам. Не путай с битвой при Пуатье 732 года: здесь другая война и другие противники.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1358, short: &#x27;Жакерия&#x27;, title: &#x27;крестьянское восстание во Франции&#x27;, detail: &#x27;Война, грабежи и налоги обострили недовольство крестьян. Восстание было подавлено.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1381, short: &#x27;восстание Тайлера&#x27;, title: &#x27;восстание Уота Тайлера в Англии&#x27;, detail: &#x27;Крестьяне требовали уменьшения поборов и освобождения от зависимости. После убийства предводителя выступление подавили.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1385, short: &#x27;Кревская уния&#x27;, title: &#x27;союз Польши и Литвы&#x27;, detail: &#x27;Династическое сближение помогло совместно бороться с Тевтонским орденом. Оно не означало немедленного слияния государств во всех отношениях.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27;, relatedTopics: [&#x27;empire&#x27;] },
+    { year: 1389, short: &#x27;Косово поле&#x27;, title: &#x27;сражение сербов и османов на Косовом поле&#x27;, detail: &#x27;Сражение связано с усилением османского влияния и зависимостью Сербии. Не следует представлять последующее завоевание всех сербских земель как событие одного дня.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27; },
+    { year: 1396, short: &#x27;Никополь&#x27;, title: &#x27;поражение крестоносцев при Никополе&#x27;, detail: &#x27;Султан Баязид I разбил войско крестоносцев на Дунае. Это усилило угрозу Византии и балканским странам.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27; },
+    { year: 1402, short: &#x27;Анкара&#x27;, title: &#x27;Тимур побеждает Баязида I&#x27;, detail: &#x27;Османский султан попал в плен. Последовавшая борьба за власть дала Византии передышку, но не устранила её слабость.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27;, relatedTopics: [&#x27;steppe&#x27;] },
+    { year: 1410, short: &#x27;Грюнвальд&#x27;, title: &#x27;победа польско-литовских войск над Орденом&#x27;, detail: &#x27;Победа ослабила Тевтонский орден, но не уничтожила его немедленно. В союзном войске участвовали и смоленские полки. Карта показывает поход, а не тактику боя.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27;, relatedTopics: [&#x27;empire&#x27;] },
+    { year: 1415, short: &#x27;казнь Яна Гуса&#x27;, title: &#x27;казнь Яна Гуса в Констанце&#x27;, detail: &#x27;Проповедник критиковал духовенство. Его казнь вызвала возмущение сторонников; позднее начались Гуситские войны в Чехии.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1415, short: &#x27;Азенкур&#x27;, title: &#x27;победа Генриха V при Азенкуре&#x27;, detail: &#x27;Новый крупный успех англичан в Столетней войне. Победа не стала концом войны: французы продолжили сопротивление.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1419, label: &#x27;1419–1434&#x27;, short: &#x27;Гуситские войны&#x27;, title: &#x27;Гуситские войны в Чехии&#x27;, detail: &#x27;Сторонники Яна Гуса отражали походы противников. Ян Жижка использовал боевые повозки. Внутренний раскол движения привёл к поражению таборитов в 1434 году.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1429, short: &#x27;Орлеан и Жанна&#x27;, title: &#x27;снятие осады Орлеана&#x27;, detail: &#x27;Жанна д’Арк воодушевила французское войско. Снятие осады стало важным переломом, но война продолжалась ещё много лет.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1431, short: &#x27;казнь Жанны&#x27;, title: &#x27;казнь Жанны д’Арк&#x27;, detail: &#x27;Жанну казнили в Руане. Её гибель не остановила борьбу Франции против англичан.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1434, short: &#x27;поражение таборитов&#x27;, title: &#x27;поражение таборитов в Гуситских войнах&#x27;, detail: &#x27;Умеренные гуситы выступили вместе с католиками против радикального крыла движения. Опорная дата окончания Гуситских войн в учебнике.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1439, short: &#x27;Флорентийская уния&#x27;, title: &#x27;Флорентийская церковная уния&#x27;, detail: &#x27;Византийские правители рассчитывали получить помощь Запада через церковное объединение. Многие православные унию не приняли; достаточной военной помощи не последовало.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27;, relatedTopics: [&#x27;society&#x27;] },
+    { year: 1444, short: &#x27;Варна&#x27;, title: &#x27;поражение крестоносцев при Варне&#x27;, detail: &#x27;Неудачная попытка остановить османское наступление. Византия осталась в крайне уязвимом положении.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27; },
+    { year: 1445, short: &#x27;Гутенберг: учебная дата&#x27;, title: &#x27;европейское книгопечатание — дата учебника&#x27;, detail: &#x27;В § 24 стоит 1445 год. Гутенберг связан с наборными металлическими литерами в Европе; его Библию библиотеки датируют серединой 1450-х. Печать в Восточной Азии существовала раньше.&#x27;, cat: &#x27;renaissance&#x27;, topic: &#x27;renaissance&#x27; },
+    { year: 1453, short: &#x27;конец Столетней войны&#x27;, title: &#x27;завершение Столетней войны&#x27;, detail: &#x27;Франция победила. Англичане сохранили Кале, но потеряли остальные прежние французские владения. В том же году произошло другое событие — падение Константинополя.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1455, label: &#x27;1455–1485&#x27;, short: &#x27;Война роз&#x27;, title: &#x27;Война Алой и Белой розы в Англии&#x27;, detail: &#x27;Борьба группировок знати и династических претендентов закончилась приходом к власти Генриха VII Тюдора в 1485 году.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1477, short: &#x27;Нанси&#x27;, title: &#x27;гибель Карла Смелого при Нанси&#x27;, detail: &#x27;Армия Рене II Лотарингского и союзников победила бургундцев. Людовик XI воспользовался ослаблением соперника, но не командовал победителями лично.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1479, short: &#x27;Кастилия и Арагон&#x27;, title: &#x27;династическая уния Кастилии и Арагона&#x27;, detail: &#x27;Изабелла и Фернандо правили двумя королевствами. Союз стал шагом к объединению Испании, но отдельные учреждения сохранялись.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1485, short: &#x27;Генрих VII&#x27;, title: &#x27;начало правления Генриха VII Тюдора&#x27;, detail: &#x27;Новая династия укрепляла королевскую власть и ограничивала самостоятельность знати после Войны роз.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27; },
+    { year: 1492, short: &#x27;взятие Гранады&#x27;, title: &#x27;завершение Реконкисты&#x27;, detail: &#x27;Войска Изабеллы и Фернандо взяли Гранаду. Это конец последнего мусульманского государства на Пиренейском полуострове, но не конец религиозных конфликтов и преследований.&#x27;, cat: &#x27;late&#x27;, topic: &#x27;late&#x27;, relatedTopics: [&#x27;monarchies&#x27;] },
     { year: 350, label: &#x27;середина IV в.&#x27;, short: &#x27;Эзана: христианство&#x27;, title: &#x27;принятие христианства царём Аксума&#x27;, detail: &#x27;При царе Эзане христианство укрепилось в Аксуме на северо-востоке Африки. Середина IV века — опорная датировка учебника; точный год не установлен. Сначала новая вера распространялась среди правящей верхушки.&#x27;, cat: &#x27;africa&#x27;, topic: &#x27;africa&#x27; },
     { year: 606, label: &#x27;606–647&#x27;, short: &#x27;правление Харши&#x27;, title: &#x27;Харша объединяет часть Северной Индии&#x27;, detail: &#x27;Правитель временно объединил значительную часть Северной Индии. После его смерти в 647 году объединение распалось. Не следует представлять это как постоянное единство всей Индии.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27; },
     { year: 712, short: &#x27;завоевание Синда&#x27;, title: &#x27;арабское завоевание Синда&#x27;, detail: &#x27;Арабы завоевали Синд на северо-западе Индийского субконтинента, на территории современного Пакистана. Это не завоевание всей Индии. Синд стал провинцией халифата.&#x27;, cat: &#x27;india&#x27;, topic: &#x27;india&#x27;, relatedTopics: [&#x27;islam&#x27;] },
@@ -1794,6 +1836,14 @@ html&gt;body{padding:0}&lt;/style&gt;
     mapSource: &#x27;Yoshida Togo и соавторы; скан Abasaa. Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Battles_of_Bun%27ei_and_Koan_map.jpg · общественное достояние · без изменений.&#x27;
   };
   events.forEach(event =&gt; {
+    if (event.year === 1453 &amp;&amp; event.topic === &#x27;byzantium&#x27;) {
+      event.topic = &#x27;ottomans&#x27;; event.cat = &#x27;ottomans&#x27;; event.relatedTopics = [&#x27;byzantium&#x27;];
+      event.detail = &#x27;29 мая войска Мехмеда II захватили Константинополь. Константин XI погиб при обороне. Византийская империя прекратила существование; город стал столицей османов.&#x27;;
+      Object.assign(event, { map: &#x27;Карты/Осада Константинополя — 1453.png&#x27;, mapAlt: &#x27;Реконструкция осады Константинополя в 1453 году&#x27;, mapCaption: &#x27;Зелёные обозначения — османы, красные — защитники. Corne d’Or — Золотой Рог. Найди цепь у входа в залив и зелёную стрелку переноса кораблей по суше. Подписи французские.&#x27;, mapSource: &#x27;Sémhur, подложка Cplakidas. https://commons.wikimedia.org/wiki/File:Siege_of_Constantinople_1453_map-fr.svg · CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/ · растровое представление Commons, содержание без изменений.&#x27; });
+    }
+    if (event.year === 1410 &amp;&amp; event.topic === &#x27;late&#x27;) Object.assign(event, { map: &#x27;Карты/Поход к Грюнвальду — 1410.png&#x27;, mapAlt: &#x27;Кампания 1410 года к Грюнвальду&#x27;, mapCaption: &#x27;Зелёные стрелки — союзные польско-литовские силы, красные — Орден. Мечи отмечают битву. Marienburg — Мариенбург. Это маршруты кампании, не схема расстановки полков.&#x27;, mapSource: &#x27;S. Bollmann. https://commons.wikimedia.org/wiki/File:Grunwald_1410.png · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.&#x27; });
+    if (event.year === 1477 &amp;&amp; event.topic === &#x27;late&#x27;) Object.assign(event, { map: &#x27;Карты/Битва при Нанси — 1477.png&#x27;, mapAlt: &#x27;План битвы при Нанси&#x27;, mapCaption: &#x27;Розовые прямоугольники — бургундцы, розовые стрелки — продвижение армии Рене II. Зелёное — леса, синее — вода. Nancy — Нанси. Это реконструкция.&#x27;, mapSource: &#x27;Odejea. https://commons.wikimedia.org/wiki/File:Plan_de_la_bataille_de_Nancy.png · CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/ · без изменений.&#x27; });
+    if (event.topic === &#x27;america&#x27;) Object.assign(event, { map: &#x27;Карты/Америка до 1500 года.png&#x27;, mapAlt: &#x27;Культурные области доколумбовой Америки&#x27;, mapCaption: &#x27;MAYA и AZTEC — Центральная Америка и Мексика; INCA — Анды. Цвета — культурные области, не точные границы государств. Карта не показывает год основания городов.&#x27;, mapSource: &#x27;Universalis. https://commons.wikimedia.org/wiki/File:America_pre-1500.png · CC0: https://creativecommons.org/publicdomain/zero/1.0/ · без изменений.&#x27; });
     if (event.topic === &#x27;india&#x27; &amp;&amp; [1206, 1398].includes(event.year)) Object.assign(event, {
       map: &#x27;Карты/Делийский султанат.png&#x27;, mapAlt: &#x27;Обзорная карта Делийского султаната&#x27;,
       mapCaption: &#x27;Коричневый — территория султаната в реконструкции расширения; Delhi — Дели, Lahore — Лахор. Дата состояния на оригинале не указана. Это не границы 1206 или 1398 года и не схема боя.&#x27;,
@@ -1811,6 +1861,10 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (event.year === 650) event.relatedTopics = [&#x27;steppe&#x27;];
   });
   const topics = [
+    [&#x27;america&#x27;, &#x27;Доколумбова Америка&#x27;, &#x27;#087f8c&#x27;],
+    [&#x27;late&#x27;, &#x27;Европа XIV–XV веков&#x27;, &#x27;#a24573&#x27;],
+    [&#x27;ottomans&#x27;, &#x27;Османы и Византия&#x27;, &#x27;#99652c&#x27;],
+    [&#x27;renaissance&#x27;, &#x27;Возрождение и печать&#x27;, &#x27;#5854b6&#x27;],
     [&#x27;india&#x27;, &#x27;Индия&#x27;, &#x27;#c56a21&#x27;],
     [&#x27;africa&#x27;, &#x27;Африка&#x27;, &#x27;#467c36&#x27;],
     [&#x27;steppe&#x27;, &#x27;Великая степь и монголы&#x27;, &#x27;#9b6844&#x27;],
@@ -1907,7 +1961,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     closePopup();
     container.replaceChildren();
     mobile.replaceChildren();
-    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;india&#x27;, &#x27;africa&#x27;].includes(key)))));
+    const shown = topic === &#x27;all&#x27; ? events : events.filter(event =&gt; (event.topic === topic || (event.relatedTopics || []).includes(topic) || (topic === &#x27;newtopics&#x27; &amp;&amp; [event.topic, ...(event.relatedTopics || [])].some(key =&gt; [&#x27;america&#x27;, &#x27;late&#x27;, &#x27;ottomans&#x27;, &#x27;renaissance&#x27;].includes(key)))));
     const minYear = Math.floor(Math.min(...shown.map(event =&gt; event.year)) / 100) * 100;
     const maxYear = Math.ceil(Math.max(...shown.map(event =&gt; event.year)) / 100) * 100;
     const range = Math.max(100, maxYear - minYear);
