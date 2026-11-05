@@ -8,7 +8,7 @@
 <title>История — таймлайн 6 класса</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="metrika.js" defer></script>
-<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}.home-link{display:inline-block;margin:0 0 .75rem;color:#254b84;font:600 1rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;text-decoration:underline;text-underline-offset:3px}iframe{display:block;width:100%;height:calc(100vh - 4.25rem);margin:0 auto;border:0}</style>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0;height:100%}body{box-sizing:border-box;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:1rem;background:inherit}nav{flex:0 0 auto}.home-link{display:inline-block;margin:0 0 .75rem;color:#254b84;font:600 1rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;text-decoration:underline;text-underline-offset:3px}iframe{display:block;flex:1 1 0;min-height:0;width:100%;height:0;margin:0 auto;border:0}</style>
 </head>
 <body>
 <noscript><div><img src="https://mc.yandex.ru/watch/113169238" style="position:absolute;left:-9999px" alt=""></div></noscript>
@@ -1592,13 +1592,18 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;dialog class=&quot;event-popup&quot; aria-label=&quot;Описание события&quot;&gt;&lt;button class=&quot;btn popup-close&quot; type=&quot;button&quot; aria-label=&quot;Закрыть описание&quot;&gt;Закрыть ×&lt;/button&gt;&lt;div class=&quot;popup-content&quot;&gt;&lt;/div&gt;&lt;/dialog&gt;
   &lt;div class=&quot;mobile-events&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;card detail&quot; aria-live=&quot;polite&quot;&gt;
-    &lt;div class=&quot;text-muted text-small&quot;&gt;Выбери дату на линии&lt;/div&gt;
+    &lt;div class=&quot;detail-header&quot;&gt;
+      &lt;span class=&quot;text-muted text-small&quot;&gt;Описание выбранного события&lt;/span&gt;
+      &lt;button class=&quot;btn detail-toggle&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot;&gt;Развернуть описание и карту ↑&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;detail-body&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Описание и карта события&quot;&gt;
     &lt;div class=&quot;detail-title&quot;&gt;486 — начало завоевания Галлии&lt;/div&gt;
     &lt;div class=&quot;detail-text&quot;&gt;Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.&lt;/div&gt;
     &lt;figure class=&quot;detail-map&quot; hidden&gt;
       &lt;img class=&quot;detail-map-image&quot; alt=&quot;&quot;&gt;
       &lt;figcaption&gt;&lt;span class=&quot;detail-map-caption&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;detail-map-source text-small text-muted&quot;&gt;&lt;/span&gt;&lt;/figcaption&gt;
     &lt;/figure&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1662,8 +1667,14 @@ html&gt;body{padding:0}&lt;/style&gt;
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed=&quot;true&quot;] .name { color: inherit; }
   #pasha-history-timeline { padding-bottom: 28vh; }
-  #pasha-history-timeline &gt; .detail { position: fixed; left: 12px; right: 12px; bottom: 8px; z-index: 6; max-height: 24vh; overflow: auto; background: var(--background); box-shadow: 0 -3px 18px #0002; }
-  #pasha-history-timeline .popup-content .detail { position: static; margin-top: 8px; }
+  #pasha-history-timeline &gt; .detail { position: fixed; left: 12px; right: 12px; bottom: 8px; z-index: 6; box-sizing: border-box; display: flex; flex-direction: column; height: 24vh; max-height: calc(100dvh - 24px); overflow: hidden; background: var(--background); box-shadow: 0 -3px 18px #0002; }
+  #pasha-history-timeline &gt; .detail.expanded { height: 85vh; height: 85dvh; }
+  #pasha-history-timeline .detail-header { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  #pasha-history-timeline .detail-toggle { flex: 0 0 auto; white-space: normal; }
+  #pasha-history-timeline .detail-body { min-height: 0; overflow-y: scroll; overscroll-behavior: contain; scrollbar-gutter: stable; padding: 8px 8px 12px 0; }
+  #pasha-history-timeline .popup-content .detail { position: static; display: block; height: auto; max-height: none; overflow: visible; margin-top: 8px; }
+  #pasha-history-timeline .popup-content .detail-body { overflow: visible; padding: 0; }
+  @media (max-width: 600px) { #pasha-history-timeline .detail-header { align-items: flex-start; } #pasha-history-timeline .detail-header &gt; span { display: none; } }
   #pasha-history-timeline .event-popup { z-index: 10; box-shadow: 0 8px 32px #0003; }
   #pasha-history-timeline .event-popup[open] { animation: event-appear 160ms ease-out; }
   #pasha-history-timeline .event-popup.hover-preview { position: fixed; margin: 0; width: min(460px, calc(100vw - 48px)); max-height: 52vh; }
@@ -1893,6 +1904,13 @@ html&gt;body{padding:0}&lt;/style&gt;
   const popup = root.querySelector(&#x27;.event-popup&#x27;);
   const scale = root.querySelector(&#x27;.century-scale&#x27;);
   const detail = root.querySelector(&#x27;.detail&#x27;);
+  const detailBody = detail.querySelector(&#x27;.detail-body&#x27;);
+  const detailToggle = detail.querySelector(&#x27;.detail-toggle&#x27;);
+  detailToggle.addEventListener(&#x27;click&#x27;, () =&gt; {
+    const expanded = detail.classList.toggle(&#x27;expanded&#x27;);
+    detailToggle.setAttribute(&#x27;aria-expanded&#x27;, String(expanded));
+    detailToggle.textContent = expanded ? &#x27;Свернуть ↓&#x27; : &#x27;Развернуть описание и карту ↑&#x27;;
+  });
   const popupContent = root.querySelector(&#x27;.popup-content&#x27;);
   let previewTimer;
   let closeTimer;
@@ -1909,7 +1927,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (preview &amp;&amp; pinned) return;
     selectEvent(event, button);
     const content = detail.cloneNode(true);
-    content.querySelector(&#x27;.text-muted.text-small&#x27;).remove();
+    content.classList.remove(&#x27;expanded&#x27;);
+    content.querySelector(&#x27;.detail-header&#x27;).remove();
     popupContent.replaceChildren(content);
     if (popup.open) popup.close();
     pinned = !preview;
@@ -1940,7 +1959,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   function selectEvent(event, button) {
     root.querySelectorAll(&#x27;button[aria-pressed]&#x27;).forEach(item =&gt; item.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;));
     button.setAttribute(&#x27;aria-pressed&#x27;, &#x27;true&#x27;);
-    title.textContent = `${event.label || event.year} — ${event.title}`;
+    const nextTitle = `${event.label || event.year} — ${event.title}`;
+    if (title.textContent !== nextTitle) detailBody.scrollTop = 0;
+    title.textContent = nextTitle;
     text.textContent = event.detail;
     if (event.map) {
       map.hidden = false;
@@ -2686,15 +2707,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       return;
     }
     if (data.type === "height") {
-      const height = data.height;
-      if (
-        typeof height === "number" &&
-        Number.isFinite(height) &&
-        height >= 0 &&
-        height <= 10_000
-      ) {
-        frame.style.height = Math.ceil(height) + "px";
-      }
+      // The standalone timeline fills the viewport. Content-driven iframe
+      // resizing would move its fixed detail panel below the visible page.
       return;
     }
     if (data.type === "scroll-to") {
@@ -2757,10 +2771,6 @@ html&gt;body{padding:0}&lt;/style&gt;
     return;
   }
   globalThis.addEventListener("resize", () => {
-    const height = Number.parseFloat(frame.style.height);
-    if (!Number.isFinite(height) || height <= viewportHeight) {
-      frame.style.removeProperty("height");
-    }
     viewportHeight = globalThis.innerHeight;
     channel.port1.postMessage({ type: "measure" });
   });

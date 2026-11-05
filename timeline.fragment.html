@@ -56,13 +56,18 @@
   <dialog class="event-popup" aria-label="Описание события"><button class="btn popup-close" type="button" aria-label="Закрыть описание">Закрыть ×</button><div class="popup-content"></div></dialog>
   <div class="mobile-events"></div>
   <div class="card detail" aria-live="polite">
-    <div class="text-muted text-small">Выбери дату на линии</div>
+    <div class="detail-header">
+      <span class="text-muted text-small">Описание выбранного события</span>
+      <button class="btn detail-toggle" type="button" aria-expanded="false">Развернуть описание и карту ↑</button>
+    </div>
+    <div class="detail-body" tabindex="0" role="region" aria-label="Описание и карта события">
     <div class="detail-title">486 — начало завоевания Галлии</div>
     <div class="detail-text">Хлодвиг победил галло-римское войско при Суассоне. Так началось создание Франкского королевства.</div>
     <figure class="detail-map" hidden>
       <img class="detail-map-image" alt="">
       <figcaption><span class="detail-map-caption"></span><br><span class="detail-map-source text-small text-muted"></span></figcaption>
     </figure>
+    </div>
   </div>
 </div>
 
@@ -126,8 +131,14 @@
   #pasha-history-timeline .name { display: block; color: var(--muted-foreground); }
   #pasha-history-timeline .event-btn[aria-pressed="true"] .name { color: inherit; }
   #pasha-history-timeline { padding-bottom: 28vh; }
-  #pasha-history-timeline > .detail { position: fixed; left: 12px; right: 12px; bottom: 8px; z-index: 6; max-height: 24vh; overflow: auto; background: var(--background); box-shadow: 0 -3px 18px #0002; }
-  #pasha-history-timeline .popup-content .detail { position: static; margin-top: 8px; }
+  #pasha-history-timeline > .detail { position: fixed; left: 12px; right: 12px; bottom: 8px; z-index: 6; box-sizing: border-box; display: flex; flex-direction: column; height: 24vh; max-height: calc(100dvh - 24px); overflow: hidden; background: var(--background); box-shadow: 0 -3px 18px #0002; }
+  #pasha-history-timeline > .detail.expanded { height: 85vh; height: 85dvh; }
+  #pasha-history-timeline .detail-header { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  #pasha-history-timeline .detail-toggle { flex: 0 0 auto; white-space: normal; }
+  #pasha-history-timeline .detail-body { min-height: 0; overflow-y: scroll; overscroll-behavior: contain; scrollbar-gutter: stable; padding: 8px 8px 12px 0; }
+  #pasha-history-timeline .popup-content .detail { position: static; display: block; height: auto; max-height: none; overflow: visible; margin-top: 8px; }
+  #pasha-history-timeline .popup-content .detail-body { overflow: visible; padding: 0; }
+  @media (max-width: 600px) { #pasha-history-timeline .detail-header { align-items: flex-start; } #pasha-history-timeline .detail-header > span { display: none; } }
   #pasha-history-timeline .event-popup { z-index: 10; box-shadow: 0 8px 32px #0003; }
   #pasha-history-timeline .event-popup[open] { animation: event-appear 160ms ease-out; }
   #pasha-history-timeline .event-popup.hover-preview { position: fixed; margin: 0; width: min(460px, calc(100vw - 48px)); max-height: 52vh; }
@@ -357,6 +368,13 @@
   const popup = root.querySelector('.event-popup');
   const scale = root.querySelector('.century-scale');
   const detail = root.querySelector('.detail');
+  const detailBody = detail.querySelector('.detail-body');
+  const detailToggle = detail.querySelector('.detail-toggle');
+  detailToggle.addEventListener('click', () => {
+    const expanded = detail.classList.toggle('expanded');
+    detailToggle.setAttribute('aria-expanded', String(expanded));
+    detailToggle.textContent = expanded ? 'Свернуть ↓' : 'Развернуть описание и карту ↑';
+  });
   const popupContent = root.querySelector('.popup-content');
   let previewTimer;
   let closeTimer;
@@ -373,7 +391,8 @@
     if (preview && pinned) return;
     selectEvent(event, button);
     const content = detail.cloneNode(true);
-    content.querySelector('.text-muted.text-small').remove();
+    content.classList.remove('expanded');
+    content.querySelector('.detail-header').remove();
     popupContent.replaceChildren(content);
     if (popup.open) popup.close();
     pinned = !preview;
@@ -404,7 +423,9 @@
   function selectEvent(event, button) {
     root.querySelectorAll('button[aria-pressed]').forEach(item => item.setAttribute('aria-pressed', 'false'));
     button.setAttribute('aria-pressed', 'true');
-    title.textContent = `${event.label || event.year} — ${event.title}`;
+    const nextTitle = `${event.label || event.year} — ${event.title}`;
+    if (title.textContent !== nextTitle) detailBody.scrollTop = 0;
+    title.textContent = nextTitle;
     text.textContent = event.detail;
     if (event.map) {
       map.hidden = false;
