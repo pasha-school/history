@@ -1559,6 +1559,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
+      &lt;option value=&quot;earlyrus&quot;&gt;История России — § 1–4&lt;/option&gt;
       &lt;option value=&quot;newtopics&quot;&gt;Америка и осень Средневековья — § 20–24&lt;/option&gt;
       &lt;option value=&quot;america&quot;&gt;Америка — § 20&lt;/option&gt;
       &lt;option value=&quot;late&quot;&gt;Европа XIV–XV веков — § 21–22, 24&lt;/option&gt;
@@ -1706,6 +1707,11 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;pasha-history-timeline&#x27;);
   const events = [
+    { year: 375, label: &#x27;IV век&#x27;, short: &#x27;гунны в Европе&#x27;, title: &#x27;вторжение гуннов в Европу&#x27;, detail: &#x27;Продвижение гуннов усилило переселение других народов.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;earlyrus&#x27; },
+    { year: 600, label: &#x27;VI — середина IX века&#x27;, short: &#x27;расселение славян&#x27;, title: &#x27;расселение восточных славян по Восточно-Европейской равнине&#x27;, detail: &#x27;Славяне осваивали лесные и лесостепные земли и взаимодействовали с финно-уграми и балтами.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
+    { year: 651, label: &#x27;VII век&#x27;, short: &#x27;три ветви славян&#x27;, title: &#x27;формирование трёх ветвей славян&#x27;, detail: &#x27;Сложились западная, южная и восточная ветви славян.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;earlyrus&#x27; },
+    { year: 907, short: &#x27;Олег у Царьграда&#x27;, title: &#x27;поход Олега на Константинополь&#x27;, detail: &#x27;По летописи, Олег выступил против Византии, добиваясь выгодных условий торговли.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
+    { year: 911, short: &#x27;договор с Византией&#x27;, title: &#x27;договор Руси с Византией&#x27;, detail: &#x27;Письменный договор регулировал отношения между Русью и Византией.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
     { year: 1350, label: &#x27;XIV–XV века&#x27;, short: &#x27;Раннее Возрождение&#x27;, title: &#x27;Раннее Возрождение в Италии&#x27;, detail: &#x27;Период, а не событие одного года. Богатые города и античное наследие помогали развитию новой культуры. Гуманисты обращались к достоинству человека и образованию; художники изучали природу и перспективу.&#x27;, cat: &#x27;renaissance&#x27;, topic: &#x27;renaissance&#x27; },
     { year: 1200, label: &#x27;около 1200&#x27;, short: &#x27;Куско&#x27;, title: &#x27;основание Куско — опорная дата учебника&#x27;, detail: &#x27;Город в Андах стал центром державы инков. Дата ранней истории условная: она не означает, что большая империя появилась за один год.&#x27;, cat: &#x27;america&#x27;, topic: &#x27;america&#x27; },
     { year: 1261, short: &#x27;возвращение столицы&#x27;, title: &#x27;восстановление Византии в Константинополе&#x27;, detail: &#x27;Войска Никейской империи вернули столицу. Однако восстановленная Византия не получила обратно всех земель и прежних доходов.&#x27;, cat: &#x27;ottomans&#x27;, topic: &#x27;ottomans&#x27;, relatedTopics: [&#x27;byzantium&#x27;] },
@@ -1791,7 +1797,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     { year: 863, short: &#x27;Кирилл и Мефодий&#x27;, title: &#x27;начало деятельности Кирилла и Мефодия&#x27;, detail: &#x27;Братья прибыли в Великую Моравию, создали славянскую азбуку и начали переводить христианские книги.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 865, short: &#x27;крещение Болгарии&#x27;, title: &#x27;принятие христианства Болгарией&#x27;, detail: &#x27;Болгария приняла христианство из Византии при князе Борисе.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;byzantium&#x27; },
     { year: 871, label: &#x27;871–899&#x27;, short: &#x27;Альфред Великий&#x27;, title: &#x27;правление Альфреда Великого&#x27;, detail: &#x27;Альфред создал флот, укрепил крепости, перестроил войско и возглавил борьбу Англии с датчанами.&#x27;, cat: &#x27;monarchies&#x27;, topic: &#x27;monarchies&#x27;, relatedTopics: [&#x27;europe&#x27;] },
-    { year: 882, label: &#x27;882–912&#x27;, short: &#x27;княжение Олега&#x27;, title: &#x27;княжение Олега на Руси&#x27;, detail: &#x27;Олег объединил Новгород и Киев и правил Русью до 912 года.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;europe&#x27;] },
+    { year: 882, short: &#x27;Олег занимает Киев&#x27;, title: &#x27;объединение северного и южного центров Руси&#x27;, detail: &#x27;Олег занял Киев, который стал столицей Руси. Город стоял на торговом пути в Византию.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;europe&#x27;, &#x27;earlyrus&#x27;] },
     { year: 962, short: &#x27;империя Оттона&#x27;, title: &#x27;образование Священной Римской империи&#x27;, detail: &#x27;Папа римский провозгласил германского короля Оттона I императором.&#x27;, cat: &#x27;empire&#x27;, topic: &#x27;empire&#x27;, relatedTopics: [&#x27;europe&#x27;] },
     { year: 966, short: &#x27;крещение Польши&#x27;, title: &#x27;принятие христианства Польшей&#x27;, detail: &#x27;Польша приняла христианство по римскому образцу и вошла в мир латинской культуры.&#x27;, cat: &#x27;europe&#x27;, topic: &#x27;europe&#x27; },
     { year: 987, label: &#x27;987–996&#x27;, short: &#x27;Гуго Капет&#x27;, title: &#x27;правление Гуго Капета&#x27;, detail: &#x27;Гуго Капет стал королём Франции и основал новую королевскую династию — Капетингов.&#x27;, cat: &#x27;monarchies&#x27;, topic: &#x27;monarchies&#x27;, relatedTopics: [&#x27;europe&#x27;] },
@@ -1869,7 +1875,11 @@ html&gt;body{padding:0}&lt;/style&gt;
     if (event.topic !== &#x27;india&#x27; &amp;&amp; [1206, 1223, 1227, 1236, 1237, 1258, 1279].includes(event.year)) Object.assign(event, mongolMap);
     if ([1274, 1281].includes(event.year)) Object.assign(event, japanMap);
     if (event.year === 1258) event.relatedTopics = [&#x27;steppe&#x27;];
-    if (event.year === 650) event.relatedTopics = [&#x27;steppe&#x27;];
+    if (event.year === 650) {
+      event.label = &#x27;VII век&#x27;;
+      event.relatedTopics = [&#x27;steppe&#x27;, &#x27;earlyrus&#x27;];
+    }
+    if (event.year === 476 || event.year === 862) event.relatedTopics = [...(event.relatedTopics || []), &#x27;earlyrus&#x27;];
   });
   const topics = [
     [&#x27;america&#x27;, &#x27;Доколумбова Америка&#x27;, &#x27;#087f8c&#x27;],

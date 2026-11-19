@@ -20,16 +20,27 @@
 </head>
 <body>
   <noscript><div><img src="https://mc.yandex.ru/watch/113169238" style="position:absolute;left:-9999px" alt=""></div></noscript>
-  <header><div class="wrap"><p>Всеобщая история · 6 класс</p><h1 id="title">Конспект</h1><a class="back" href="index.html">← На главную</a></div></header>
+  <header><div class="wrap"><p id="course">Всеобщая история · 6 класс</p><h1 id="title">Конспект</h1><a class="back" href="index.html">← На главную</a></div></header>
   <main class="wrap"><article class="paper" id="content">Загрузка конспекта…</article></main>
   <script>
     const notes={2:'§ 2 — Византийская империя и её соседи.md',3:'§ 3 — От королевства Хлодвига к империи Карла Великого.md',4:'§ 4 — Европа в IX–XI вв.md',5:'§ 5 — Возникновение ислама и государства у арабов.md',6:'§ 6 — Арабский халифат, его расцвет и распад.md',7:'§ 7 — Сеньоры и вассалы.md',8:'§ 8 — Католическая Церковь и духовенство.md',9:'§ 9 — Крестьяне и горожане.md',10:'§ 10 — Крестовые походы.md',11:'§ 11–12 — Англия, Франция и государства Пиренейского полуострова.md',12:'§ 11–12 — Англия, Франция и государства Пиренейского полуострова.md',13:'§ 13 — Священная Римская империя и её соседи.md',14:'§ 14 — Западноевропейская культура в XI–XIV вв.md',15:"§ 15 — Кочевники Великой степи и их соседи в Средние века.md",16:"§ 16–17 — Китай и Япония в Средние века.md",17:"§ 16–17 — Китай и Япония в Средние века.md",18:"§ 18 — Индия в Средние века.md",19:"§ 19 — Народы и государства Африки.md",20:"§ 20 — Цивилизации доколумбовой Америки.md",21:"§ 21–22 — Европа в XIV — первой половине XV века.md",22:"§ 21–22 — Европа в XIV — первой половине XV века.md",23:"§ 23 — Гибель Византии и возникновение Османской империи.md",24:"§ 24 — Европа на пороге Нового времени.md"};
-    const n=Number(new URLSearchParams(location.search).get('n'));
+    const russianNotes={
+      1:'§ 1 — Великое переселение народов.md',
+      2:'§ 2 — Расселение, хозяйство и общество.md',
+      3:'§ 3 — Верования, соседи и торговля.md',
+      4:'§ 4 — Начало династии Рюриковичей.md'
+    };
+    const params=new URLSearchParams(location.search);
+    const russia=params.get('book')==='russia';
+    const n=Number(params.get('n'));
+    const filename=(russia?russianNotes:notes)[n];
+    const base=new URL(russia?'Конспекты/История России/':'Конспекты/',location.href);
+    if(russia)document.getElementById('course').textContent='История России · 6 класс';
     const content=document.getElementById('content');
-    if(!notes[n])content.textContent='Такого параграфа пока нет.';
+    if(!filename)content.textContent='Такого параграфа пока нет.';
     else (async()=>{
       try{
-        const response=await fetch('Конспекты/'+encodeURIComponent(notes[n]));
+        const response=await fetch(new URL(encodeURIComponent(filename),base));
         if(!response.ok)throw new Error('Конспект не найден: '+response.status);
         let markdown=(await response.text()).replace(/^---\s*\n[\s\S]*?\n---\s*\n/,'');
         markdown=markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(_,target,label)=>{
@@ -49,7 +60,7 @@
         if(heading){document.getElementById('title').textContent=heading.textContent;document.title=heading.textContent+' — История Паши';heading.remove()}
         content.querySelectorAll('img').forEach(img=>{
           const src=img.getAttribute('src');
-          if(src&&!/^https?:/.test(src))img.src=new URL(src,new URL('Конспекты/',location.href)).href;
+          if(src&&!/^https?:/.test(src))img.src=new URL(src,base).href;
         });
       }catch(error){content.textContent='Не удалось загрузить конспект: '+error.message}
     })();
