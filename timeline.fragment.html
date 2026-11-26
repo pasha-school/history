@@ -487,7 +487,7 @@
       tick.textContent = year;
       scale.appendChild(tick);
     }
-    const grouped = topic === 'all';
+    const grouped = topic === 'all' || topic === 'rus5to8';
     const ends = {};
     const slots = shown.map(event => {
       const key = grouped ? event.topic : 'all';
@@ -499,29 +499,26 @@
     });
     let offset = 0;
     const offsets = {};
-    const heights = {};
-    topics.forEach(([key]) => {
-      offsets[key] = offset;
-      heights[key] = 40 + Math.max(1, (ends[key] || []).length) * 100;
-      offset += heights[key];
-    });
-    timeline.classList.toggle('by-topic', grouped);
-    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
     timeline.classList.add('by-topic');
     if (grouped) {
-      topics.forEach(([key, name, color], index) => {
+      topics.forEach(([key, name, color]) => {
+        if (!ends[key]) return;
+        offsets[key] = offset;
+        const height = 40 + ends[key].length * 100;
         const band = document.createElement('div');
         band.className = 'topic-band';
-        band.style.top = `${offsets[key]}px`;
-        band.style.height = `${heights[key]}px`;
+        band.style.top = `${offset}px`;
+        band.style.height = `${height}px`;
         band.style.setProperty('--lane-color', color);
         const heading = document.createElement('span');
         heading.className = 'topic-band-title';
         heading.textContent = name;
         band.appendChild(heading);
         container.appendChild(band);
+        offset += height;
       });
     }
+    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
 
     shown.forEach((event, index) => {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;

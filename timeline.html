@@ -2023,7 +2023,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       tick.textContent = year;
       scale.appendChild(tick);
     }
-    const grouped = topic === &#x27;all&#x27;;
+    const grouped = topic === &#x27;all&#x27; || topic === &#x27;rus5to8&#x27;;
     const ends = {};
     const slots = shown.map(event =&gt; {
       const key = grouped ? event.topic : &#x27;all&#x27;;
@@ -2035,29 +2035,26 @@ html&gt;body{padding:0}&lt;/style&gt;
     });
     let offset = 0;
     const offsets = {};
-    const heights = {};
-    topics.forEach(([key]) =&gt; {
-      offsets[key] = offset;
-      heights[key] = 40 + Math.max(1, (ends[key] || []).length) * 100;
-      offset += heights[key];
-    });
-    timeline.classList.toggle(&#x27;by-topic&#x27;, grouped);
-    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
     timeline.classList.add(&#x27;by-topic&#x27;);
     if (grouped) {
-      topics.forEach(([key, name, color], index) =&gt; {
+      topics.forEach(([key, name, color]) =&gt; {
+        if (!ends[key]) return;
+        offsets[key] = offset;
+        const height = 40 + ends[key].length * 100;
         const band = document.createElement(&#x27;div&#x27;);
         band.className = &#x27;topic-band&#x27;;
-        band.style.top = `${offsets[key]}px`;
-        band.style.height = `${heights[key]}px`;
+        band.style.top = `${offset}px`;
+        band.style.height = `${height}px`;
         band.style.setProperty(&#x27;--lane-color&#x27;, color);
         const heading = document.createElement(&#x27;span&#x27;);
         heading.className = &#x27;topic-band-title&#x27;;
         heading.textContent = name;
         band.appendChild(heading);
         container.appendChild(band);
+        offset += height;
       });
     }
+    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
 
     shown.forEach((event, index) =&gt; {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
