@@ -487,11 +487,9 @@
       tick.textContent = year;
       scale.appendChild(tick);
     }
-    const grouped = topic === 'all' || topic === 'rus5to8';
     const ends = {};
     const slots = shown.map(event => {
-      const key = grouped ? event.topic : 'all';
-      const rows = ends[key] ||= [];
+      const rows = ends[event.topic] ||= [];
       let row = rows.findIndex(end => x(event.year) - end >= 120);
       if (row < 0) row = rows.length;
       rows[row] = x(event.year);
@@ -500,25 +498,23 @@
     let offset = 0;
     const offsets = {};
     timeline.classList.add('by-topic');
-    if (grouped) {
-      topics.forEach(([key, name, color]) => {
-        if (!ends[key]) return;
-        offsets[key] = offset;
-        const height = 40 + ends[key].length * 100;
-        const band = document.createElement('div');
-        band.className = 'topic-band';
-        band.style.top = `${offset}px`;
-        band.style.height = `${height}px`;
-        band.style.setProperty('--lane-color', color);
-        const heading = document.createElement('span');
-        heading.className = 'topic-band-title';
-        heading.textContent = name;
-        band.appendChild(heading);
-        container.appendChild(band);
-        offset += height;
-      });
-    }
-    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
+    topics.forEach(([key, name, color]) => {
+      if (!ends[key]) return;
+      offsets[key] = offset;
+      const height = 40 + ends[key].length * 100;
+      const band = document.createElement('div');
+      band.className = 'topic-band';
+      band.style.top = `${offset}px`;
+      band.style.height = `${height}px`;
+      band.style.setProperty('--lane-color', color);
+      const heading = document.createElement('span');
+      heading.className = 'topic-band-title';
+      heading.textContent = name;
+      band.appendChild(heading);
+      container.appendChild(band);
+      offset += height;
+    });
+    timeline.style.height = `${offset}px`;
 
     shown.forEach((event, index) => {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
@@ -526,7 +522,7 @@
       const wrap = document.createElement('div');
       wrap.className = 'event-wrap';
       wrap.style.left = `${x(event.year)}px`;
-      wrap.style.top = `${(grouped ? offsets[event.topic] : 0) + slots[index] * 100}px`;
+      wrap.style.top = `${offsets[event.topic] + slots[index] * 100}px`;
 
       const stem = document.createElement('span');
       stem.className = `stem ${lane.includes('up') ? 'up' : 'down'}`;
@@ -559,7 +555,7 @@
       mobileButton.className = 'btn btn-ghost';
       mobileButton.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
-      if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) => key === event.topic)[1]}`;
+      mobileButton.textContent += ` · ${topics.find(([key]) => key === event.topic)[1]}`;
       mobileButton.addEventListener('click', () => openEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });

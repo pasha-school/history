@@ -2023,11 +2023,9 @@ html&gt;body{padding:0}&lt;/style&gt;
       tick.textContent = year;
       scale.appendChild(tick);
     }
-    const grouped = topic === &#x27;all&#x27; || topic === &#x27;rus5to8&#x27;;
     const ends = {};
     const slots = shown.map(event =&gt; {
-      const key = grouped ? event.topic : &#x27;all&#x27;;
-      const rows = ends[key] ||= [];
+      const rows = ends[event.topic] ||= [];
       let row = rows.findIndex(end =&gt; x(event.year) - end &gt;= 120);
       if (row &lt; 0) row = rows.length;
       rows[row] = x(event.year);
@@ -2036,25 +2034,23 @@ html&gt;body{padding:0}&lt;/style&gt;
     let offset = 0;
     const offsets = {};
     timeline.classList.add(&#x27;by-topic&#x27;);
-    if (grouped) {
-      topics.forEach(([key, name, color]) =&gt; {
-        if (!ends[key]) return;
-        offsets[key] = offset;
-        const height = 40 + ends[key].length * 100;
-        const band = document.createElement(&#x27;div&#x27;);
-        band.className = &#x27;topic-band&#x27;;
-        band.style.top = `${offset}px`;
-        band.style.height = `${height}px`;
-        band.style.setProperty(&#x27;--lane-color&#x27;, color);
-        const heading = document.createElement(&#x27;span&#x27;);
-        heading.className = &#x27;topic-band-title&#x27;;
-        heading.textContent = name;
-        band.appendChild(heading);
-        container.appendChild(band);
-        offset += height;
-      });
-    }
-    timeline.style.height = grouped ? `${offset}px` : `${40 + ends.all.length * 100}px`;
+    topics.forEach(([key, name, color]) =&gt; {
+      if (!ends[key]) return;
+      offsets[key] = offset;
+      const height = 40 + ends[key].length * 100;
+      const band = document.createElement(&#x27;div&#x27;);
+      band.className = &#x27;topic-band&#x27;;
+      band.style.top = `${offset}px`;
+      band.style.height = `${height}px`;
+      band.style.setProperty(&#x27;--lane-color&#x27;, color);
+      const heading = document.createElement(&#x27;span&#x27;);
+      heading.className = &#x27;topic-band-title&#x27;;
+      heading.textContent = name;
+      band.appendChild(heading);
+      container.appendChild(band);
+      offset += height;
+    });
+    timeline.style.height = `${offset}px`;
 
     shown.forEach((event, index) =&gt; {
       const position = shown.length === 1 ? 50 : 7 + (index / (shown.length - 1)) * 86;
@@ -2062,7 +2058,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       const wrap = document.createElement(&#x27;div&#x27;);
       wrap.className = &#x27;event-wrap&#x27;;
       wrap.style.left = `${x(event.year)}px`;
-      wrap.style.top = `${(grouped ? offsets[event.topic] : 0) + slots[index] * 100}px`;
+      wrap.style.top = `${offsets[event.topic] + slots[index] * 100}px`;
 
       const stem = document.createElement(&#x27;span&#x27;);
       stem.className = `stem ${lane.includes(&#x27;up&#x27;) ? &#x27;up&#x27; : &#x27;down&#x27;}`;
@@ -2095,7 +2091,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       mobileButton.className = &#x27;btn btn-ghost&#x27;;
       mobileButton.setAttribute(&#x27;aria-pressed&#x27;, index === 0 ? &#x27;true&#x27; : &#x27;false&#x27;);
       mobileButton.textContent = `${event.label || event.year} — ${event.short}`;
-      if (grouped) mobileButton.textContent += ` · ${topics.find(([key]) =&gt; key === event.topic)[1]}`;
+      mobileButton.textContent += ` · ${topics.find(([key]) =&gt; key === event.topic)[1]}`;
       mobileButton.addEventListener(&#x27;click&#x27;, () =&gt; openEvent(event, mobileButton));
       mobile.appendChild(mobileButton);
     });
