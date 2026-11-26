@@ -1560,6 +1560,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;label class=&quot;filter text-small&quot;&gt;Показать тему
     &lt;select class=&quot;form-select&quot; aria-label=&quot;Выбор темы таймлайна&quot;&gt;
       &lt;option value=&quot;earlyrus&quot;&gt;История России — § 1–4&lt;/option&gt;
+      &lt;option value=&quot;rus5to8&quot;&gt;История России — § 5–8&lt;/option&gt;
       &lt;option value=&quot;newtopics&quot;&gt;Америка и осень Средневековья — § 20–24&lt;/option&gt;
       &lt;option value=&quot;america&quot;&gt;Америка — § 20&lt;/option&gt;
       &lt;option value=&quot;late&quot;&gt;Европа XIV–XV веков — § 21–22, 24&lt;/option&gt;
@@ -1707,6 +1708,17 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;pasha-history-timeline&#x27;);
   const events = [
+    { year: 941, short: &#x27;Первый поход Игоря&#x27;, title: &#x27;первый поход Игоря на Византию&#x27;, detail: &#x27;Поход закончился поражением. Византийцы применили греческий огонь против русских кораблей.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 944, short: &#x27;Договор Игоря&#x27;, title: &#x27;второй поход Игоря и договор с Византией&#x27;, detail: &#x27;Игорь принял дары византийских послов и заключил новый договор. Он предусматривал торговые пошлины для русских купцов.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 945, short: &#x27;Гибель Игоря&#x27;, title: &#x27;гибель Игоря и начало правления Ольги&#x27;, detail: &#x27;Древляне убили Игоря, когда он вернулся за повторной данью. Ольга стала управлять Русью при малолетнем Святославе и впоследствии упорядочила сбор дани.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 964, short: &#x27;Начало правления Святослава&#x27;, title: &#x27;начало самостоятельного правления Святослава&#x27;, detail: &#x27;Святослав начал править самостоятельно. Во время восточных походов он разгромил Хазарский каганат.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 967, short: &#x27;Святослав на Дунае&#x27;, title: &#x27;первый поход Святослава на Дунай&#x27;, detail: &#x27;По просьбе Византии Святослав выступил против Болгарии и занял города на Нижнем Дунае.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 968, short: &#x27;Осада Киева&#x27;, title: &#x27;печенеги осаждают Киев&#x27;, detail: &#x27;Святослав вернулся с Дуная. Печенеги отступили.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 971, short: &#x27;Мир после Доростола&#x27;, title: &#x27;мир Святослава с Византией&#x27;, detail: &#x27;После осады Доростола Святослав заключил мир с Византией и покинул Балканы.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 972, short: &#x27;Гибель Святослава&#x27;, title: &#x27;гибель Святослава&#x27;, detail: &#x27;На обратном пути князь погиб в столкновении с печенегами у днепровских порогов.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 978, label: &#x27;978/980&#x27;, short: &#x27;Княжение Владимира&#x27;, title: &#x27;начало княжения Владимира в Киеве&#x27;, detail: &#x27;Владимир победил в борьбе за власть между сыновьями Святослава. В учебнике приведены две возможные даты начала правления: 978 и 980 годы.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 981, short: &#x27;Червен и Перемышль&#x27;, title: &#x27;присоединение Червена и Перемышля&#x27;, detail: &#x27;При Владимире эти города вошли в состав Руси на юго-западной границе.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
+    { year: 989, short: &#x27;Десятинная церковь&#x27;, title: &#x27;закладка Десятинной церкви&#x27;, detail: &#x27;В Киеве заложили каменный храм. Владимир выделял на него десятую часть своих доходов.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;rus5to8&#x27;] },
     { year: 375, label: &#x27;IV век&#x27;, short: &#x27;гунны в Европе&#x27;, title: &#x27;вторжение гуннов в Европу&#x27;, detail: &#x27;Продвижение гуннов усилило переселение других народов.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
     { year: 600, label: &#x27;VI — середина IX века&#x27;, short: &#x27;расселение славян&#x27;, title: &#x27;расселение восточных славян по Восточно-Европейской равнине&#x27;, detail: &#x27;Славяне осваивали лесные и лесостепные земли и взаимодействовали с финно-уграми и балтами.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
     { year: 651, label: &#x27;VII век&#x27;, short: &#x27;три ветви славян&#x27;, title: &#x27;формирование трёх ветвей славян&#x27;, detail: &#x27;Сложились западная, южная и восточная ветви славян.&#x27;, cat: &#x27;neighbors&#x27;, topic: &#x27;rus&#x27;, relatedTopics: [&#x27;earlyrus&#x27;] },
@@ -1880,6 +1892,9 @@ html&gt;body{padding:0}&lt;/style&gt;
       event.relatedTopics = [&#x27;steppe&#x27;, &#x27;earlyrus&#x27;];
     }
     if (event.year === 476 || event.year === 862) event.relatedTopics = [...(event.relatedTopics || []), &#x27;earlyrus&#x27;];
+    if ([650, 911, 962, 966, 987, 988, 992].includes(event.year)) {
+      event.relatedTopics = [...(event.relatedTopics || []), &#x27;rus5to8&#x27;];
+    }
   });
   const topics = [
     [&#x27;america&#x27;, &#x27;Доколумбова Америка&#x27;, &#x27;#087f8c&#x27;],

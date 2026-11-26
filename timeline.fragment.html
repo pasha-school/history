@@ -24,6 +24,7 @@
   <label class="filter text-small">Показать тему
     <select class="form-select" aria-label="Выбор темы таймлайна">
       <option value="earlyrus">История России — § 1–4</option>
+      <option value="rus5to8">История России — § 5–8</option>
       <option value="newtopics">Америка и осень Средневековья — § 20–24</option>
       <option value="america">Америка — § 20</option>
       <option value="late">Европа XIV–XV веков — § 21–22, 24</option>
@@ -171,6 +172,17 @@
 (() => {
   const root = document.getElementById('pasha-history-timeline');
   const events = [
+    { year: 941, short: 'Первый поход Игоря', title: 'первый поход Игоря на Византию', detail: 'Поход закончился поражением. Византийцы применили греческий огонь против русских кораблей.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 944, short: 'Договор Игоря', title: 'второй поход Игоря и договор с Византией', detail: 'Игорь принял дары византийских послов и заключил новый договор. Он предусматривал торговые пошлины для русских купцов.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 945, short: 'Гибель Игоря', title: 'гибель Игоря и начало правления Ольги', detail: 'Древляне убили Игоря, когда он вернулся за повторной данью. Ольга стала управлять Русью при малолетнем Святославе и впоследствии упорядочила сбор дани.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 964, short: 'Начало правления Святослава', title: 'начало самостоятельного правления Святослава', detail: 'Святослав начал править самостоятельно. Во время восточных походов он разгромил Хазарский каганат.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 967, short: 'Святослав на Дунае', title: 'первый поход Святослава на Дунай', detail: 'По просьбе Византии Святослав выступил против Болгарии и занял города на Нижнем Дунае.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 968, short: 'Осада Киева', title: 'печенеги осаждают Киев', detail: 'Святослав вернулся с Дуная. Печенеги отступили.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 971, short: 'Мир после Доростола', title: 'мир Святослава с Византией', detail: 'После осады Доростола Святослав заключил мир с Византией и покинул Балканы.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 972, short: 'Гибель Святослава', title: 'гибель Святослава', detail: 'На обратном пути князь погиб в столкновении с печенегами у днепровских порогов.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 978, label: '978/980', short: 'Княжение Владимира', title: 'начало княжения Владимира в Киеве', detail: 'Владимир победил в борьбе за власть между сыновьями Святослава. В учебнике приведены две возможные даты начала правления: 978 и 980 годы.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 981, short: 'Червен и Перемышль', title: 'присоединение Червена и Перемышля', detail: 'При Владимире эти города вошли в состав Руси на юго-западной границе.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
+    { year: 989, short: 'Десятинная церковь', title: 'закладка Десятинной церкви', detail: 'В Киеве заложили каменный храм. Владимир выделял на него десятую часть своих доходов.', cat: 'neighbors', topic: 'rus', relatedTopics: ['rus5to8'] },
     { year: 375, label: 'IV век', short: 'гунны в Европе', title: 'вторжение гуннов в Европу', detail: 'Продвижение гуннов усилило переселение других народов.', cat: 'neighbors', topic: 'rus', relatedTopics: ['earlyrus'] },
     { year: 600, label: 'VI — середина IX века', short: 'расселение славян', title: 'расселение восточных славян по Восточно-Европейской равнине', detail: 'Славяне осваивали лесные и лесостепные земли и взаимодействовали с финно-уграми и балтами.', cat: 'neighbors', topic: 'rus', relatedTopics: ['earlyrus'] },
     { year: 651, label: 'VII век', short: 'три ветви славян', title: 'формирование трёх ветвей славян', detail: 'Сложились западная, южная и восточная ветви славян.', cat: 'neighbors', topic: 'rus', relatedTopics: ['earlyrus'] },
@@ -344,6 +356,9 @@
       event.relatedTopics = ['steppe', 'earlyrus'];
     }
     if (event.year === 476 || event.year === 862) event.relatedTopics = [...(event.relatedTopics || []), 'earlyrus'];
+    if ([650, 911, 962, 966, 987, 988, 992].includes(event.year)) {
+      event.relatedTopics = [...(event.relatedTopics || []), 'rus5to8'];
+    }
   });
   const topics = [
     ['america', 'Доколумбова Америка', '#087f8c'],
